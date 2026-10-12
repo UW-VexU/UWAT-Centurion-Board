@@ -5,4 +5,5 @@
 	(lib (name "4p4c-955012401") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/0955012401") (options "") (descr ""))
 	(lib (name "terminal_Phoenix_193516_4lead") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_1935187/KiCADv6") (options "") (descr ""))
 	(lib (name "onsemi-ss34") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_SS34/KiCADv6") (options "") (descr ""))
+	(lib (name "tvs-diode-SMBJ16A") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_SMBJ16A/KiCADv6") (options "") (descr ""))
 )
