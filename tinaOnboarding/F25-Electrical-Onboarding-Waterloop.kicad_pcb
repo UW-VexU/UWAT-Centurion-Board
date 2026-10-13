@@ -127,9 +127,9 @@
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "gerbers/")
 		)
 	)
 	(footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
@@ -6935,6 +6935,18 @@
 			(justify left bottom)
 		)
 	)
+	(gr_text "VEXU PSU Rev1"
+		(at 141.5 125.75 0)
+		(layer "F.SilkS")
+		(uuid "7f06a23c-3ffb-4d4e-80ee-d76ef6b782e3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "3V3"
 		(at 142.25 106.75 0)
 		(layer "F.SilkS")
@@ -8106,14 +8118,6 @@
 		(layers "F.Cu" "B.Cu")
 		(net "Net-(D1-K)")
 		(uuid "c842718a-58d7-49a7-99b4-03f52c64f183")
-	)
-	(via
-		(at 149 88)
-		(size 0.8)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net "Net-(D1-K)")
-		(uuid "fba98973-081b-4cfe-b6c7-abe9531c6a50")
 	)
 	(segment
 		(start 144 88)
