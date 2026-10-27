@@ -1,0 +1,13 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "3456fce2-0431-421c-b82e-67da49ad870a")
+	(paper "A4")
+	(title_block
+		(title "Centurion Sensor Board")
+		(rev "A")
+		(company "UWAT VEXU")
+	)
+	(lib_symbols)
+)
