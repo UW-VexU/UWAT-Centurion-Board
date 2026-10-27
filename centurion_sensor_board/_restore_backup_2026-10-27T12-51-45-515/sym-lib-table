@@ -1,4 +1,0 @@
-(sym_lib_table
-	(version 7)
-	(lib (name "centurion") (type "KiCad") (uri "${KIPRJMOD}/lib/centurion.kicad_sym") (options "") (descr ""))
-)
