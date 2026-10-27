@@ -10,9 +10,69 @@
 		(company "UWAT VEXU")
 	)
 	(lib_symbols)
+	(wire
+		(pts
+			(xy 19.05 130.81) (xy 16.51 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "180d2d3b-b1f6-4147-8269-fd3d30df78d6")
+	)
+	(wire
+		(pts
+			(xy 13.97 62.23) (xy 13.97 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2edfb0fa-5107-4195-8968-01a9585df566")
+	)
+	(wire
+		(pts
+			(xy 16.51 64.77) (xy 20.32 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "383dc11b-3b29-42da-8096-fd18db815070")
+	)
+	(wire
+		(pts
+			(xy 20.32 62.23) (xy 13.97 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73208952-6cc9-4196-aef5-bd8a19213c3d")
+	)
+	(wire
+		(pts
+			(xy 13.97 193.04) (xy 20.32 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3c5afc3-79f1-4066-8026-bd82d01f41fc")
+	)
+	(wire
+		(pts
+			(xy 16.51 130.81) (xy 16.51 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbc65534-c643-4d3d-b566-0965da45d706")
+	)
 	(sheet
-		(at 13.97 80.01)
-		(size 82.55 52.07)
+		(at 19.05 80.01)
+		(size 77.47 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -27,7 +87,7 @@
 		)
 		(uuid "049f194b-de0d-4a7b-b819-bc2fc160abfa")
 		(property "Sheetname" "SmartPort_A"
-			(at 13.97 79.2984 0)
+			(at 19.05 79.2984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -38,7 +98,7 @@
 			)
 		)
 		(property "Sheetfile" "smartport.kicad_sch"
-			(at 13.97 132.6646 0)
+			(at 19.05 132.6646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -49,7 +109,7 @@
 			)
 		)
 		(pin "VBAT_OR" output
-			(at 13.97 130.81 180)
+			(at 19.05 130.81 180)
 			(uuid "45760063-a02f-40e8-805c-ddbdb5cca18e")
 			(effects
 				(font
@@ -67,8 +127,8 @@
 		)
 	)
 	(sheet
-		(at 13.97 142.24)
-		(size 82.55 52.07)
+		(at 20.32 142.24)
+		(size 76.2 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -83,7 +143,7 @@
 		)
 		(uuid "17553156-96ba-4882-ad49-2ab75d7462cf")
 		(property "Sheetname" "SmartPort_B"
-			(at 13.97 141.5284 0)
+			(at 20.32 141.5284 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -94,7 +154,7 @@
 			)
 		)
 		(property "Sheetfile" "smartport.kicad_sch"
-			(at 13.97 194.8946 0)
+			(at 20.32 194.8946 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -105,7 +165,7 @@
 			)
 		)
 		(pin "VBAT_OR" output
-			(at 13.97 193.04 180)
+			(at 20.32 193.04 180)
 			(uuid "6e5f3137-56ab-4967-b144-8eb799efa9d6")
 			(effects
 				(font
@@ -123,8 +183,8 @@
 		)
 	)
 	(sheet
-		(at 201.93 80.01)
-		(size 81.28 52.07)
+		(at 207.01 80.01)
+		(size 76.2 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -139,7 +199,7 @@
 		)
 		(uuid "380feb03-a3a1-433f-8f94-5b17d09f05ae")
 		(property "Sheetname" "IMU"
-			(at 201.93 79.2984 0)
+			(at 207.01 79.2984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -150,7 +210,7 @@
 			)
 		)
 		(property "Sheetfile" "imu.kicad_sch"
-			(at 201.93 132.6646 0)
+			(at 207.01 132.6646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -169,8 +229,8 @@
 		)
 	)
 	(sheet
-		(at 13.97 16.51)
-		(size 82.55 52.07)
+		(at 20.32 16.51)
+		(size 76.2 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -185,7 +245,7 @@
 		)
 		(uuid "483f8da1-6abe-4dd3-8249-b5c044ad4b51")
 		(property "Sheetname" "Power"
-			(at 13.97 15.7984 0)
+			(at 20.32 15.7984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -196,7 +256,7 @@
 			)
 		)
 		(property "Sheetfile" "power.kicad_sch"
-			(at 13.97 69.1646 0)
+			(at 20.32 69.1646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -204,6 +264,36 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+			)
+		)
+		(pin "VBAT_A" input
+			(at 20.32 64.77 180)
+			(uuid "263b17cc-ed81-4bb6-9f76-44f23061e937")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "VBAT_B" input
+			(at 20.32 62.23 180)
+			(uuid "2405ed51-2e45-4e98-907a-8b25f495fbf5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "VBUS" input
+			(at 96.52 67.31 0)
+			(uuid "7c7f3b19-d58f-4e76-9b43-83660fffde64")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 			)
 		)
 		(instances
@@ -215,8 +305,8 @@
 		)
 	)
 	(sheet
-		(at 200.66 16.51)
-		(size 82.55 52.07)
+		(at 207.01 16.51)
+		(size 76.2 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -231,7 +321,7 @@
 		)
 		(uuid "4a885af1-e631-4593-8a22-f033f878bfe6")
 		(property "Sheetname" "USB_Jetson"
-			(at 200.66 15.7984 0)
+			(at 207.01 15.7984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -242,7 +332,7 @@
 			)
 		)
 		(property "Sheetfile" "usb_jetson.kicad_sch"
-			(at 200.66 69.1646 0)
+			(at 207.01 69.1646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -261,8 +351,8 @@
 		)
 	)
 	(sheet
-		(at 107.95 16.51)
-		(size 82.55 52.07)
+		(at 111.76 16.51)
+		(size 78.74 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -277,7 +367,7 @@
 		)
 		(uuid "a2749188-7030-48ce-90cd-33dfb0325bc0")
 		(property "Sheetname" "MCU"
-			(at 107.95 15.7984 0)
+			(at 111.76 15.7984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -288,7 +378,7 @@
 			)
 		)
 		(property "Sheetfile" "mcu.kicad_sch"
-			(at 107.95 69.1646 0)
+			(at 111.76 69.1646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -307,8 +397,8 @@
 		)
 	)
 	(sheet
-		(at 107.95 80.01)
-		(size 82.55 52.07)
+		(at 113.03 80.01)
+		(size 77.47 52.07)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -323,7 +413,7 @@
 		)
 		(uuid "c3ade79f-f6a1-428a-8275-210e4881fe1a")
 		(property "Sheetname" "Sensors"
-			(at 107.95 79.2984 0)
+			(at 113.03 79.2984 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -334,7 +424,7 @@
 			)
 		)
 		(property "Sheetfile" "sensors.kicad_sch"
-			(at 107.95 132.6646 0)
+			(at 113.03 132.6646 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
