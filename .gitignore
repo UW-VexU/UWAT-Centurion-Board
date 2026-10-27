@@ -3,3 +3,4 @@ fp-info-cache
 *.lck
 *.kicad_prl
 .easyeda_cache/
+.history/
