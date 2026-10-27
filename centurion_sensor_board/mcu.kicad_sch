@@ -2135,7 +2135,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 175.26) (xy 43.18 175.26)
+			(xy 36.83 175.26) (xy 43.18 175.26)
 		)
 		(stroke
 			(width 0)
@@ -2155,7 +2155,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 161.29) (xy 43.18 161.29)
+			(xy 36.83 161.29) (xy 43.18 161.29)
 		)
 		(stroke
 			(width 0)
@@ -2295,7 +2295,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 147.32) (xy 43.18 147.32)
+			(xy 36.83 147.32) (xy 43.18 147.32)
 		)
 		(stroke
 			(width 0)
@@ -2623,16 +2623,6 @@
 		)
 		(uuid "9259881f-b1c2-438c-902f-f235b2c50bff")
 	)
-	(label "LED_PORTB"
-		(at 26.67 161.29 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "997072cd-e782-479b-a720-488f70160db1")
-	)
 	(label "JETSON_TX"
 		(at 187.96 62.23 0)
 		(effects
@@ -2642,16 +2632,6 @@
 			(justify left bottom)
 		)
 		(uuid "999c81c5-898d-441e-a390-4498d1e21758")
-	)
-	(label "LED_PORTA"
-		(at 26.67 147.32 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a03b7c5d-719b-4462-afc2-9845fa0332e4")
 	)
 	(label "SPI_MISO"
 		(at 187.96 85.09 0)
@@ -2692,16 +2672,6 @@
 			(justify left bottom)
 		)
 		(uuid "bc33c91e-5ca1-4ce0-9c6b-0dbff4d58a1c")
-	)
-	(label "LED_MCU"
-		(at 26.67 175.26 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c9b311bb-f5e3-4c9e-a8fd-ba8d41156c46")
 	)
 	(label "PORTB_TX"
 		(at 187.96 87.63 0)
@@ -2772,6 +2742,78 @@
 			(justify right bottom)
 		)
 		(uuid "ef974e12-2d0c-47ea-b060-00a679cdf4d4")
+	)
+	(global_label "LED_PORTB"
+		(shape input)
+		(at 36.83 161.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0ee75852-4ab5-46a1-b801-0c20f594bb08")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 23.322 161.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "LED_PORTA"
+		(shape input)
+		(at 36.83 147.32 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1507a853-6bc4-48f9-af08-ccc1dc303dca")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 23.5034 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "LED_MCU"
+		(shape input)
+		(at 36.83 175.26 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5ebeecbc-26a9-405a-9740-b3951bd65e46")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 25.3782 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")
