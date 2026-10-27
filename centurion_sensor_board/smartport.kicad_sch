@@ -510,7 +510,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 21.59) (xy 43.18 21.59)
+			(xy 116.84 91.44) (xy 134.62 91.44)
 		)
 		(stroke
 			(width 0)
@@ -520,7 +520,7 @@
 	)
 	(wire
 		(pts
-			(xy 17.78 24.13) (xy 25.4 24.13)
+			(xy 109.22 93.98) (xy 116.84 93.98)
 		)
 		(stroke
 			(width 0)
@@ -530,7 +530,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 21.59) (xy 60.96 21.59)
+			(xy 142.24 91.44) (xy 152.4 91.44)
 		)
 		(stroke
 			(width 0)
@@ -540,7 +540,7 @@
 	)
 	(hierarchical_label "VBAT_OR"
 		(shape output)
-		(at 60.96 21.59 0)
+		(at 152.4 91.44 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -551,7 +551,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 17.78 24.13 0)
+		(at 109.22 93.98 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -562,7 +562,7 @@
 		(fields_autoplaced yes)
 		(uuid "37273f99-a7f0-40bd-b7d3-33480b8c78bc")
 		(property "Reference" "#PWR01"
-			(at 17.78 30.48 0)
+			(at 109.22 100.33 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -573,7 +573,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 17.78 29.21 0)
+			(at 109.22 99.06 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -583,7 +583,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 17.78 24.13 0)
+			(at 109.22 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -594,7 +594,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 17.78 24.13 0)
+			(at 109.22 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -605,7 +605,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 17.78 24.13 0)
+			(at 109.22 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -633,7 +633,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x04")
-		(at 30.48 24.13 0)
+		(at 121.92 93.98 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -644,7 +644,7 @@
 		(fields_autoplaced yes)
 		(uuid "6e6b8386-0c24-4c8a-87ea-2c7fa81b77b7")
 		(property "Reference" "J1"
-			(at 33.02 24.1299 0)
+			(at 124.46 93.9799 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -655,7 +655,7 @@
 			)
 		)
 		(property "Value" "SmartPort"
-			(at 33.02 26.6699 0)
+			(at 124.46 96.5199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -666,7 +666,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 30.48 24.13 0)
+			(at 121.92 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -677,7 +677,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 30.48 24.13 0)
+			(at 121.92 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -688,7 +688,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 30.48 24.13 0)
+			(at 121.92 93.98 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -725,7 +725,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Schottky")
-		(at 46.99 21.59 0)
+		(at 138.43 91.44 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -736,7 +736,7 @@
 		(dnp no)
 		(uuid "8952b40b-f3ba-46ed-af50-f37d7a433ed2")
 		(property "Reference" "D1"
-			(at 47.3075 15.24 0)
+			(at 138.7475 85.09 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -746,7 +746,7 @@
 			)
 		)
 		(property "Value" "SS34"
-			(at 47.3075 17.78 0)
+			(at 138.7475 87.63 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -756,7 +756,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA"
-			(at 46.99 21.59 0)
+			(at 138.43 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -767,7 +767,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 21.59 0)
+			(at 138.43 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -778,7 +778,7 @@
 			)
 		)
 		(property "Description" "Schottky diode"
-			(at 46.99 21.59 0)
+			(at 138.43 91.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
