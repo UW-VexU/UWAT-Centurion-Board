@@ -9,7 +9,10 @@ The board below was first audited as a 4-layer design. It is now 2 layers. The o
 - **Ground.** GND is carried by the top and bottom pours, tied by 50 stitching vias. One via was added at C12, whose GND pad was boxed in by the new 3.3 V route. Four 3.3 V vias that no longer joined two layers were removed, three of them with their pad stubs. TP2, a pad on the back, now joins the 3.3 V route with a short trace on the back.
 - **Checks on the result.** ERC 0 errors. DRC 0 violations and 0 unconnected, including the J1 pin-field rule and the 0.5 mm battery rule. Schematic to PCB parity 0 issues. All 57 footprints and their 3D models load.
 - **Datasheet check of the circuit.** U2 (AP63301): pins FB 1, EN 2, VIN 3, GND 4, SW 5, BST 6. R20 93.1k, R21 30.1k, C1 10 µF, 2 x 22 µF out, C3 100 nF and C13 56 pF all match Table 1 for 3.3 V. Output is 3.27 V. L1 is 10 µH against 4.7 µH in Table 1, inside the 2.2 to 10 µH the datasheet allows. EN and VIN are rated to 35 V, above D1's clamp. U3 (MAX33071E): SO-8, half duplex, 3 to 5.5 V supply, 2 Mbps, ±65 V on A and B.
-- **Open from the review.** On port power with USB unplugged, D5's VBUS pin lets the ESP32's D+ pull-up lift VBUS to about 2 V (see the README). Tying D5 pin 5 to 3.3 V instead of VBUS would remove this. Not changed yet.
+- **D5 pin 5 moved to 3.3 V.** On port power with USB unplugged, D5's VBUS pin let the ESP32's D+ pull-up lift VBUS to about 2 V. Some laptops will not attach until VBUS is near 0 V. Pin 5 now goes to 3.3 V, which removes that path. 3.3 V is under the part's 5.25 V working voltage. USB full speed signals stay near 3.3 V, so D5's clamp diodes stay off in normal use.
+  - Schematic: the power symbol on D5 pin 5 changed from VBUS to +3V3. Nothing else changed.
+  - Layout: no parts moved. The VBUS via that sat against pin 5 moved down beside J2, and VBUS was re-run on the back. Pin 5 has a short top trace to a new via. From there a 0.3 mm trace runs on the back, around the RS-485 lines, to the 3.3 V via at U3.
+  - Checks: ERC 0 errors. DRC 0 violations and 0 unconnected. Parity 0 issues. The new copper keeps at least 0.22 mm from other nets, against a 0.15 mm rule.
 
 The rest of this file is the 4-layer audit.
 
@@ -48,7 +51,7 @@ stellaNova is the VEX V5 wireless debugger. Checked 2026-10-30 in two rounds. In
 3. **Button pin pairing.** The reviewer could not confirm which PTS810 pins are tied inside. The C&K datasheet shows pins 1 and 2 tied, pins 3 and 4 tied, and the button joining the two pairs. The footprint and wiring match that, so no change was needed.
 4. **Not-fitted parts.** C6, R2 and R4 now have no paste openings and are left out of the pick-and-place file.
 5. **J1 test fit.** The J1 footprint text no longer says "ultra low profile". A 1:1 print PDF is now in `docs/` so a real jack can be checked against it before ordering.
-6. **README notes added.** RS-485 echo (the receiver is always on), no pin JTAG (IO39 to IO42 go to the microSD), USB VBUS sitting near 2 V on port power, and JLCPCB assembly tips.
+6. **README notes added.** RS-485 echo (the receiver is always on), no pin JTAG (IO39 to IO42 go to the microSD), USB VBUS sitting near 2 V on port power (since fixed, see the top of this file), and JLCPCB assembly tips.
 7. **Name.** The board is now uwat-stellaNova everywhere: KiCad files, library, title block, silkscreen, BOM and zip.
 8. **Part number.** The PTS810 part number now reads the same in every file.
 

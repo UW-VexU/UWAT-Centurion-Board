@@ -40,6 +40,8 @@ smart port, or from USB-C on the bench.
 - USB-C alone gives the 500 mA USB 2.0 default. Worst case the board draws about 480 mA from it,
   so use a powered hub or the brain for long WiFi sessions. R22 keeps VBUS at 0 V on port power
   so a laptop still attaches when plugged in later.
+- D5 (USB ESD protection) has its supply pin, pin 5, on 3.3 V rather than VBUS. So on port power the
+  ESP32's D+ pull-up cannot lift VBUS through D5. USB and the smart cable can go in either order.
 - C6 (220 uF bulk) is not fitted: the buck datasheet characterises 22 to 68 uF of output
   capacitance. Fit it only if a load-step test shows a dip on 3.3 V.
 
@@ -62,9 +64,6 @@ smart port, or from USB-C on the bench.
 - RS-485 echo: the receiver is always on (RE tied low), so the ESP32 hears its own transmissions on
   RX. Throw away the echoed bytes after each send, or use them to check for bus collisions.
 - IO39 to IO42 go to the microSD card, so pin JTAG is not available. Use the built in USB JTAG.
-- When the board runs from the smart port with USB unplugged, the USB protection chip lets the D+
-  pull-up lift VBUS to about 2 V. Some USB-C to USB-C laptop ports will not turn on until VBUS is
-  near 0 V. If a laptop does not see the board, plug USB in first, then the smart cable.
 
 ## If you use JLCPCB assembly
 

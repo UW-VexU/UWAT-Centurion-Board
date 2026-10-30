@@ -4695,12 +4695,12 @@
     (instances
       (project "uwat-stellaNova"
         (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "D5") (unit 1)))))
-  (symbol (lib_id "power:VBUS") (at 391.16 40.64 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid 42fe46fc-157e-5d38-8cae-83bbcedb4f1f)
+  (symbol (lib_id "power:+3V3") (at 391.16 40.64 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid 42fe46fc-157e-5d38-8cae-83bbcedb4f1f)
     (property "Reference" "#PWR047" (at 391.16 34.29 0)
       (effects
         (font (size 1.27 1.27))
         hide))
-    (property "Value" "VBUS" (at 391.16 37.08 0)
+    (property "Value" "+3V3" (at 391.16 37.08 0)
       (effects
         (font (size 1.27 1.27))))
     (property "Footprint" "" (at 391.16 40.64 0)
