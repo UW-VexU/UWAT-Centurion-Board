@@ -32,6 +32,7 @@ Rev A design files. The KiCad design rule check shows 0 errors and 0 unconnected
 | `bom/` | BOM spreadsheet with formulas, and a CSV for DigiKey BOM Manager |
 | `docs/powerJackal_revA_schematic.pdf` | Schematic as a PDF |
 | `docs/design_notes.md` | How the board works, layout rules, test plan, revision history |
+| `docs/firmware.md` | Firmware specification: pins, INA226 setup, expected readings, limits, features to code |
 | `docs/board_viewer/` | Interactive board page (3D, assembly, copper, schematic, BOM). Open the `.html` file in a browser |
 | `docs/powerJackal_wiring_map.html` | Pin-by-pin wiring map of every part |
 | `docs/images/` | Pictures that explain design changes |
@@ -78,7 +79,7 @@ These notes used to be printed on the back of the board. They live here now.
 - **Recovery:** if a firmware bug breaks USB, hold BOOT (SW2), tap RESET (SW1), then let go of BOOT. The chip starts in its ROM download mode, which always works over USB.
 - **Radio:** keep Wi-Fi and Bluetooth off. No antenna is fitted.
 
-The full ESP32 pin map is in [docs/design_notes.md](docs/design_notes.md#esp32-c3-pins).
+The full ESP32 pin map is in [docs/design_notes.md](docs/design_notes.md#esp32-c3-pins). The firmware specification, with what to build and the readings to expect, is in [docs/firmware.md](docs/firmware.md).
 
 ## Ordering boards
 

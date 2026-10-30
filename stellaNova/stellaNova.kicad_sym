@@ -1,0 +1,323 @@
+(kicad_symbol_lib (version 20220914) (generator kicad_symbol_editor)
+  (symbol "V5_SmartPort"
+    (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+    (property "Reference" "J" (at -5.08 8.89 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "V5_SmartPort" (at -5.08 -7.62 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "stellaNova:Molex_43202-4101_RJ9_Horizontal" (at 0 -10.16 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "https://kb.vex.com/hc/en-us/articles/360036143012" (at 0 -12.7 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_description" "VEX V5 smart port, 4P4C: RS-485 half-duplex pair plus raw battery. Contact order A, B, GND, + (labelled smart cable photo, VEX Forum). Cables are straight-through." (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_keywords" "VEX V5 smart port RJ9 4P4C RS485" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (symbol "V5_SmartPort_0_1"
+      (rectangle (start -5.08 7.62) (end 7.62 -5.08)
+        (stroke (width 0.254) (type default))
+        (fill (type background))))
+    (symbol "V5_SmartPort_1_1"
+      (pin passive line (at -10.16 5.08 0) (length 5.08)
+        (name "VBAT"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "4"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin passive line (at -10.16 2.54 0) (length 5.08)
+        (name "GND"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "3"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin passive line (at -10.16 0 0) (length 5.08)
+        (name "DATA_B"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "2"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin passive line (at -10.16 -2.54 0) (length 5.08)
+        (name "DATA_A"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "1"
+          (effects
+            (font (size 1.27 1.27)))))))
+  (symbol "MAX33071E" (in_bom yes) (on_board yes)
+    (property "Reference" "U" (at -6.096 11.43 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Value" "MAX33071EASA+" (at 0.762 11.43 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" (at 0 -17.78 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX33070E-MAX33071E.pdf" (at 0 1.27 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_keywords" "RS485 RS-485 transceiver half duplex 3.3V fault protected" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_description" "3.3 V half-duplex RS-485 transceiver, 65 V fault protected A/B, true fail-safe, 2 Mbps, SOIC-8 standard pinout. Pin compatible: ST3485EBDR, SN65HVD75DR" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_fp_filters" "DIP*W7.62mm* SOIC*3.9x4.9mm*P1.27mm*" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (symbol "MAX33071E_0_1"
+      (rectangle (start -7.62 10.16) (end 7.62 -12.7)
+        (stroke (width 0.254) (type default))
+        (fill (type background)))
+      (circle (center -0.3048 -3.683) (radius 0.3556)
+        (stroke (width 0.254) (type default))
+        (fill (type outline)))
+      (circle (center -0.0254 1.4986) (radius 0.3556)
+        (stroke (width 0.254) (type default))
+        (fill (type outline)))
+      (polyline
+        (pts (xy -4.064 -5.08) (xy -1.905 -5.08))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -4.064 2.54) (xy -1.27 2.54))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -1.27 -3.2004) (xy -1.27 -3.4544))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -0.635 -5.08) (xy 5.334 -5.08))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -4.064 -2.54) (xy -1.27 -2.54) (xy -1.27 -3.175))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 0 1.27) (xy 0 0) (xy -4.064 0))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 1.27 3.175) (xy 3.81 3.175) (xy 3.81 -5.08))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 2.54 1.905) (xy 2.54 -3.81) (xy 0 -3.81))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -1.905 -3.175) (xy -1.905 -5.715) (xy 0.635 -4.445) (xy -1.905 -3.175))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy -1.27 2.54) (xy 1.27 3.81) (xy 1.27 1.27) (xy -1.27 2.54))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 1.905 1.905) (xy 4.445 1.905) (xy 4.445 2.54) (xy 5.334 2.54))
+        (stroke (width 0.254) (type default))
+        (fill (type none)))
+      (rectangle (start 1.27 3.175) (end 1.27 3.175)
+        (stroke (width 0) (type default))
+        (fill (type none)))
+      (circle (center 1.651 1.905) (radius 0.3556)
+        (stroke (width 0.254) (type default))
+        (fill (type outline))))
+    (symbol "MAX33071E_1_1"
+      (pin output line (at -10.16 2.54 0) (length 2.54)
+        (name "RO"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "1"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin input line (at -10.16 0 0) (length 2.54)
+        (name "~{RE}"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "2"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin input line (at -10.16 -2.54 0) (length 2.54)
+        (name "DE"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "3"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin input line (at -10.16 -5.08 0) (length 2.54)
+        (name "DI"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "4"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin power_in line (at 0 -15.24 90) (length 2.54)
+        (name "GND"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "5"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 10.16 -5.08 180) (length 2.54)
+        (name "A"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "6"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin bidirectional line (at 10.16 2.54 180) (length 2.54)
+        (name "B"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "7"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin power_in line (at 0 12.7 270) (length 2.54)
+        (name "VCC"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "8"
+          (effects
+            (font (size 1.27 1.27)))))))
+  (symbol "VIN" (power)
+    (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (property "Reference" "#PWR" (at 0 -3.81 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Value" "VIN" (at 0 3.556 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_keywords" "power-flag VIN" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_description" "Power symbol: buck input rail after protection" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (symbol "VIN_0_1"
+      (polyline
+        (pts (xy -0.762 1.27) (xy 0 2.54))
+        (stroke (width 0) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 0 0) (xy 0 2.54))
+        (stroke (width 0) (type default))
+        (fill (type none)))
+      (polyline
+        (pts (xy 0 2.54) (xy 0.762 1.27))
+        (stroke (width 0) (type default))
+        (fill (type none))))
+    (symbol "VIN_1_1"
+      (pin power_in line (at 0 0 90) (length 0)
+        hide
+        (name "VIN"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "1"
+          (effects
+            (font (size 1.27 1.27)))))))
+  (symbol "AP63301WU" (in_bom yes) (on_board yes)
+    (property "Reference" "U" (at -7.62 6.35 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Value" "AP63301WU-7" (at 2.54 6.35 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Footprint" "Package_TO_SOT_SMD:TSOT-23-6" (at 0 -22.86 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP63300-AP63301.pdf" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_keywords" "buck step-down regulator adjustable" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_description" "3.8 to 32 V in, 3 A synchronous buck, adjustable (0.8 V FB), 500 kHz, TSOT-26" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "ki_fp_filters" "TSOT?23*" (at 0 0 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (symbol "AP63301WU_0_1"
+      (rectangle (start -7.62 5.08) (end 7.62 -5.08)
+        (stroke (width 0.254) (type default))
+        (fill (type background))))
+    (symbol "AP63301WU_1_1"
+      (pin input line (at 10.16 -2.54 180) (length 2.54)
+        (name "FB"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "1"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin input line (at -10.16 -2.54 0) (length 2.54)
+        (name "EN"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "2"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin power_in line (at -10.16 2.54 0) (length 2.54)
+        (name "IN"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "3"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin power_in line (at 0 -7.62 90) (length 2.54)
+        (name "GND"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "4"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin output line (at 10.16 2.54 180) (length 2.54)
+        (name "SW"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "5"
+          (effects
+            (font (size 1.27 1.27)))))
+      (pin passive line (at 10.16 0 180) (length 2.54)
+        (name "BST"
+          (effects
+            (font (size 1.27 1.27))))
+        (number "6"
+          (effects
+            (font (size 1.27 1.27))))))))

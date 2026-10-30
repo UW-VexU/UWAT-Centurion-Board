@@ -1,0 +1,8 @@
+(version 1)
+
+# J1 is the through-hole smart port jack, soldered by hand on the bottom side. Keep other nets'
+# copper at least 0.5 mm from its pins, so a solder bridge cannot put battery voltage on USB or a GPIO.
+(rule "J1 pin field clearance"
+  (layer outer)
+  (constraint clearance (min 0.5mm))
+  (condition "B.Type == 'Pad' && B.insideCourtyard('J1') && B.Pad_Type == 'Through-hole' && A.Type != 'Zone' && A.NetName != '/RS485_A' && A.NetName != '/RS485_B' && A.NetName != 'GND' && A.NetName != '/VBAT_PORT'"))
