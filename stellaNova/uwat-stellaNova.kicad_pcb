@@ -66,7 +66,7 @@
 			(layerselection 0x00000000_00000000_55555555_5755f5ff)
 			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
-			(usegerberextensions no)
+			(usegerberextensions yes)
 			(usegerberattributes yes)
 			(usegerberadvancedattributes yes)
 			(creategerberjobfile yes)
@@ -75,7 +75,7 @@
 			(svgprecision 4)
 			(plotframeref no)
 			(mode 1)
-			(useauxorigin no)
+			(useauxorigin yes)
 			(pdf_front_fp_property_popups yes)
 			(pdf_back_fp_property_popups yes)
 			(pdf_metadata yes)
@@ -91,12 +91,12 @@
 			(hidednponfab no)
 			(sketchdnponfab yes)
 			(crossoutdnponfab yes)
-			(subtractmaskfromsilk no)
+			(subtractmaskfromsilk yes)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "")
+			(outputdirectory "fabrication/gerbers/")
 		)
 	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
@@ -1676,6 +1676,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1687,6 +1688,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1698,6 +1700,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1709,6 +1712,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -5428,6 +5432,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -5439,6 +5444,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -5450,6 +5456,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -5461,6 +5468,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -8498,6 +8506,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -8509,6 +8518,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -8520,6 +8530,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -8531,6 +8542,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -21483,6 +21495,24 @@
 		(uuid "5ef98c51-b514-4778-a9b2-03de31c8709d")
 	)
 	(segment
+		(start 124 116.73)
+		(end 126.45 116.73)
+		(width 0.2)
+		(locked yes)
+		(layer "F.Cu")
+		(net "/SCL")
+		(uuid "724d546a-217e-4ceb-b0ed-c7ab1ee4e61c")
+	)
+	(segment
+		(start 124 114.19)
+		(end 126.45 114.19)
+		(width 0.2)
+		(locked yes)
+		(layer "F.Cu")
+		(net "/SDA")
+		(uuid "dce5564a-e2d7-4189-a92f-58bcf8018749")
+	)
+	(segment
 		(start 135.913 119.3571)
 		(end 136.1176 119.1525)
 		(width 0.2)
@@ -21971,24 +22001,6 @@
 		(layer "F.Cu")
 		(net "/BST")
 		(uuid "4cdd958d-1fec-4f8f-a96b-f257d9081eab")
-	)
-	(segment
-		(start 124 114.19)
-		(end 126.45 114.19)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/SDA")
-		(uuid "dce5564a-e2d7-4189-a92f-58bcf8018749")
-	)
-	(segment
-		(start 124 116.73)
-		(end 126.45 116.73)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/SCL")
-		(uuid "724d546a-217e-4ceb-b0ed-c7ab1ee4e61c")
 	)
 	(zone
 		(net "GND")
