@@ -29,6 +29,18 @@ smart port, or from USB-C on the bench.
 - Surface finish: lead-free HASL works. ENIG gives flatter pads for the ESP32 module and USB-C if hand soldering.
 - Any solder mask color. Vias are tented in the files.
 
+## Back of the board
+
+The back reads STELLANOVA, then UWAT-VEXU F26, in Chakra Petch Bold. The font is embedded in the board
+file, so the gerbers come out the same on any computer. The test pads keep their labels: TX0, RX0, VIN,
+GND and 3V3, plus V5 PORT at the jack.
+
+These notes used to be printed on the back. They live here now.
+
+- Board: uwat-stellaNova, rev A.
+- Smart port pins: 1 = A, 2 = B, 3 = GND, 4 = VBAT.
+- Main parts: ESP32-S3, USB-C, RS-485.
+
 ## Board
 
 - 48 x 40 mm, 2 layers, 1.6 mm FR4. Both layers carry signals and a GND pour. 3.3 V runs as a 0.3 mm trace,
