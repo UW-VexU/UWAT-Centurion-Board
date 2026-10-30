@@ -16,7 +16,7 @@ Rev A design files. The KiCad design rule check shows 0 errors and 0 unconnected
 | Stackup | 2 layers, 1.6 mm FR-4, 1 oz copper |
 | Mounting | 4 x 4.5 mm holes for #8-32 screws, 63.5 x 38.1 mm apart on the VEX 0.5 in grid, 4.45 mm from the edges |
 | Parts | 59 placed parts, all on the top side, plus 9 bare copper test pads |
-| Cost | About $57.54 CAD in parts per board at DigiKey Canada, qty 1 (checked October 11, 2026). Bare PCB not included |
+| Cost | About $63.53 CAD in parts per board at DigiKey Canada qty-1 prices, plus $6.26 for the J6 and J9 plugs. A parts order for 2 boards with spares is about $153.35 CAD at DigiKey's price breaks (checked October 29, 2026). Bare PCB not included |
 | Inputs | J1 smart port (11 to 14.4 V battery), J2 bench supply 10 to 15 V |
 | Outputs | J6 5 V up to 2 A, J9 3.3 V, J3 STEMMA QT (I2C + 3.3 V) |
 | MCU | ESP32-C3-MINI-1U-N4X, USB serial and JTAG on USB-C |
@@ -41,7 +41,7 @@ Rev A design files. The KiCad design rule check shows 0 errors and 0 unconnected
 ## Opening the project
 
 1. Open `powerJackal.kicad_pro` in KiCad.
-2. The files are KiCad 7.0 format. KiCad 8 and 9 open them and upgrade the format when you save. Agree on one KiCad version for the team, then commit the upgrade by itself so the diff stays readable.
+2. The board file is KiCad 10.0 format. It was saved with KiCad 10 for the rev A fixes, so KiCad 9 and older cannot open it. The schematic is still KiCad 7.0 format, and KiCad 10 upgrades it when you save. Commit a format upgrade by itself so the diff stays readable.
 3. The UWAT library loads from `lib/` through the project library tables, so nothing needs to be installed. Everything else uses KiCad's standard libraries.
 4. Many tracks are locked to protect the hand routing. Unlock a track (select it, then press L) before moving it.
 
@@ -49,7 +49,7 @@ Rev A design files. The KiCad design rule check shows 0 errors and 0 unconnected
 
 - **Power in:** the smart port (J1) and the bench input (J2) each pass through a Schottky diode (D5, D3), so either can be plugged in alone or both at once. Then a 1.5 A polyfuse (F1), the input shunt R1, a TVS clamp (D1) and bulk capacitors.
 - **5 V:** TI TPSM53602 step-down module (U1), up to 2 A. Shunt R2 measures the 5 V rail.
-- **3.3 V:** AP7361C LDO (U6), fed from the 5 V rail through D2. Shunt R12 measures the 3.3 V rail.
+- **3.3 V:** MCP1826S LDO (U6), fed from the 5 V rail through D2. Shunt R12 measures the 3.3 V rail.
 - **USB power switch:** Q1 (AO3401A) lets USB power the 3.3 V side only while the 5 V rail is off. On the desk, USB alone runs the ESP32 for flashing. With port or bench power on, USB only carries data, so the port readings never include USB current.
 - **Measurement:** three INA226 monitors on one I2C bus.
 
@@ -58,6 +58,16 @@ Rev A design files. The KiCad design rule check shows 0 errors and 0 unconnected
 | U2 | Port input, after F1 | 0x40 | R1, 20 mΩ | about 4 A |
 | U3 | 5 V rail | 0x41 | R2, 20 mΩ | about 4 A |
 | U5 | 3.3 V rail | 0x45 | R12, 50 mΩ | about 1.6 A |
+
+## Quick reference
+
+These notes used to be printed on the back of the board. They live here now.
+
+- **Smart port pinout:** check the J1 pinout with a meter before the first plug-in.
+- **USB-C:** flashes the ESP32-C3 and carries its serial output.
+- **Stuck?** Hold BOOT, tap RESET, then let go of BOOT.
+- **USB power:** USB powers the 3.3 V side only while port and bench power are off.
+- **INA226 addresses:** 0x40 port input, 0x41 5 V rail, 0x45 3.3 V rail.
 
 ## Firmware quick start
 
@@ -77,6 +87,8 @@ The full ESP32 pin map is in [docs/design_notes.md](docs/design_notes.md#esp32-c
    - Tented vias. Ask them to tent or plug the vias in U1's exposed pad if they offer it.
 2. **Parts:** upload `bom/powerJackal_revA_DigiKey_upload.csv` to BOM Manager on digikey.ca.
    - Set the number of boards in the yellow cell of the spreadsheet first. Quantities include spares.
+   - To buy a different quantity of a part, type it in the yellow Your order qty column. The unit price follows DigiKey's price breaks, and the Tip column shows when buying up to the next break costs less.
+   - After changing quantities, save the DigiKey upload tab as CSV and upload that instead.
 3. **Assembly:** `fab/revA/powerJackal_revA_positions_top.csv` gives part centers in mm from the bottom-left board corner, top side only.
 
 ## Before ordering

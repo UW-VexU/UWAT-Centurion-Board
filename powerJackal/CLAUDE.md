@@ -12,7 +12,8 @@ This folder is the powerJackal board: a VEX V5 smart port power test board, rev 
 
 ## Environment
 
-- KiCad files are 7.0 format. KiCad 8 or 9 upgrades them on save. Commit a format upgrade by itself.
+- The board file is KiCad 10.0 format, saved with KiCad 10.0.7. KiCad 9 and older cannot open it. The schematic is still 7.0 format and KiCad 10 upgrades it on save. Commit a format upgrade by itself.
+- The back silkscreen text uses Chakra Petch Bold, embedded in the board file (`embedded_fonts yes`). Keep it embedded, or machines without the font fall back to the KiCad font and the long line runs onto J6's pads.
 - **kicad-cli:** on Windows it is in the KiCad `bin` folder, for example `C:\Program Files\KiCad\8.0\bin\kicad-cli.exe`.
 - **Python scripts:** anything in `tools/kicad/` that imports `pcbnew` must run with KiCad's own Python, for example `"C:\Program Files\KiCad\8.0\bin\python.exe" tools\kicad\corners.py powerJackal.kicad_pcb`.
 - **Footprint path:** scripts that load footprints from KiCad's library need the env var `KICAD_FOOTPRINT_DIR` set to KiCad's `footprints` folder.
@@ -63,7 +64,7 @@ This folder is the powerJackal board: a VEX V5 smart port power test board, rev 
 
 - **Schematic PDF:** `kicad-cli sch export pdf -o docs/powerJackal_revA_schematic.pdf powerJackal.kicad_sch`.
 - **Gerbers, drill and placement:** use the commands in `README.md`. The gerber export uses `--subtract-soldermask --use-drill-file-origin`. The drill export uses `--excellon-separate-th --drill-origin plot`.
-- **BOM:** `python tools/bom/build_bom.py bom` writes the xlsx and the DigiKey CSV. Part data lives in the list `P` at the top of `build_bom.py`.
+- **BOM:** `python tools/bom/build_bom.py bom` writes the xlsx and the DigiKey CSV. Part data lives in `P`, DigiKey price breaks in `BREAKS` and product links in `LINK`, at the top of `build_bom.py`. The builder needs `openpyxl`.
 - **Board viewer and wiring map:**
   - `tools/render/build_v3.py <board> <workdir>` rebuilds `docs/board_viewer/` and needs Node and Playwright.
   - `tools/wiring/make_wiring_map.py docs/powerJackal_wiring_map.html` rebuilds the wiring map from `jackal_design.py`.
@@ -72,7 +73,9 @@ This folder is the powerJackal board: a VEX V5 smart port power test board, rev 
 ## Parts and pricing
 
 - Source from DigiKey Canada (digikey.ca). Check stock and price in CAD.
-- The BOM records the DigiKey part number, stock, qty-1 USD price and the Bank of Canada USD to CAD rate with its date. Update the dates when prices are rechecked.
+- The BOM records the DigiKey part number, stock and the full CAD price-break table read from digikey.ca, with the date checked. Update the date when prices are rechecked.
+- The xlsx prices each line at the break for its order qty with a `LOOKUP` on the Price breaks tab. Keep each part's breaks in increasing quantity there.
+- Every BOM line has a digikey.ca product link in `LINK` in `build_bom.py`. The number at the end of a link picks the page, so open each new link once and check it shows the right MPN.
 - Prefer parts with large DigiKey stock and packages that are easy to hand solder.
 
 ## Key facts

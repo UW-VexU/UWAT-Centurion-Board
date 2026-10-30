@@ -41,7 +41,7 @@ PARTS = [
 
     # ---------------- 2 5 V regulator
     P("D1", "Device:D_Zener", "SMBJ16A", "Diode_SMD:D_SMB", {"1": "VIN_MOD", "2": "GND"}, "v5", "SMBJ16A", "Littelfuse"),
-    P("C1", "Device:C_Polarized", "47u 50V", "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm", {"1": "VIN_MOD", "2": "GND"}, "v5", "EEU-FC1H470", "Panasonic"),
+    P("C1", "Device:C_Polarized", "47u 50V", "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm", {"1": "VIN_MOD", "2": "GND"}, "v5", "EEU-FR1H470", "Panasonic"),
     P("C2", "Device:C", "10u 50V", C1210, {"1": "VIN_MOD", "2": "GND"}, "v5", "CL32B106KBJNNNE", "Samsung Electro-Mechanics"),
     P("C3", "Device:C", "10u 50V", C1210, {"1": "VIN_MOD", "2": "GND"}, "v5", "CL32B106KBJNNNE", "Samsung Electro-Mechanics"),
     P("C8", "Device:C", "100n", C0805, {"1": "VIN_MOD", "2": "GND"}, "v5", "CC0805KRX7R9BB104", "Yageo"),
@@ -76,8 +76,9 @@ PARTS = [
     # ---------------- 4 3.3 V regulator
     P("D2", "Device:D_Schottky", "SS14", "Diode_SMD:D_SMA", {"1": "5V_LDO", "2": "5V"}, "v33", "SS14-E3/61T", "Vishay", rot=180),
     P("C10", "Device:C", "10u 50V", C1210, {"1": "5V_LDO", "2": "GND"}, "v33", "CL32B106KBJNNNE", "Samsung Electro-Mechanics"),
-    P("U6", "Regulator_Linear:AP7361C-33E", "AP7361C-33E", "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
-      {"1": "5V_LDO", "2": "GND", "3": "3V3_LDO"}, "v33", "AP7361C-33E-13", "Diodes Incorporated"),
+    P("U6", "Regulator_Linear:AP7361C-33E", "MCP1826S-3302E", "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
+      {"1": "5V_LDO", "2": "GND", "3": "3V3_LDO"}, "v33", "MCP1826ST-3302E/DB", "Microchip Technology",
+      note="Drawn with the AP7361C-33E symbol. Same SOT-223 pinout: 1 IN, 2 GND and tab, 3 OUT."),
     P("C11", "Device:C", "47u 10V", C1206, {"1": "3V3_LDO", "2": "GND"}, "v33", "GRM31CR61A476ME15L", "Murata"),
 
     # ---------------- 5 USB-C
@@ -85,8 +86,8 @@ PARTS = [
       {"A4": "VBUS_USB", "A9": "VBUS_USB", "B4": "VBUS_USB", "B9": "VBUS_USB", "A1": "GND", "A12": "GND", "B1": "GND", "B12": "GND", "S1": "GND",
        "A5": "CC1", "B5": "CC2", "A6": "USB_DP", "B6": "USB_DP", "A7": "USB_DN", "B7": "USB_DN", "A8": NC, "B8": NC},
       "usb", "USB4105-GF-A", "GCT"),
-    P("R14", "Device:R", "5.1k", R0805, {"1": "CC1", "2": "GND"}, "usb", "RC0805FR-075K1L", "Yageo"),
-    P("R15", "Device:R", "5.1k", R0805, {"1": "CC2", "2": "GND"}, "usb", "RC0805FR-075K1L", "Yageo"),
+    P("R14", "Device:R", "5.1k", R0805, {"1": "CC1", "2": "GND"}, "usb", "RMCF0805FT5K10", "Stackpole Electronics"),
+    P("R15", "Device:R", "5.1k", R0805, {"1": "CC2", "2": "GND"}, "usb", "RMCF0805FT5K10", "Stackpole Electronics"),
     P("U7", "Power_Protection:USBLC6-2SC6", "USBLC6-2SC6", "Package_TO_SOT_SMD:SOT-23-6",
       {"1": "USB_DP", "6": "USB_DP", "3": "USB_DN", "4": "USB_DN", "5": "VBUS_USB", "2": "GND"}, "usb", "USBLC6-2SC6", "STMicroelectronics"),
     P("D4", "Device:D_Schottky", "SS14", "Diode_SMD:D_SMA", {"1": "USB_PWR", "2": "VBUS_USB"}, "usb", "SS14-E3/61T", "Vishay", rot=180),
@@ -109,7 +110,7 @@ PARTS = [
     P("C13", "Device:C", "100n", C0805, {"1": "3V3", "2": "GND"}, "mcu", "CC0805KRX7R9BB104", "Yageo"),
     P("C15", "Device:C", "100n", C0805, {"1": "3V3", "2": "GND"}, "mcu", "CC0805KRX7R9BB104", "Yageo"),
     P("R17", "Device:R", "10k", R0805, {"1": "3V3", "2": "EN"}, "mcu", "RC0805FR-0710KL", "Yageo", note="EN pull-up, 10k and 1u delay"),
-    P("C9", "Device:C", "1u", C0805, {"1": "EN", "2": "GND"}, "mcu", "C2012X7R1H105K125AB", "TDK"),
+    P("C9", "Device:C", "1u", C0805, {"1": "EN", "2": "GND"}, "mcu", "CC0805KKX7R8BB105", "Yageo"),
     P("SW1", "Switch:SW_Push", "RESET", "Button_Switch_SMD:SW_SPST_TL3342", {"1": "EN", "2": "GND"}, "mcu", "TL3342F160QG", "E-Switch"),
     P("SW2", "Switch:SW_Push", "BOOT", "Button_Switch_SMD:SW_SPST_TL3342", {"1": "BOOT", "2": "GND"}, "mcu", "TL3342F160QG", "E-Switch",
       note="GPIO9 low at reset = download mode. GPIO9 has an internal pull-up."),

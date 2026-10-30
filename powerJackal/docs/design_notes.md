@@ -10,7 +10,7 @@ J1 smart port (VPORT) --D5--+
 J2 bench input (BENCH_IN) --D3--+                                      |                                                        |
                                                                       D1 TVS, C1 47 µF, C2 + C3 10 µF, C8 100 nF                  D2
                                                                                                                                  |
-J7 USB-C (VBUS_USB) --D4-- USB_PWR --Q1-------------------------------------------------------------------------------------- 5V_LDO --> U6 AP7361C --> 3V3_LDO --R12 50 mΩ-- 3V3
+J7 USB-C (VBUS_USB) --D4-- USB_PWR --Q1-------------------------------------------------------------------------------------- 5V_LDO --> U6 MCP1826S --> 3V3_LDO --R12 50 mΩ-- 3V3
 ```
 
 | Net | Comes from | Feeds |
@@ -44,7 +44,7 @@ J7 USB-C (VBUS_USB) --D4-- USB_PWR --Q1-----------------------------------------
 
 ### 3.3 V regulator and the USB power switch
 
-- U6 is an AP7361C-33 LDO (1 A, SOT-223). Its tab is GND and sits in the ground pour.
+- U6 is an MCP1826S-3302E LDO (1 A, 250 mV dropout, SOT-223). Its tab is GND and sits in the ground pour. It replaced the AP7361C-33E, which went out of stock. The pinout is the same, so the schematic keeps the AP7361C-33E symbol.
 - Its input (5V_LDO) comes from the 5 V rail through D2 (SS14), or from USB through D4 (SS14) and Q1.
 - **Q1** is an AO3401A P-channel MOSFET. Drain on USB_PWR, source on 5V_LDO, gate on the 5 V rail.
   - **5 V rail off** (USB only): the gate sits at 0 V and Q1 turns on fully, so USB runs the 3.3 V side for flashing on the desk.
@@ -116,7 +116,7 @@ Notes on the free pins:
 | J3 | JST SM04B-SRSS-TB, STEMMA QT / Qwiic | 1 GND, 2 3V3, 3 SDA, 4 SCL |
 | J7 | GCT USB4105-GF-A, USB-C | USB 2.0 data and VBUS |
 
-Plug-in test loads live off the board. Clamp a cement resistor's leads in a 1803578 plug:
+Plug-in test loads live off the board. Clamp a 5 W cement resistor's leads in a 1803578 plug. The resistors are not in the BOM, so buy them separately:
 
 - **LOAD1**, 10 Ω: 0.5 A at 5 V.
 - **LOAD2**, two 10 Ω in parallel: 1 A at 5 V. Use it on J6 only.
@@ -161,8 +161,8 @@ TP1 to TP6 and TP8 to TP10 are bare 3.4 x 1.8 mm copper pads with no paste, so t
 
 - **Ground:** a top ground pour and a bottom ground plane, tied by about 190 stitching vias.
 - **U1 pours:** VIN_MOD and 5V_MOD each have their own top pour around U1's input and output caps.
-- **Thermal vias:** U1's exposed pad has 11.
-- **Pad connections:** surface mount pads join the pours solidly. Through-hole pads use thermal spokes (0.45 mm, 4 per layer) so they are easy to hand solder.
+- **Thermal vias:** U1's exposed pad has 11. The pad and all 11 vias join the GND pours solidly, so heat and ground current reach the bottom plane directly.
+- **Pad connections:** surface mount pads join the pours solidly. Through-hole pads use thermal spokes (0.45 mm, 4 per layer) so they are easy to hand solder. U1's thermal vias are the exception and join solidly.
 
 ### Routing style
 
@@ -189,6 +189,7 @@ Keep to these when editing the layout:
 - **Top side only.** Hand assembly works with a stencil.
 - **Pads under the body:** U1 (TPSM53602) and U4 (ESP32-C3 module) need solder paste and a hot plate or hot air. The INA226s are 0.5 mm pitch VSSOP-10.
 - **Silkscreen:** R21, R23 and LED3 have no reference designator printed because there is no room. LED3 has its "STAT" label. Use the assembly view in the board viewer to place them.
+- **Back silkscreen:** "JACKAL", "Smart Port Power Converter - Rev 1-1" and "UWAT VEXU - F26" in Chakra Petch Bold. The font is embedded in the board file, so KiCad shows it even where the font is not installed. Install Chakra Petch to edit that text. The quick reference notes that were printed there are in the README.
 
 ## Bring-up and test
 
@@ -218,3 +219,9 @@ All changes below happened during rev A design, before any boards were made.
 | TP10, C11, TP4 moved, R3 and R4 up 0.5 mm, SW1 down 0.5 mm, ESP32 support parts lined up with their pins | Room for straight pad entries |
 | SCL moved to the bottom layer past D2 and U6 | It ran under both bodies on top, 0.2 mm from U6's tab. See `images/scl_and_j2_ground.png` |
 | JP4 solder jumper replaced by Q1, an automatic USB power switch | No jumper to cut. USB powers the board only when port and bench power are off |
+| U1's exposed pad and its 11 thermal vias set to join the GND pours solidly, in the board and in `lib/UWAT.pretty` | The pad had no zone connection on top. The vias had 0.45 mm spokes on the bottom, and the middle row reached no copper at all |
+| Two more 0.8/0.4 mm vias where the 5 V feed to J6 drops to the bottom layer, with the top run extended over them | One via carried all of J6's current plus the 3.3 V side, up to about 2.3 A. Three vias now share it |
+| All zones refilled in KiCad 10. Gerbers and drill files regenerated | The old fill ran 0.3 mm from every board edge, inside the 0.5 mm edge keepout |
+| C1 to EEU-FR1H470, C9 to CC0805KKX7R8BB105 (25 V), U6 to MCP1826ST-3302E/DB, R14 and R15 to RMCF0805FT5K10. Same footprints, no layout change | The old parts were out of stock at DigiKey Canada on October 29, 2026 |
+| BOM prices now in CAD from digikey.ca. The OLED, its cable and the test load resistors left the BOM | Order only what the board needs. The J6 and J9 plugs stay |
+| Back silkscreen cut to the title block in Chakra Petch Bold, embedded in the board. The five reminder lines moved to the README | New board name and team label. At 0.8 mm the reminder lines were too small for a custom font |
