@@ -7,7 +7,7 @@
     (property "Value" "V5_SmartPort" (at -5.08 -7.62 0)
       (effects
         (font (size 1.27 1.27)) (justify left)))
-    (property "Footprint" "stellaNova:Molex_43202-4101_RJ9_Horizontal" (at 0 -10.16 0)
+    (property "Footprint" "stellaNova:Molex_95501-2441_4P4C_Horizontal" (at 0 -10.16 0)
       (effects
         (font (size 1.27 1.27))
         hide))

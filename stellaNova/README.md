@@ -70,6 +70,10 @@ These notes used to be printed on the back. They live here now.
   together, pins 3 and 4 are tied together, and pressing the button joins the two pairs. The
   footprint and wiring match that.
 - Do not populate parts (C6, R2, R4) have no paste openings and are left out of the placement file.
+- Expansion pins: J4 (SDA on IO37, SCL on IO35), J5 (GND) and J6 (3.3 V) are 2.54 mm through-hole pins between
+  the ESP32 and the microSD socket, labelled on the top silkscreen. Use them for an I2C sensor or display, or as
+  UART1. Cut 4 pins from a breakaway strip and solder them when needed. The board has no I2C pull-ups. Most I2C
+  breakout boards include them. If yours does not, add 4.7 k from SDA and from SCL to 3.3 V.
 
 ## Things to know when writing firmware or using it
 
@@ -87,7 +91,8 @@ These notes used to be printed on the back. They live here now.
 ## Check before first power-up
 
 0. Before ordering, print `docs/uwat-stellaNova-1to1-print.pdf` at 100% scale (not "fit to page")
-   and set a real Molex 43202-4101 jack on it. Its pins and the two pegs must line up with the holes.
+   and set a real Molex 0955012441 jack on it (the same jack as powerJackal). Its pins and the two pegs
+   must line up with the holes. If a peg does not fit, it only locates the jack, so it can be cut off.
 1. Jack pin map: 1 = RS-485 A, 2 = RS-485 B, 3 = GND, 4 = battery. Contact order is A, B, GND, + as
    on the labelled smart cable photo on the VEX Forum (black A, red B, green GND, yellow +).
    VEX smart cables are straight-through.
@@ -110,8 +115,11 @@ These notes used to be printed on the back. They live here now.
 | LEDs LINK / ACT | IO13 / IO14 (high = on) |
 | BOOT / RESET | IO0 / EN |
 | UART0 TX / RX (back pads) | IO43 / IO44 |
+| Expansion pins J4 SDA / SCL | IO37 / IO35 (any function, so they also work as UART1 TX / RX) |
+| Expansion pins J5 / J6 | GND / 3.3 V |
 
-Module is ESP32-S3-WROOM-1-N16R2: set PSRAM to Quad (QSPI) mode, not Octal.
+Module is ESP32-S3-WROOM-1-N16R2: set PSRAM to Quad (QSPI) mode, not Octal. IO35 and IO37 are free only
+because this module's PSRAM is quad. A module with octal PSRAM (R8 or R16V) uses those pins, so keep the N16R2.
 
 Brain side: `vexGenericSerialEnable(port, 0)` then `vexGenericSerialBaudrate(port, 230400)`, or `pros::Serial`.
 
@@ -141,7 +149,7 @@ Brain side: `vexGenericSerialEnable(port, 0)` then `vexGenericSerialBaudrate(por
 | 1 | D7 | Orange | Lite-On LTST-C191KFKT | 160-1445-1-ND | 195,728 | $0.22 |
 | 1 | D8 | Red | Lite-On LTST-C191KRKT | 160-1447-1-ND | 1,354,761 | $0.24 |
 | 1 | F1 | PTC 0.5 A 30 V | Bel Fuse 0ZCG0050AF2C | 5923-0ZCG0050AF2CCT-ND | 345,670 | $0.31 |
-| 1 | J1 | V5 smart port (4P4C) | Molex 0432024101 | WM5439-ND | 2,540 | $2.18 |
+| 1 | J1 | V5 smart port (4P4C) | Molex 0955012441 | WM5568-ND | 4,151 | $1.53 |
 | 1 | J2 | USB-C 2.0 | GCT USB4105-GF-A | 2073-USB4105-GF-ACT-ND | 85,103 | $1.19 |
 | 1 | J3 | microSD push-push | Hirose DM3AT-SF-PEJM5 | HR1964CT-ND | 76,375 | $5.27 |
 | 1 | L1 | 10uH | Wurth 74438357100 | 732-11206-1-ND | 15,980 | $2.68 |
@@ -156,6 +164,7 @@ Brain side: `vexGenericSerialEnable(port, 0)` then `vexGenericSerialBaudrate(por
 | 1 | U1 | ESP32-S3-WROOM-1-N16R2 | Espressif ESP32-S3-WROOM-1-N16R2 | 5407-ESP32-S3-WROOM-1-N16R2CT-ND | 4,702 | $10.61 |
 | 1 | U2 | AP63301WU-7 | Diodes Inc AP63301WU-7 | 31-AP63301WU-7CT-ND | 13,846 | $1.52 |
 | 1 | U3 | MAX33071EASA+ | Analog Devices MAX33071EASA+ | 505-MAX33071EASA+-ND | 2,956 | $12.30 |
+| 4 pins | J4 J5 J6 | Header pins, 2.54 mm | Sullins PRPC040SAAN-RC (40-pin strip, one covers 10 boards) | S1011EC-40-ND | 65,709 | $1.83 per strip |
 
 Do not populate: C6 R2 R4
 

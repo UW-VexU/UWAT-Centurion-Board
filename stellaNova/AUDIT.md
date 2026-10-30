@@ -13,6 +13,12 @@ The board below was first audited as a 4-layer design. It is now 2 layers. The o
   - Schematic: the power symbol on D5 pin 5 changed from VBUS to +3V3. Nothing else changed.
   - Layout: no parts moved. The VBUS via that sat against pin 5 moved down beside J2, and VBUS was re-run on the back. Pin 5 has a short top trace to a new via. From there a 0.3 mm trace runs on the back, around the RS-485 lines, to the 3.3 V via at U3.
   - Checks: ERC 0 errors. DRC 0 violations and 0 unconnected. Parity 0 issues. The new copper keeps at least 0.22 mm from other nets, against a 0.15 mm rule.
+- **J1 is now the same jack as powerJackal.** J1 changed from Molex 0432024101 to Molex 0955012441 (WM5568-ND), so both boards use one part. The solder pins, the pegs and the body outline are the same as the old footprint, measured from pin 1. They match the Molex 95501 footprint download in the repo root (`0955012401/`). Only the footprint name, the part numbers and the 3D model changed. The new model is Molex's 95501 STEP. A 3D render shows it flat on the board with its opening at the board edge, like the old one. It is tab down, so the cable latch sits the same way. The board moved no copper. DRC, ERC and parity are still clean.
+- **Expansion pins added.** J4 brings IO37 (SDA) and IO35 (SCL) out to two 2.54 mm through-hole pins. J5 is GND and J6 is 3.3 V. They sit in the only free spot, between the ESP32 and the microSD socket, 14 mm or more from the antenna. Board size is unchanged at 48 x 40 mm.
+  - IO35 and IO37 were picked because they line up with J4's pins at exactly 2.54 mm, so each gets a short straight trace. They are free GPIOs only because the N16R2 has quad PSRAM. The datasheet's strapping pins (IO0, IO3, IO45, IO46) and USB pins were avoided.
+  - J4 to J6 use compact footprints in the project library. The courtyard is the 2.54 mm plastic body, so they fit beside the ESP32 and microSD outlines. J4 has 1.5 mm round pads to keep 0.25 mm from the SD_D1 trace. J5 joins the GND pour. J6 takes a 2 mm trace from the 3.3 V via by R13.
+  - The back title moved left to clear the new pins, and STELLANOVA is now 2.7 mm tall instead of 3.0 mm.
+  - Checks: ERC 0 errors. DRC 0 violations and 0 unconnected at all severities. Parity 0 issues. Smallest new gap 0.258 mm (J4 pin 1 to SD_D1). The 3D view shows the pins clear of the ESP32 and microSD bodies.
 
 The rest of this file is the 4-layer audit.
 
@@ -28,7 +34,7 @@ stellaNova is the VEX V5 wireless debugger. Checked 2026-10-30 in two rounds. In
 | Schematic to PCB parity | 57 of 57 footprints, 0 pad net mismatches |
 | Symbol pin to footprint pad to datasheet | all 57 parts match |
 | DigiKey Canada stock | all 31 lines Active and in stock |
-| Parts cost per board | CAD 48.46 at qty 1, 36.70 at qty-10 pricing |
+| Parts cost per board | CAD 47.99 at qty 1, 36.29 at qty-10 pricing (header strip counted at a tenth per board) |
 
 ## Fixed in the first round
 
@@ -62,7 +68,7 @@ stellaNova is the VEX V5 wireless debugger. Checked 2026-10-30 in two rounds. In
 | ESP32-S3-WROOM-1-N16R2 | 5407-ESP32-S3-WROOM-1-N16R2CT-ND | 4,702 | 10.61 |
 | MAX33071EASA+ | 505-MAX33071EASA+-ND | 2,956 | 12.30 |
 | AP63301WU-7 | 31-AP63301WU-7CT-ND | 13,846 | 1.52 |
-| Molex 0432024101 (J1) | WM5439-ND | 2,540 | 2.18 |
+| Molex 0955012441 (J1, same jack as powerJackal) | WM5568-ND | 4,151 | 1.53 |
 | GCT USB4105-GF-A | 2073-USB4105-GF-ACT-ND | 85,103 | 1.19 |
 | Hirose DM3AT-SF-PEJM5 | HR1964CT-ND | 76,375 | 5.27 |
 | Würth 74438357100 (10 µH, Isat 4.6 A, 110 mΩ max) | 732-11206-1-ND | 15,980 | 2.68 |
@@ -98,7 +104,7 @@ The smallest stocks are J1, U3 and U1, at thousands each. TI's protected transce
 
 These can't be settled on paper. The README bring-up list covers them.
 
-1. Before ordering, print `docs/uwat-stellaNova-1to1-print.pdf` at 100% and set a real Molex 43202-4101 jack on it.
+1. Before ordering, print `docs/uwat-stellaNova-1to1-print.pdf` at 100% and set a real Molex 0955012441 jack on it.
 2. Beep a smart cable through J1: black to J1.1, red to J1.2, green to J1.3, yellow to J1.4. The jack is tab-down, the same as the VEXBridge board's Evercom jack, and the staggered pins only fit one way.
 3. Beep SW1 and SW2. Each should short to GND only while pressed.
 4. Plug into the brain with USB unplugged. The PWR LED should light. If it doesn't, nothing is damaged.
@@ -112,6 +118,7 @@ These can't be settled on paper. The README bring-up list covers them.
 - [ST3485EB datasheet](https://www.farnell.com/datasheets/1788494.pdf)
 - [ESP32-S3-WROOM-1 datasheet](https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
 - [AP63300/AP63301 datasheet](https://static.chipdip.ru/lib/118/DOC031118364.pdf)
-- [Molex SDA-43202 drawing](https://static.chipdip.ru/lib/680/DOC044680973.pdf)
+- [Molex SDA-43202 drawing](https://static.chipdip.ru/lib/680/DOC044680973.pdf) (the first J1, same pin and peg pattern)
+- [Molex 0955012441 at DigiKey Canada](https://www.digikey.ca/en/products/detail/molex/0955012441/1835860)
 - [C&K PTS810 datasheet](https://www.ckswitches.com/media/1476/pts810.pdf)
 - [DigiKey Canada](https://www.digikey.ca)

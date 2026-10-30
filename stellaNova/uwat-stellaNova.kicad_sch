@@ -12,7 +12,7 @@
       (property "Value" "V5_SmartPort" (at -5.08 -7.62 0)
         (effects
           (font (size 1.27 1.27)) (justify left)))
-      (property "Footprint" "stellaNova:Molex_43202-4101_RJ9_Horizontal" (at 0 -10.16 0)
+      (property "Footprint" "stellaNova:Molex_95501-2441_4P4C_Horizontal" (at 0 -10.16 0)
         (effects
           (font (size 1.27 1.27))
           hide))
@@ -1900,7 +1900,101 @@
               (font (size 1.27 1.27))))
           (number "1"
             (effects
-              (font (size 1.27 1.27))))))))
+              (font (size 1.27 1.27)))))))    (symbol "Connector_Generic:Conn_01x01" (pin_names (offset 1.016)
+        hide) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 2.54 0)
+        (effects
+          (font (size 1.27 1.27))))
+      (property "Value" "Conn_01x01" (at 0 -2.54 0)
+        (effects
+          (font (size 1.27 1.27))))
+      (property "Footprint" "" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "Datasheet" "" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_keywords" "connector" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_fp_filters" "Connector*:*_1x??_*" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (symbol "Conn_01x01_1_1"
+        (rectangle (start -1.27 1.27) (end 1.27 -1.27)
+          (stroke (width 0.254) (type default))
+          (fill (type background)))
+        (rectangle (start -1.27 0.127) (end 0 -0.127)
+          (stroke (width 0.1524) (type default))
+          (fill (type none)))
+        (pin passive line (at -5.08 -0 0) (length 3.81)
+          (name "Pin_1"
+            (effects
+              (font (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font (size 1.27 1.27)))))))
+    (symbol "Connector_Generic:Conn_01x02" (pin_names (offset 1.016)
+        hide) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 2.54 0)
+        (effects
+          (font (size 1.27 1.27))))
+      (property "Value" "Conn_01x02" (at 0 -5.08 0)
+        (effects
+          (font (size 1.27 1.27))))
+      (property "Footprint" "" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "Datasheet" "" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_keywords" "connector" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (property "ki_fp_filters" "Connector*:*_1x??_*" (at 0 0 0)
+        (effects
+          (font (size 1.27 1.27))
+          hide))
+      (symbol "Conn_01x02_1_1"
+        (rectangle (start -1.27 1.27) (end 1.27 -3.81)
+          (stroke (width 0.254) (type default))
+          (fill (type background)))
+        (rectangle (start -1.27 0.127) (end 0 -0.127)
+          (stroke (width 0.1524) (type default))
+          (fill (type none)))
+        (rectangle (start -1.27 -2.413) (end 0 -2.667)
+          (stroke (width 0.1524) (type default))
+          (fill (type none)))
+        (pin passive line (at -5.08 -0 0) (length 3.81)
+          (name "Pin_1"
+            (effects
+              (font (size 1.27 1.27))))
+          (number "1"
+            (effects
+              (font (size 1.27 1.27)))))
+        (pin passive line (at -5.08 -2.54 0) (length 3.81)
+          (name "Pin_2"
+            (effects
+              (font (size 1.27 1.27))))
+          (number "2"
+            (effects
+              (font (size 1.27 1.27)))))))
+  )
   (wire
     (pts (xy 53.34 53.34) (xy 43.18 53.34))
     (stroke (width 0) (type default)) (uuid 9a14ed43-0c8a-5948-9e62-e7bc57827ee3))
@@ -2370,12 +2464,10 @@
   (label "BOOT" (at 241.3 66.04 180) (fields_autoplaced)
     (effects
       (font (size 1.27 1.27)) (justify right bottom)) (uuid c656eee4-5770-5e92-a04f-696cd7629b09))
-  (no_connect (at 279.4 78.74) (uuid cd562573-ab5b-5167-b998-91c63e92c837))
   (no_connect (at 279.4 81.28) (uuid f4cf8cdb-fdad-5f3d-9964-6305eb4ea8f9))
   (label "ESP_EN" (at 241.3 60.96 180) (fields_autoplaced)
     (effects
       (font (size 1.27 1.27)) (justify right bottom)) (uuid 4eb46bdc-37cf-50c7-9de9-84780651a3bf))
-  (no_connect (at 279.4 83.82) (uuid 2fb75eac-a32a-5019-9a2f-650112f1eb67))
   (label "SD_D1" (at 287.02 86.36 0) (fields_autoplaced)
     (effects
       (font (size 1.27 1.27)) (justify left bottom)) (uuid 21677060-af52-5ba9-91a8-052a3524f189))
@@ -2572,7 +2664,7 @@
     (effects
       (font (size 1.27 1.27)
         italic) (justify left top)) (uuid edb4c80e-c850-54b0-afa9-395b43e6b819))
-  (text "RS-485  RX IO9   DE IO10   TX IO11   (UART_MODE_RS485_HALF_DUPLEX, RTS = IO10)\nUSB     D- IO19  D+ IO20   (USB Serial/JTAG, auto-reset into bootloader)\nmicroSD CLK IO40  CMD IO41  D0 IO39  D1 IO38  D2 IO2  D3 IO42  DET IO1 (low = card in)\nLEDs    LINK IO13  ACT IO14  (high = on)\nButtons RESET = EN,  BOOT = IO0\nUART0   TX IO43 (TP4), RX IO44 (TP5): ROM boot log\n\nBrain side: vexGenericSerialEnable(port, 0) then\nvexGenericSerialBaudrate(port, 230400). PROS: pros::Serial.\n\nModule N16R2 has quad PSRAM: set PSRAM mode to Quad, not Octal.\nStrapping pins IO3, IO45, IO46 are left floating on purpose\n(internal defaults give SPI boot and 3.3 V flash)." (at 208.28 177.8 0)
+  (text "RS-485  RX IO9   DE IO10   TX IO11   (UART_MODE_RS485_HALF_DUPLEX, RTS = IO10)\nUSB     D- IO19  D+ IO20   (USB Serial/JTAG, auto-reset into bootloader)\nmicroSD CLK IO40  CMD IO41  D0 IO39  D1 IO38  D2 IO2  D3 IO42  DET IO1 (low = card in)\nLEDs    LINK IO13  ACT IO14  (high = on)\nButtons RESET = EN,  BOOT = IO0\nUART0   TX IO43 (TP4), RX IO44 (TP5): ROM boot log\nHeader  J4 SDA IO37, SCL IO35 (any function, UART1 too), J5 GND, J6 3V3\n\nBrain side: vexGenericSerialEnable(port, 0) then\nvexGenericSerialBaudrate(port, 230400). PROS: pros::Serial.\n\nModule N16R2 has quad PSRAM: set PSRAM mode to Quad, not Octal.\nIO35 and IO37 are free only because the PSRAM is quad.\nStrapping pins IO3, IO45, IO46 are left floating on purpose\n(internal defaults give SPI boot and 3.3 V flash)." (at 208.28 177.8 0)
     (effects
       (font (size 1.4 1.4)) (justify left top)) (uuid d14828ee-3e52-55e1-a890-8c56e600c983))
   (junction (at 57.15 132.08) (diameter 0) (color 0 0 0 0) (uuid 023793d3-cdfc-559a-b649-a8eb21efa0fc))
@@ -2690,7 +2782,7 @@
     (property "Value" "V5 smart port (4P4C)" (at 114.3 60.96 0)
       (effects
         (font (size 1.27 1.27)) (justify left)))
-    (property "Footprint" "stellaNova:Molex_43202-4101_RJ9_Horizontal" (at 124.46 53.34 0)
+    (property "Footprint" "stellaNova:Molex_95501-2441_4P4C_Horizontal" (at 124.46 53.34 0)
       (effects
         (font (size 1.27 1.27))
         hide))
@@ -2702,11 +2794,11 @@
       (effects
         (font (size 1.27 1.27))
         hide))
-    (property "MPN" "0432024101" (at 124.46 53.34 0)
+    (property "MPN" "0955012441" (at 124.46 53.34 0)
       (effects
         (font (size 1.27 1.27))
         hide))
-    (property "DigiKey" "WM5439-ND" (at 124.46 53.34 0)
+    (property "DigiKey" "WM5568-ND" (at 124.46 53.34 0)
       (effects
         (font (size 1.27 1.27))
         hide))
@@ -5803,5 +5895,175 @@
     (instances
       (project "uwat-stellaNova"
         (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "TP5") (unit 1)))))
+  (wire
+    (pts (xy 279.4 78.74) (xy 287.02 78.74))
+    (stroke (width 0) (type default)) (uuid e184c8f2-9e65-4a30-a0b9-fba8aee2ec6d))
+  (label "SCL" (at 287.02 78.74 0) (fields_autoplaced)
+    (effects
+      (font (size 1.27 1.27)) (justify left bottom)) (uuid e4d69491-b903-4e40-8846-f496046fd820))
+  (wire
+    (pts (xy 279.4 83.82) (xy 287.02 83.82))
+    (stroke (width 0) (type default)) (uuid af82354c-3610-446b-b142-6a619b96ffd5))
+  (label "SDA" (at 287.02 83.82 0) (fields_autoplaced)
+    (effects
+      (font (size 1.27 1.27)) (justify left bottom)) (uuid fd2a3beb-33e1-4268-be2c-d941c1055033))
+  (symbol (lib_id "Connector_Generic:Conn_01x02") (at 307.34 78.74 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid d2779965-6cc4-4aca-a726-ef59d636fe6b)
+    (property "Reference" "J4" (at 309.88 78.74 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "Header 1x02" (at 309.88 81.28 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "stellaNova:PinHeader_1x02_P2.54mm_Vertical_Compact" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "~" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Manufacturer" "Sullins Connector Solutions" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "MPN" "PRPC040SAAN-RC" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "DigiKey" "S1011EC-40-ND" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Note" "Pins cut from one 40-pin strip" (at 307.34 78.74 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (pin "1" (uuid d1516ecd-44e7-45a2-b4c8-df717a3daa1f))
+    (pin "2" (uuid 1969af60-ab2c-4a92-8922-23b3acc8281a))
+    (instances
+      (project "uwat-stellaNova"
+        (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "J4") (unit 1)))))
+  (label "SDA" (at 302.26 78.74 180) (fields_autoplaced)
+    (effects
+      (font (size 1.27 1.27)) (justify right bottom)) (uuid b839f0dd-89e0-4f6c-b79a-7ec6f1ab51e2))
+  (label "SCL" (at 302.26 81.28 180) (fields_autoplaced)
+    (effects
+      (font (size 1.27 1.27)) (justify right bottom)) (uuid 937775e3-70a1-4f37-a932-b2eea6d275d5))
+  (symbol (lib_id "Connector_Generic:Conn_01x01") (at 307.34 88.9 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid 793234b6-e5d7-43d9-bf40-870a0d7bc882)
+    (property "Reference" "J5" (at 309.88 87.63 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "Header 1x01" (at 309.88 90.17 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "stellaNova:PinHeader_1x01_P2.54mm_Vertical_Compact" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "~" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Manufacturer" "Sullins Connector Solutions" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "MPN" "PRPC040SAAN-RC" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "DigiKey" "S1011EC-40-ND" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Note" "Pins cut from one 40-pin strip" (at 307.34 88.9 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (pin "1" (uuid 6cca156a-f5a7-4e0d-b008-d3ca54baacfc))
+    (instances
+      (project "uwat-stellaNova"
+        (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "J5") (unit 1)))))
+  (wire
+    (pts (xy 302.26 88.9) (xy 302.26 91.44))
+    (stroke (width 0) (type default)) (uuid ef57f97f-2e68-4c89-a223-14d8a3fa1f51))
+  (symbol (lib_id "power:GND") (at 302.26 91.44 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid 55e2521b-06ec-4054-a860-b2ca2e7c88ad)
+    (property "Reference" "#PWR070" (at 302.26 97.79 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Value" "GND" (at 302.26 95.25 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 302.26 91.44 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "~" (at 302.26 91.44 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (pin "1" (uuid eebd07d9-eeef-4b70-b43b-c793ae24c28a))
+    (instances
+      (project "uwat-stellaNova"
+        (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "#PWR070") (unit 1)))))
+  (symbol (lib_id "Connector_Generic:Conn_01x01") (at 307.34 104.14 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid e0612deb-7822-4fce-b8e5-73e67eb2c93a)
+    (property "Reference" "J6" (at 309.88 102.87 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "Header 1x01" (at 309.88 105.41 0)
+      (effects
+        (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "stellaNova:PinHeader_1x01_P2.54mm_Vertical_Compact" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "~" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Manufacturer" "Sullins Connector Solutions" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "MPN" "PRPC040SAAN-RC" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "DigiKey" "S1011EC-40-ND" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Note" "Pins cut from one 40-pin strip" (at 307.34 104.14 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (pin "1" (uuid a36abe20-5707-4f03-b6c1-7301dcc67e9d))
+    (instances
+      (project "uwat-stellaNova"
+        (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "J6") (unit 1)))))
+  (wire
+    (pts (xy 302.26 104.14) (xy 302.26 101.6))
+    (stroke (width 0) (type default)) (uuid d5abf961-6aad-4d12-ae60-da22562dbb8d))
+  (symbol (lib_id "power:+3V3") (at 302.26 101.6 0) (unit 1) (in_bom no) (on_board yes) (dnp no) (uuid 62fffffe-32f5-4efd-93ce-f2b6325fa36f)
+    (property "Reference" "#PWR071" (at 302.26 95.25 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Value" "+3V3" (at 302.26 98.04 0)
+      (effects
+        (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 302.26 101.6 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (property "Datasheet" "~" (at 302.26 101.6 0)
+      (effects
+        (font (size 1.27 1.27))
+        hide))
+    (pin "1" (uuid e76132f8-a1eb-4b55-a4a1-a9b4b7108fbe))
+    (instances
+      (project "uwat-stellaNova"
+        (path "/a59952b4-2c18-57d1-abeb-2ef238f8d25a" (reference "#PWR071") (unit 1)))))
   (sheet_instances
     (path "/" (page "1"))))

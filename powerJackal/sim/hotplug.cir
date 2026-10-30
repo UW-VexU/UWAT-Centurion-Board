@@ -1,0 +1,153 @@
+* powerJackal hot-plug: V5 battery plugged into J1 (smart port) through a smart cable
+*
+* Plain SPICE. Opens in LTspice (File > Open, then Run). Also runs in ngspice.
+* Probe V(vinmod) for the input rail (TP2, U1 VIN and EN, U2 VBUS, C1 to C3, C8, D1).
+* Path: J1 pin 4 (VPORT) > D5 > VIN_OR > F1 > VFUSE > R1 > VIN_MOD. Board GND is node 0.
+* The whole cable loop (VBAT wire plus GND wire) is lumped into the + leg.
+* The bench input J2 is open here. See hotplug_bench.cir for J2.
+*
+* ---------------------------------------------------------------------------
+* Parameters. Defaults are the worst case: low source R, low cable R,
+* F1 and C1 ESR at their minimum, TVS at its highest breakdown corner.
+* ---------------------------------------------------------------------------
+* V5 battery, fully charged (4S LiFePO4, 4 x 3.65 V).
+.param VBAT=14.6
+* Battery plus brain internal resistance. Assumed, bracket 50m to 200m.
+.param RSRC=50m
+* Loop inductance of battery lead, brain and smart cable. Swept 0.3u to 3u.
+.param LCAB=1u
+* Cable resistance mode. 0 = fixed RCAB0 (worst case, low damping).
+* 1 = RCAB0 plus 28 AWG resistance for the cable length that gives LCAB.
+.param KLINK=0
+* Short cable plus four 4P4C contacts (0.15 m of 28 AWG pair is 64m, contacts about 10m each).
+.param RCAB0=0.1
+* 28 AWG copper is 0.213 ohm/m, so 0.426 ohm/m for the + and GND conductors.
+.param RPERM=0.426
+* Loop inductance per metre of two adjacent flat-cable conductors.
+* L = (u0/pi) acosh(d/2r), d = 1.0 to 1.3 mm pitch, r = 0.16 mm, gives 0.63u to 0.83u per m.
+.param LPERM=0.75u
+* Part of LCAB that is battery lead and brain wiring, with no cable length.
+.param LFIX=0.2u
+.param RCAB={RCAB0 + KLINK*RPERM*max(LCAB-LFIX,0)/LPERM}
+* F1 Littelfuse 2016L150/33DR: 1.5 A hold, 33 V, 40 A max. Rmin 0.07, R1max 0.18 ohm
+* (Littelfuse 2016L table as listed by DigiKey). Rmin gives the least damping.
+.param RPTC=0.07
+* C1 Panasonic EEU-FR1H470 ESR. Panasonic gives |Z| 0.14 ohm max at 100 kHz.
+* ESR assumed 0.05 to 0.14 ohm. The low end gives the least damping.
+.param ESRC1=0.05
+* 1 = D1 fitted, 0 = D1 removed.
+.param TVS=1
+* TVS corner. 1 = highest VBR (19.7 V, worst for clamp voltage). 0 = lowest VBR (17.8 V, most TVS current).
+.param TVSC=1
+* 1 = C2 and C3 follow the Samsung DC-bias curve. 0 = fixed at their value at 14 V.
+.param CNL=1
+* Load on VIN_MOD while U1 is still starting. Light load, 10 mA.
+.param ILOAD=10m
+*
+* Derived values. Do not edit.
+.param KNL={CNL}
+.param KLIN={(1-CNL)*0.746}
+.param TVS_VBR={TVSC*19.7+(1-TVSC)*17.8}
+.param TVS_A={TVSC*0.479+(1-TVSC)*0.26}
+.param TVS_RS=0.0645
+.param RTVS={1m+(1-TVS)*1G}
+*
+* ---------------------------------------------------------------------------
+* Source and cable
+* ---------------------------------------------------------------------------
+* Ideal step at 1 us with a 10 ns edge. No contact bounce.
+V_BAT bat 0 PWL(0 0 1u 0 1.01u {VBAT})
+R_SRC bat s1 {RSRC}
+L_CAB s1 s2 {LCAB}
+R_CAB s2 vport {RCAB}
+* J1 pin, TP1 and cable end capacitance. Assumed 50 pF.
+C_PORT vport 0 50p
+*
+* ---------------------------------------------------------------------------
+* Input OR, fuse and shunt
+* ---------------------------------------------------------------------------
+* D5 Diodes Inc B340A, 40 V 3 A Schottky. DS13005: VF 0.50 V max at 3 A, IFSM 100 A, CT 250 pF typ.
+* Model fit: about 0.41 V at 3 A.
+D_D5 vport vinor D_B340A
+* D3 B340A from the bench input. J2 is open, so BENCH_IN only has its own capacitance.
+D_D3 bench vinor D_B340A
+R_J2 bench 0 10Meg
+C_J2 bench 0 20p
+* R8 10k and LED1 (Lite-On LTST-C171GKT) from VIN_OR. About 1.2 mA.
+R_R8 vinor led1 10k
+D_LED1 led1 0 D_LED
+* Ammeter for the input current.
+V_IF1 vinor f1a 0
+* F1 PTC. Thermal time constant is ms, so it is a fixed resistor here.
+R_F1 f1a vfuse {RPTC}
+* R1 Vishay WSL1206R0200FEA, 20 mOhm shunt for U2 (INA226, IN+ on VFUSE, IN- on VIN_MOD).
+R_R1 vfuse vinmod 20m
+*
+* ---------------------------------------------------------------------------
+* VIN_MOD rail
+* ---------------------------------------------------------------------------
+* C1 Panasonic EEU-FR1H470, 47 uF 50 V aluminium electrolytic, 6.3 x 11.2 mm radial.
+* ESL 8 nH assumed (radial can plus leads).
+R_C1 vinmod c1a {ESRC1}
+L_C1 c1a c1b 8n
+C_C1 c1b 0 47u
+*
+* C2 and C3 Samsung CL32B106KBJNNNE, 10 uF 50 V X7R 1210, modelled as one 20 uF part.
+* Nonlinear: dQ/dV follows the Samsung DC-bias curve (characteristic sheet, Agilent 4284A):
+* -12% at 10 V, -27% at 15 V, -41% at 20 V, -54% at 25 V, -63% at 30 V, -74% at 40 V.
+* Fit: C(V) = C0/(1+(V/24)^2), within 3% of C0 from 0 to 40 V. C(14 V) = 0.746*C0.
+* ESR 5 mOhm each, so 2.5 mOhm for the pair (Samsung |Z| and ESR plot).
+* Charge model, built from basic parts so LTspice and ngspice both run it.
+* B_C23Q makes Qn(V) = 24*atan(V/24) volts. The 1 uF helper cap turns that into a current,
+* and B_C23 draws C0/1u times that current. R_C23H stops trapezoidal ringing (adds 0.7 mOhm).
+.param C23N=20u
+R_C23 vinmod c23b 2.5m
+B_C23Q c23q 0 V=KNL*24*atan(V(c23b)/24)+KLIN*V(c23b)
+V_C23 c23q c23h 0
+R_C23H c23h c23y 10m
+C_C23 c23y 0 1u
+B_C23 c23b 0 I=C23N*1e6*I(V_C23)
+* C8 Yageo CC0805KRX7R9BB104, 100 nF 50 V X7R. Assumed 80 nF at 14 V. Too small to matter.
+* It sits on the C2 and C3 inner node so the solver does not see a sub-ns mode.
+C_C8 c23b 0 80n
+*
+* D1 Littelfuse SMBJ16A TVS, cathode on VIN_MOD. JEDEC SMBJ16A ratings:
+* VRWM 16 V, VBR 17.8 to 19.7 V at 1 mA, IR 1 uA max at 16 V, VC 26.0 V at 23.1 A (10/1000 us), 600 W.
+* Model: an offset source plus a steep diode. The high corner hits 19.7 V at 1 mA and
+* 26.0 V at 23.1 A. The low corner hits 17.8 V at 1 mA and keeps leakage under 1 uA at 16 V.
+* V_ID1 measures TVS current.
+V_ID1 vinmod d1m 0
+R_D1SW d1m d1k {RTVS}
+V_D1OFF d1k d1b {TVS_VBR - TVS_A*ln(1m/1n)}
+D_D1BR d1b 0 D_TVSBR
+D_D1FW 0 d1k D_TVSFW
+*
+* U1 TI TPSM53602 (EN tied to VIN). Treated as a light load while it starts.
+* Abs max (TI SNVSBD0B): VIN 38 V, EN up to VIN + 0.3 V. Recommended VIN 36 V max.
+* U2 INA226 VBUS and IN- also sit here. Abs max 40 V (TI SBOS547C). Their input current is ignored.
+R_LOAD vinmod 0 {14.6/ILOAD}
+*
+* ---------------------------------------------------------------------------
+* Models
+* ---------------------------------------------------------------------------
+.model D_B340A D(IS=20u N=1.05 RS=0.03 CJO=500p VJ=0.5 M=0.45)
+.model D_LED D(IS=1e-20 N=1.8 RS=5)
+.model D_TVSBR D(IS=1n N={TVS_A/25.865m} RS={TVS_RS})
+.model D_TVSFW D(IS=1e-12 N=1.5 RS=0.03)
+*
+* ---------------------------------------------------------------------------
+* Analysis. The .step and .meas lines are for LTspice.
+* ---------------------------------------------------------------------------
+.tran 10n 600u 0 10n
+.options plotwinsize=0
+.step param LCAB list 0.3u 0.5u 1u 1.5u 2u 3u
+.step param TVS list 0 1
+.meas tran VIN_PK MAX V(vinmod)
+.meas tran VFUSE_PK MAX V(vfuse)
+.meas tran IIN_PK MAX I(V_IF1)
+.meas tran ID1_PK MAX I(V_ID1)
+.meas tran ED1 INTEG V(d1k)*I(V_ID1)
+.meas tran VRD5_PK MAX V(vinor)-V(vport)
+.meas tran VRD3_PK MAX V(vinor)-V(bench)
+.meas tran VIN_END FIND V(vinmod) AT 590u
+.end
