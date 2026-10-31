@@ -1,0 +1,21 @@
+# KiCad local files: backups, locks, caches and per-user view settings
+*-backups/
+*.kicad_prl
+fp-info-cache
+*.lck
+~*.lck
+_autosave-*
+\#auto_saved_files#
+*.bak
+*.kicad_sch-bak
+*.kicad_pcb-bak
+
+# Reports from local DRC or ERC runs
+*.rpt
+
+# Python and Node
+__pycache__/
+*.pyc
+node_modules/
+tools/**/work/
+

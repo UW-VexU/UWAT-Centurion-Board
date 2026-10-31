@@ -1,0 +1,126 @@
+* powerJackal hot-plug: live bench supply connected to J2 (screw terminal) on long leads
+*
+* Plain SPICE. Opens in LTspice (File > Open, then Run). Also runs in ngspice.
+* Probe V(vinmod) for the input rail (TP2, U1 VIN and EN, U2 VBUS, C1 to C3, C8, D1).
+* Path: J2 pin 1 (BENCH_IN) > D3 > VIN_OR > F1 > VFUSE > R1 > VIN_MOD. Board GND is node 0.
+* The lead loop (+ lead and GND lead) is lumped into the + leg.
+* The smart port J1 is open here. See hotplug.cir for J1.
+* Everything from VIN_OR onward is the same as hotplug.cir.
+*
+* ---------------------------------------------------------------------------
+* Parameters. Defaults are the worst case.
+* ---------------------------------------------------------------------------
+* Bench supply, top of the J2 range (10 to 15 V, powerJackal README).
+.param VPSU=15
+* Supply output impedance at tens of kHz (its output cap ESR). Assumed, bracket 10m to 50m.
+.param RPSU=20m
+* Loop inductance of the two bench leads. Two loose 1 m leads a few cm apart are about 1u to 2u.
+* Swept 0.5u to 4u.
+.param LLEAD=2u
+* Lead, banana and screw terminal resistance. A 1 m pair of 18 AWG is 42 mOhm. Assumed 50m.
+.param RLEAD=50m
+* F1 Littelfuse 2016L150/33DR: Rmin 0.07, R1max 0.18 ohm (Littelfuse 2016L table as listed by DigiKey).
+.param RPTC=0.07
+* C1 Panasonic EEU-FR1H470 ESR. Panasonic gives |Z| 0.14 ohm max at 100 kHz. ESR assumed 0.05 to 0.14 ohm.
+.param ESRC1=0.05
+* 1 = D1 fitted, 0 = D1 removed.
+.param TVS=1
+* TVS corner. 1 = highest VBR (19.7 V). 0 = lowest VBR (17.8 V).
+.param TVSC=1
+* 1 = C2 and C3 follow the Samsung DC-bias curve. 0 = fixed at their value at 14 V.
+.param CNL=1
+* Load on VIN_MOD while U1 is still starting. Light load, 10 mA at 14.6 V.
+.param ILOAD=10m
+*
+* Derived values. Do not edit.
+.param KNL={CNL}
+.param KLIN={(1-CNL)*0.746}
+.param TVS_VBR={TVSC*19.7+(1-TVSC)*17.8}
+.param TVS_A={TVSC*0.479+(1-TVSC)*0.26}
+.param TVS_RS=0.0645
+.param RTVS={1m+(1-TVS)*1G}
+*
+* ---------------------------------------------------------------------------
+* Source and leads
+* ---------------------------------------------------------------------------
+* Ideal step at 1 us with a 10 ns edge. The supply's big output cap makes it a stiff source.
+V_PSU psu 0 PWL(0 0 1u 0 1.01u {VPSU})
+R_PSU psu s1 {RPSU}
+L_LEAD s1 s2 {LLEAD}
+R_LEAD s2 bench {RLEAD}
+* J2 terminal capacitance. Assumed 20 pF.
+C_J2 bench 0 20p
+*
+* ---------------------------------------------------------------------------
+* Input OR, fuse and shunt
+* ---------------------------------------------------------------------------
+* D3 Diodes Inc B340A, 40 V 3 A Schottky. DS13005: VF 0.50 V max at 3 A, IFSM 100 A, CT 250 pF typ.
+D_D3 bench vinor D_B340A
+* D5 B340A from the smart port. J1 is open, so VPORT only has TP1 and the jack.
+D_D5 vport vinor D_B340A
+R_TP1 vport 0 10Meg
+C_PORT vport 0 50p
+* R8 10k and LED1 (Lite-On LTST-C171GKT) from VIN_OR. About 1.2 mA.
+R_R8 vinor led1 10k
+D_LED1 led1 0 D_LED
+* Ammeter for the input current.
+V_IF1 vinor f1a 0
+* F1 PTC. Thermal time constant is ms, so it is a fixed resistor here.
+R_F1 f1a vfuse {RPTC}
+* R1 Vishay WSL1206R0200FEA, 20 mOhm shunt for U2 (INA226).
+R_R1 vfuse vinmod 20m
+*
+* ---------------------------------------------------------------------------
+* VIN_MOD rail (same as hotplug.cir)
+* ---------------------------------------------------------------------------
+* C1 Panasonic EEU-FR1H470, 47 uF 50 V aluminium electrolytic. ESL 8 nH assumed.
+R_C1 vinmod c1a {ESRC1}
+L_C1 c1a c1b 8n
+C_C1 c1b 0 47u
+*
+* C2 and C3 Samsung CL32B106KBJNNNE, 10 uF 50 V X7R 1210, modelled as one 20 uF part.
+* Nonlinear DC-bias charge model, fit C(V) = C0/(1+(V/24)^2). See hotplug.cir for the details.
+.param C23N=20u
+R_C23 vinmod c23b 2.5m
+B_C23Q c23q 0 V=KNL*24*atan(V(c23b)/24)+KLIN*V(c23b)
+V_C23 c23q c23h 0
+R_C23H c23h c23y 10m
+C_C23 c23y 0 1u
+B_C23 c23b 0 I=C23N*1e6*I(V_C23)
+* C8 Yageo CC0805KRX7R9BB104, 100 nF 50 V X7R. Assumed 80 nF at 14 V.
+C_C8 c23b 0 80n
+*
+* D1 Littelfuse SMBJ16A TVS, cathode on VIN_MOD. VBR 17.8 to 19.7 V at 1 mA, VC 26.0 V at 23.1 A.
+V_ID1 vinmod d1m 0
+R_D1SW d1m d1k {RTVS}
+V_D1OFF d1k d1b {TVS_VBR - TVS_A*ln(1m/1n)}
+D_D1BR d1b 0 D_TVSBR
+D_D1FW 0 d1k D_TVSFW
+*
+* U1 TPSM53602 as a light load. Abs max VIN 38 V. U2 INA226 abs max 40 V.
+R_LOAD vinmod 0 {14.6/ILOAD}
+*
+* ---------------------------------------------------------------------------
+* Models
+* ---------------------------------------------------------------------------
+.model D_B340A D(IS=20u N=1.05 RS=0.03 CJO=500p VJ=0.5 M=0.45)
+.model D_LED D(IS=1e-20 N=1.8 RS=5)
+.model D_TVSBR D(IS=1n N={TVS_A/25.865m} RS={TVS_RS})
+.model D_TVSFW D(IS=1e-12 N=1.5 RS=0.03)
+*
+* ---------------------------------------------------------------------------
+* Analysis. The .step and .meas lines are for LTspice.
+* ---------------------------------------------------------------------------
+.tran 10n 600u 0 10n
+.options plotwinsize=0
+.step param LLEAD list 0.5u 1u 2u 3u 4u
+.step param TVS list 0 1
+.meas tran VIN_PK MAX V(vinmod)
+.meas tran VFUSE_PK MAX V(vfuse)
+.meas tran IIN_PK MAX I(V_IF1)
+.meas tran ID1_PK MAX I(V_ID1)
+.meas tran ED1 INTEG V(d1k)*I(V_ID1)
+.meas tran VRD3_PK MAX V(vinor)-V(bench)
+.meas tran VRD5_PK MAX V(vinor)-V(vport)
+.meas tran VIN_END FIND V(vinmod) AT 590u
+.end

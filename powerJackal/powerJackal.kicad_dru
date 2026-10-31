@@ -1,0 +1,4 @@
+(version 1)
+(rule "USB-C shell pegs sit close to the GND pins by design"
+  (condition "A.Parent == 'J7' && B.Parent == 'J7'")
+  (constraint hole_clearance (min 0.15mm)))

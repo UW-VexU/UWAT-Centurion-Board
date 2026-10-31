@@ -1,9 +1,4 @@
 (sym_lib_table
-	(version 7)
-	(lib (name "LTM8023") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_LTM8023EV-PBF/KiCADv6") (options "") (descr ""))
-	(lib (name "polyfuse_2016L150/33DR") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_2016L150-33DR_polyfuse/KiCADv6") (options "") (descr ""))
-	(lib (name "4p4c-955012401") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/0955012401") (options "") (descr ""))
-	(lib (name "terminal_Phoenix_193516_4lead") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_1935187/KiCADv6") (options "") (descr ""))
-	(lib (name "onsemi-ss34") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_SS34/KiCADv6") (options "") (descr ""))
-	(lib (name "tvs-diode-SMBJ16A") (type "KiCad") (uri "C:/Users/xiele/Documents/UWAT-VEXU-All/UWAT-Centurion-Board/ul_SMBJ16A/KiCADv6") (options "") (descr ""))
+  (version 7)
+  (lib (name "UWAT")(type "KiCad")(uri "${KIPRJMOD}/lib/UWAT.kicad_sym")(options "")(descr "UWAT VEXU parts for powerJackal"))
 )

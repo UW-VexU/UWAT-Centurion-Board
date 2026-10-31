@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "stellaNova")(type "KiCad")(uri "${KIPRJMOD}/stellaNova.kicad_sym")(options "")(descr "uwat-stellaNova project symbols"))
+)

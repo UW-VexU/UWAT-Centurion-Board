@@ -1,0 +1,151 @@
+* stellaNova hot-plug: V5 battery plugged in through a smart cable
+*
+* Plain SPICE. Opens in LTspice (File > Open, then Run). Also runs in ngspice.
+* Probe V(vin) for the input rail (TP1, U2 VIN, C1, D1). V(en) is U2 EN.
+* Battery path: J1 pin 4 (VBAT_PORT) > F1 > D2 > VIN. Board GND is node 0.
+* The whole cable loop (VBAT wire plus GND wire) is lumped into the + leg.
+*
+* ---------------------------------------------------------------------------
+* Parameters. Defaults are the worst case: low source R, low cable R,
+* PTC at its minimum, TVS at its highest breakdown corner.
+* ---------------------------------------------------------------------------
+* V5 battery, fully charged (4S LiFePO4, 4 x 3.65 V).
+.param VBAT=14.6
+* Battery plus brain internal resistance. Assumed, bracket 50m to 200m.
+.param RSRC=50m
+* Loop inductance of battery lead, brain and smart cable. Swept 0.3u to 3u.
+.param LCAB=1u
+* Cable resistance mode. 0 = fixed RCAB0 (worst case, low damping).
+* 1 = RCAB0 plus 28 AWG resistance for the cable length that gives LCAB.
+.param KLINK=0
+* Short cable plus four 4P4C contacts (0.15 m of 28 AWG pair is 64m, contacts about 10m each).
+.param RCAB0=0.1
+* 28 AWG copper is 0.213 ohm/m, so 0.426 ohm/m for the + and GND conductors.
+.param RPERM=0.426
+* Loop inductance per metre of two adjacent flat-cable conductors.
+* L = (u0/pi) acosh(d/2r), d = 1.0 to 1.3 mm pitch, r = 0.16 mm, gives 0.63u to 0.83u per m.
+.param LPERM=0.75u
+* Part of LCAB that is battery lead and brain wiring, with no cable length.
+.param LFIX=0.2u
+.param RCAB={RCAB0 + KLINK*RPERM*max(LCAB-LFIX,0)/LPERM}
+* F1 Bel 0ZCG0050AF2C. Datasheet Rev. 0ZCG Apr2026: Rmin 0.150, R1max 1.000 ohm.
+* Rmin gives the least damping, so it is the default.
+.param RPTC=0.15
+* 1 = D1 fitted, 0 = D1 removed.
+.param TVS=1
+* TVS corner. 1 = highest VBR (22.1 V, worst for clamp voltage). 0 = lowest VBR (20.0 V, most TVS current).
+.param TVSC=1
+* 1 = C1 follows the Samsung DC-bias curve. 0 = C1 fixed at its value at 14 V.
+.param CNL=1
+* Load on VIN while U2 is still in soft start. Light load, 10 mA.
+.param ILOAD=10m
+* 1 = USB hot-plug test (5.25 V into VBUS). Set VBAT=0 for that run.
+.param USB=0
+*
+* Derived values. Do not edit.
+.param KNL={CNL}
+.param KLIN={(1-CNL)*0.746}
+.param TVS_VBR={TVSC*22.1+(1-TVSC)*20.0}
+.param TVS_A={TVSC*0.537+(1-TVSC)*0.29}
+.param TVS_RS=0.145
+.param RTVS={1m+(1-TVS)*1G}
+*
+* ---------------------------------------------------------------------------
+* Source and cable
+* ---------------------------------------------------------------------------
+* Ideal step at 1 us with a 10 ns edge. No contact bounce.
+V_BAT bat 0 PWL(0 0 1u 0 1.01u {VBAT})
+R_SRC bat s1 {RSRC}
+L_CAB s1 s2 {LCAB}
+R_CAB s2 port {RCAB}
+* J1 pin and cable end capacitance. Assumed 50 pF.
+C_PORT port 0 50p
+*
+* ---------------------------------------------------------------------------
+* Board
+* ---------------------------------------------------------------------------
+* Ammeter for the input current (through F1 and D2).
+V_IF1 port f1a 0
+* F1 PTC. Thermal time constant is ms, so it is a fixed resistor here.
+R_F1 f1a d2a {RPTC}
+* D2 Nexperia PMEG6020ER, 60 V 2 A Schottky. VF max 530 mV, IFSM 50 A (distributor listings).
+* Model fit: about 0.45 V at 2 A. CJO is a guess.
+D_D2 d2a vin D_PMEG6020ER
+*
+* C1 Samsung CL32B106KBJNNNE, 10 uF 50 V X7R 1210.
+* Nonlinear: dQ/dV follows the Samsung DC-bias curve (characteristic sheet, Agilent 4284A):
+* -12% at 10 V, -27% at 15 V, -41% at 20 V, -54% at 25 V, -63% at 30 V, -74% at 40 V.
+* Fit: C(V) = C0/(1+(V/24)^2), within 3% of C0 from 0 to 40 V. C(14 V) = 7.46 uF.
+* ESR 5 mOhm, read from the same sheet (|Z| and ESR plot, 100 kHz to 1 MHz).
+* Charge model, built from basic parts so LTspice and ngspice both run it.
+* B_C1Q makes Qn(V) = 24*atan(V/24) volts (the integral of C(V)/C0). The 1 uF helper
+* cap turns that into a current, and B_C1 draws C0/1u times that current.
+* R_C1H (10 ns with the helper) stops trapezoidal ringing. It adds about 1.3 mOhm of ESR.
+.param C1N=10u
+R_C1 vin c1b 5m
+B_C1Q c1q 0 V=KNL*24*atan(V(c1b)/24)+KLIN*V(c1b)
+V_C1 c1q c1h 0
+R_C1H c1h c1y 10m
+C_C1 c1y 0 1u
+B_C1 c1b 0 I=C1N*1e6*I(V_C1)
+*
+* C2 Yageo CC0603KRX7R9BB104, 100 nF 50 V X7R 0603. Assumed 70 nF at 14 V. Too small to matter.
+* It sits on C1's inner node. A separate tiny ESR would add a sub-ns mode that stalls the solver.
+C_C2 c1b 0 70n
+*
+* D1 Bourns SMAJ18A TVS, cathode on VIN. Bourns SMAJ datasheet (2022-06-17):
+* VRWM 18 V, VBR 20.0 to 22.1 V at 1 mA, IR 1 uA max at 18 V,
+* VC 29.2 V at 13.7 A (10/1000 us), VC 38.0 V at 68.5 A (8/20 us), 400 W (10/1000 us).
+* Model: an offset source plus a steep diode. The high corner hits 22.1 V at 1 mA,
+* 29.2 V at 13.7 A and 38.0 V at 68.5 A. The low corner hits 20.0 V at 1 mA and
+* keeps leakage under 1 uA at 18 V. V_ID1 measures TVS current.
+V_ID1 vin d1m 0
+R_D1SW d1m d1k {RTVS}
+V_D1OFF d1k d1b {TVS_VBR - TVS_A*ln(1m/1n)}
+D_D1BR d1b 0 D_TVSBR
+* Forward conduction of D1 (VF 3.5 V at 35 A per Bourns).
+D_D1FW 0 d1k D_TVSFW
+*
+* U2 AP63301WU-7 buck. Treated as a light load: it is in UVLO or soft start (4 ms)
+* during the event. Abs max (Diodes Inc datasheet): VIN 35 V DC, 40 V for 400 ms, EN 35 V.
+R_LOAD vin 0 {14.6/ILOAD}
+* R1 100k from VIN to U2 EN. R2 (EN to GND) is DNP, so EN follows VIN.
+* EN pin capacitance assumed 10 pF.
+R_R1 vin en 100k
+C_EN en 0 10p
+*
+* USB side. D3 PMEG6020ER from VBUS to VIN. R22 5.1k holds VBUS at 0 V when USB is out.
+D_D3 vbus vin D_PMEG6020ER
+R_R22 vbus 0 5.1k
+* Optional USB source (USB=1): 5.25 V step, 1 uH and 0.2 ohm of USB cable.
+* With USB=0 the branch is a 10k resistor to GND, so VBUS still sits at 0 V.
+* R_LUSB damps the cable inductor so the solver stays happy. It does nothing at the ring frequency.
+V_USB usb 0 PWL(0 0 1u 0 1.01u {5.25*USB})
+R_USB usb u1 {0.2+(1-USB)*10k}
+L_USB u1 vbus 1u
+R_LUSB u1 vbus 50
+*
+* ---------------------------------------------------------------------------
+* Models
+* ---------------------------------------------------------------------------
+.model D_PMEG6020ER D(IS=5u N=1.05 RS=0.05 CJO=150p VJ=0.5 M=0.5)
+.model D_TVSBR D(IS=1n N={TVS_A/25.865m} RS={TVS_RS})
+.model D_TVSFW D(IS=1e-12 N=1.5 RS=0.05)
+*
+* ---------------------------------------------------------------------------
+* Analysis. The .step and .meas lines are for LTspice.
+* ---------------------------------------------------------------------------
+.tran 10n 400u 0 10n
+.options plotwinsize=0
+.step param LCAB list 0.3u 0.5u 1u 1.5u 2u 3u
+.step param TVS list 0 1
+.meas tran VIN_PK MAX V(vin)
+.meas tran EN_PK MAX V(en)
+.meas tran IIN_PK MAX I(V_IF1)
+.meas tran ID1_PK MAX I(V_ID1)
+.meas tran ED1 INTEG V(d1k)*I(V_ID1)
+.meas tran VRD2_PK MAX V(vin)-V(d2a)
+.meas tran VRD3_PK MAX V(vin)-V(vbus)
+.meas tran VF1_PK MAX abs(V(f1a)-V(d2a))
+.meas tran VIN_END FIND V(vin) AT 390u
+.end
