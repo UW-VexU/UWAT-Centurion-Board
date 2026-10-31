@@ -10,10 +10,9 @@
 		(company "UWAT VEXU")
 	)
 	(lib_symbols
-		(symbol "Connector_Generic:Conn_01x04"
+		(symbol "Connector:4P4C"
 			(pin_names
 				(offset 1.016)
-				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -21,27 +20,29 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 5.08 0)
+				(at -5.08 8.89 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify right)
 				)
 			)
-			(property "Value" "Conn_01x04"
-				(at 0 -7.62 0)
+			(property "Value" "4P4C"
+				(at 2.54 8.89 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Footprint" ""
-				(at 0 0 0)
+				(at 0 1.27 90)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -52,6 +53,17 @@
 				)
 			)
 			(property "Datasheet" ""
+				(at 0 1.27 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "RJ connector, 4P4C (4 positions 4 connected), RJ9/RJ10/RJ22"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -62,7 +74,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(property "ki_keywords" "4P4C RJ socket connector"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -73,7 +85,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "connector"
+			(property "ki_fp_filters" "4P4C* RJ9* RJ10* RJ22*"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -84,21 +96,72 @@
 					)
 				)
 			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
+			(symbol "4P4C_0_1"
+				(polyline
+					(pts
+						(xy -6.35 3.175) (xy -5.08 3.175) (xy -5.08 3.175)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
-			)
-			(symbol "Conn_01x04_1_1"
+				(polyline
+					(pts
+						(xy -6.35 1.905) (xy -5.08 1.905) (xy -5.08 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -6.35 0.635) (xy -5.08 0.635) (xy -5.08 0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -6.35 -0.635) (xy -5.08 -0.635) (xy -5.08 -0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -6.35 -3.175) (xy -6.35 5.715) (xy -1.27 5.715) (xy 3.81 5.715) (xy 3.81 4.445) (xy 5.08 4.445)
+						(xy 5.08 3.175) (xy 6.35 3.175) (xy 6.35 -0.635) (xy 5.08 -0.635) (xy 5.08 -1.905) (xy 3.81 -1.905)
+						(xy 3.81 -3.175) (xy -6.35 -3.175) (xy -6.35 -3.175)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(start 7.62 7.62)
+					(end -7.62 -5.08)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -107,54 +170,12 @@
 						(type background)
 					)
 				)
-				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
+			)
+			(symbol "4P4C_1_1"
 				(pin passive line
-					(at -5.08 2.54 0)
-					(length 3.81)
-					(name "Pin_1"
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -170,9 +191,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_2"
+					(at 10.16 0 180)
+					(length 2.54)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -188,9 +209,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_3"
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -206,9 +227,9 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -5.08 0)
-					(length 3.81)
-					(name "Pin_4"
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -394,12 +415,8 @@
 		)
 		(symbol "power:GND"
 			(power global)
-			(pin_numbers
-				(hide yes)
-			)
 			(pin_names
 				(offset 0)
-				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -489,7 +506,8 @@
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
-					(name ""
+					(hide yes)
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -510,37 +528,107 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 91.44) (xy 134.62 91.44)
+			(xy 121.92 64.77) (xy 135.5 64.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4bd1f732-45fd-4662-975b-36661c960d2d")
+		(uuid "0544b035-dcf5-459c-ac6f-4742824c682c")
 	)
 	(wire
 		(pts
-			(xy 109.22 93.98) (xy 116.84 93.98)
+			(xy 121.92 69.85) (xy 124.46 69.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5d1d6777-1c33-4744-a181-29b27b45435e")
+		(uuid "230fc744-b129-41c4-9d9e-84f3a8d19301")
 	)
 	(wire
 		(pts
-			(xy 142.24 91.44) (xy 152.4 91.44)
+			(xy 121.92 62.23) (xy 124.46 62.23)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c137c87f-cca9-4eea-a299-dc8e477eaa43")
+		(uuid "66a4e8a8-bf76-490e-8914-98fae4588a93")
+	)
+	(wire
+		(pts
+			(xy 121.92 67.31) (xy 124.46 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bac02ee6-7f7e-4fa4-945a-cd6da3a2958f")
+	)
+	(wire
+		(pts
+			(xy 153.67 64.77) (xy 151.13 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f43034a4-124c-4f00-9b41-84cac5fa401a")
+	)
+	(wire
+		(pts
+			(xy 161.29 64.77) (xy 163.83 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f62013c9-6bdd-487b-9c2f-94b18cef5b85")
+	)
+	(label "VPORT"
+		(at 151.13 64.77 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a26722c-219f-403a-a9d0-595096c75683")
+	)
+	(label "RS485_A"
+		(at 124.46 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5f72c5f3-d3fd-41f8-802b-31137982595e")
+	)
+	(label "VPORT"
+		(at 124.46 62.23 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9762460c-0d9a-4188-b4db-d52be4d402a2")
+	)
+	(label "RS485_B"
+		(at 124.46 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c84c65cd-4872-4119-afee-4d112eba027f")
 	)
 	(hierarchical_label "VBAT_OR"
 		(shape output)
-		(at 152.4 91.44 0)
+		(at 163.83 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -551,7 +639,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 109.22 93.98 0)
+		(at 135.5 64.77 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -559,10 +647,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "37273f99-a7f0-40bd-b7d3-33480b8c78bc")
+		(uuid "1c5091bb-379a-480f-8d97-c372a8e502fa")
 		(property "Reference" "#PWR01"
-			(at 109.22 100.33 0)
+			(at 135.5 71.12 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -573,7 +660,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 109.22 99.06 0)
+			(at 135.5 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -583,7 +670,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 109.22 93.98 0)
+			(at 135.5 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -594,7 +681,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 109.22 93.98 0)
+			(at 135.5 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -604,9 +691,8 @@
 				)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 109.22 93.98 0)
-			(hide yes)
+		(property "Description" ""
+			(at 135.5 64.77 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -616,7 +702,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "63cd71b5-a8c4-4e50-967b-a52604cf5ca0")
+			(uuid "8b81e0d8-4a1a-4005-bef1-2d24a14fd158")
 		)
 		(instances
 			(project "centurion_sensor_board"
@@ -632,8 +718,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
-		(at 121.92 93.98 0)
+		(lib_id "Connector:4P4C")
+		(at 111.76 67.31 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -641,10 +727,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6e6b8386-0c24-4c8a-87ea-2c7fa81b77b7")
+		(uuid "44777eb8-6434-4835-8a3f-f3a373428af0")
 		(property "Reference" "J1"
-			(at 124.46 93.9799 0)
+			(at 104.14 58.42 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -654,8 +739,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SmartPort"
-			(at 124.46 96.5199 0)
+		(property "Value" "Smart port 4P4C"
+			(at 104.14 74.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -665,8 +750,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 121.92 93.98 0)
+		(property "Footprint" "UWAT:Molex_95501-2441_4P4C_Horizontal"
+			(at 111.76 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -677,7 +762,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 121.92 93.98 0)
+			(at 111.76 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -687,8 +772,18 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 121.92 93.98 0)
+		(property "Description" ""
+			(at 111.76 67.31 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0955012441"
+			(at 111.76 67.31 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -698,17 +793,39 @@
 				)
 			)
 		)
-		(pin "2"
-			(uuid "9a1f0587-6494-4a72-b9d5-3de3661a667a")
+		(property "Manufacturer" "Molex"
+			(at 111.76 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
-		(pin "3"
-			(uuid "96781d56-e454-47fc-8d69-641d68908918")
-		)
-		(pin "4"
-			(uuid "1172ca3e-e350-486c-a01f-7b6e9f9f691c")
+		(property "Note" "Pin map assumes the usual black, red, green, yellow order. Check with a meter."
+			(at 111.76 67.31 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(pin "1"
-			(uuid "767d7a14-fe77-4c04-a663-fd5fb0ff2c50")
+			(uuid "eb755d54-5512-46be-8eb1-f388678ffc43")
+		)
+		(pin "2"
+			(uuid "fb61ee74-1c36-4f9c-b626-c7572c31398d")
+		)
+		(pin "3"
+			(uuid "60e18451-22a4-461e-8f97-26421d8ac390")
+		)
+		(pin "4"
+			(uuid "894d6468-52d2-4a71-8ef2-213ba1336085")
 		)
 		(instances
 			(project "centurion_sensor_board"
@@ -725,8 +842,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Schottky")
-		(at 138.43 91.44 0)
-		(mirror y)
+		(at 157.48 64.77 180)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -734,29 +850,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "8952b40b-f3ba-46ed-af50-f37d7a433ed2")
-		(property "Reference" "D1"
-			(at 138.7475 85.09 0)
+		(uuid "f959c895-b910-4ad5-a763-71eeefeb6eb3")
+		(property "Reference" "D5"
+			(at 156.21 62.23 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "SS34"
-			(at 138.7475 87.63 0)
+		(property "Value" "B340A"
+			(at 156.21 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA"
-			(at 138.43 91.44 0)
+			(at 157.48 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -767,7 +885,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 91.44 0)
+			(at 157.48 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -777,8 +895,18 @@
 				)
 			)
 		)
-		(property "Description" "Schottky diode"
-			(at 138.43 91.44 0)
+		(property "Description" ""
+			(at 157.48 64.77 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B340A-13-F"
+			(at 157.48 64.77 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -788,20 +916,31 @@
 				)
 			)
 		)
-		(pin "2"
-			(uuid "5781bcb1-92c8-47aa-85af-e81bd2a4143b")
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 157.48 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
 		)
 		(pin "1"
-			(uuid "27a75fba-519b-4aed-a958-23808af685aa")
+			(uuid "f9432f6b-852d-44e1-bbc7-39a1fa0e9bb7")
+		)
+		(pin "2"
+			(uuid "dcac6bc9-b4c4-4a5a-be1c-7cd4ceabd063")
 		)
 		(instances
 			(project "centurion_sensor_board"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/049f194b-de0d-4a7b-b819-bc2fc160abfa"
-					(reference "D1")
+					(reference "D5")
 					(unit 1)
 				)
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/17553156-96ba-4882-ad49-2ab75d7462cf"
-					(reference "D2")
+					(reference "D11")
 					(unit 1)
 				)
 			)
