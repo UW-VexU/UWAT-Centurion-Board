@@ -1,3 +1,8 @@
+# Claude Code instruction files stay local. These patterns match in every folder.
+CLAUDE.md
+CLAUDE.local.md
+
+# KiCad local files: backups, locks, caches, per-user view settings and local history
 *-backups/
 fp-info-cache
 *.lck

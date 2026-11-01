@@ -512,7 +512,7 @@
 			(uuid "2e2c94ad-0dc6-48cf-a53b-88d0e85c4cdb")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/4a885af1-e631-4593-8a22-f033f878bfe6"
 					(reference "J4")
 					(unit 1)
@@ -590,7 +590,7 @@
 			(uuid "a561ead9-102a-4695-aa9d-4fa4cede280d")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/4a885af1-e631-4593-8a22-f033f878bfe6"
 					(reference "#PWR022")
 					(unit 1)

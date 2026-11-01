@@ -2885,7 +2885,7 @@
 			(uuid "127effd0-0adf-4c29-b173-72c9e44703d3")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "#PWR017")
 					(unit 1)
@@ -2966,7 +2966,7 @@
 			(uuid "30470ce2-32df-498c-a242-bc4e336ebdba")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "C11")
 					(unit 1)
@@ -3044,7 +3044,7 @@
 			(uuid "b5647e50-9822-46ad-b54f-14729bcf747e")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "#PWR016")
 					(unit 1)
@@ -3122,7 +3122,7 @@
 			(uuid "90c0be99-6208-4fcc-ad78-68bdca4e23f5")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "#PWR015")
 					(unit 1)
@@ -3203,7 +3203,7 @@
 			(uuid "884013a1-8cdf-4c8f-80d6-e32df15901c6")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "SW1")
 					(unit 1)
@@ -3294,7 +3294,7 @@
 			(uuid "ff95a34e-09b3-4d6b-afe3-38c1840a8d47")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "D7")
 					(unit 1)
@@ -3372,7 +3372,7 @@
 			(uuid "d61286cc-ad77-46cf-b061-83f7acb98a0c")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "#PWR019")
 					(unit 1)
@@ -3452,7 +3452,7 @@
 			(uuid "4c68de39-4f60-43d6-ac0f-09bc7c7ebd52")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "R4")
 					(unit 1)
@@ -3534,7 +3534,7 @@
 			(uuid "fd0fb349-8bf1-4843-b880-c388c24c7b64")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "R2")
 					(unit 1)
@@ -3625,7 +3625,7 @@
 			(uuid "2ad6359d-0ee9-4ae9-baaa-3ba7c8ceb57f")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "D6")
 					(unit 1)
@@ -3716,7 +3716,7 @@
 			(uuid "8eae03b3-d1f4-4041-9b3a-b1442a8a9527")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "D8")
 					(unit 1)
@@ -3915,7 +3915,7 @@
 			(uuid "2b27e4c8-8b74-40ff-9c15-afb66d92f356")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "U3")
 					(unit 1)
@@ -3996,7 +3996,7 @@
 			(uuid "4bb37d07-bf28-4e79-84eb-136f69f70838")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "C9")
 					(unit 1)
@@ -4076,7 +4076,7 @@
 			(uuid "d8b4e168-7ab0-48a5-8345-0fe089250ba6")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "R5")
 					(unit 1)
@@ -4156,7 +4156,7 @@
 			(uuid "269a2533-8859-46a6-b766-25128c0edfd8")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "R3")
 					(unit 1)
@@ -4238,7 +4238,7 @@
 			(uuid "a863c7e8-8d2f-4624-9e84-02c52b22c980")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "C10")
 					(unit 1)
@@ -4316,7 +4316,7 @@
 			(uuid "587a919d-1998-4d4f-b5c0-e5c37407e86f")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "#PWR018")
 					(unit 1)
@@ -4397,7 +4397,7 @@
 			(uuid "a6a54095-adff-4512-8462-d5b94e8d5002")
 		)
 		(instances
-			(project "centurion_sensor_board"
+			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/a2749188-7030-48ce-90cd-33dfb0325bc0"
 					(reference "SW2")
 					(unit 1)
