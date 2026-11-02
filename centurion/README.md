@@ -57,13 +57,52 @@ A parallel camera uses about 11 to 14 pins. Add 2 RS-485 ports, 2 I2C buses, the
 
 ## The board as drawn now
 
-94 parts on 7 sheets.
+94 parts on 7 sheets: 38 resistors, 16 capacitors, 13 connectors, 11 ICs, 10 diodes and LEDs, 2 polyfuses, 2 buttons, 1 MOSFET and 1 solder jumper.
 
-- **Power.** Both smart ports feed VIN_OR through a B340A diode each. Then come a 1.5 A polyfuse, an SMBJ16A TVS, 47 µF of bulk capacitance, a TPSM53602 5 V buck and an MCP1826S 3.3 V LDO. USB-C has 5.1k CC resistors and USBLC6 ESD. A 100k / 27k divider makes VBAT_SENSE.
-- **MCU.** ESP32-S3-WROOM-1-N8 with reset and boot buttons and 3 LEDs. It is to be replaced.
-- **IMU.** ICM-42688-P on SPI, plus a 6-pin header for an ADXRS453 gyro module.
-- **Sensors.** One TCA9548A, 4.7k pull-ups on every channel, TPD4E05U06 ESD on every port, and a 0.35 A polyfuse on the sensor 3.3 V.
-- **Jetson.** A 3-pin UART header. USB-C is the main link.
+### Power
+
+Copied from powerJackal.
+
+| Ref | Part | Job |
+|---|---|---|
+| J1, J2 | Molex 0955012441 | Smart port jacks A and B. Power and RS-485 from the V5 brain. |
+| D5, D11 | B340A Schottky | Let either port power the board |
+| F1 | 2016L150 polyfuse, 1.5 A hold | Input overcurrent |
+| D4 | SMBJ16A TVS | Clamps input spikes |
+| C1 | 47 µF 50 V electrolytic | Bulk cap. Damps hot-plug ringing. |
+| U1 | TPSM53602 | 5 V buck module, 2 A |
+| U7 | MCP1826S | 3.3 V LDO, 1 A |
+| J16 | USB4105 USB-C | Firmware upload and the Jetson link |
+| U13 | USBLC6-2SC6 | USB ESD |
+| Q1, D9, D10 | AO3401A and 2 x SS14 | Let USB run the 3.3 V side on the bench |
+| R1, R40, C6 | 100k, 27k, 100 nF | Battery voltage sense (VBAT_SENSE) |
+| LED1, LED2 | Green LEDs | Input power and 5 V on |
+
+### MCU and motion sensing
+
+| Ref | Part | Job |
+|---|---|---|
+| U3 | ESP32-S3-WROOM-1-N8 | MCU, with reset and boot buttons and 3 status LEDs. To be replaced by the STM32F446. |
+| U5 | ICM-42688-P | 6-axis IMU (gyro and accelerometer) on the board, SPI |
+| J5 | 1 x 6 header | Plug-in ADXRS453 gyro module, SPI |
+
+### Sensor ports
+
+| Ref | Part | Job |
+|---|---|---|
+| U6 | TCA9548A | 8-channel I2C mux |
+| J6, J7, J9 to J13 | 4-pin JST-GH | Encoder and ToF ports |
+| J14, JP1 | 5-pin JST-GH and a solder jumper | AUX1 port. JP1 picks 3.3 V or 5 V. |
+| U8 to U12 | 5 x TPD4E05U06 | ESD on every port |
+| F2 | Polyfuse, 0.35 A hold | Feeds the 3.3 V of all the sensor ports |
+| R10 to R36 | 4.7k pull-ups and the AUX1 divider | Pull-ups on every mux channel |
+
+### Jetson link
+
+| Ref | Part | Job |
+|---|---|---|
+| J16 | USB-C | Main link, through the MCU's USB |
+| J4 | 1 x 3 header | Backup 3.3 V UART |
 
 ### Mux channels
 
@@ -79,6 +118,40 @@ The ENC ports are for I2C encoders. Magnetic angle sensors like the AS5600 share
 The ports are 4-pin JST-GH: pin 1 is 3.3 V, then SCL, SDA and GND. That is the Pixhawk order. Qwiic uses GND, 3.3 V, SDA, SCL.
 
 AUX1 (J14) is a 5-pin JST-GH with VCC, GND, SDA, SCL and a signal pin. JP1 sets VCC to 3.3 V or 5 V. The signal pin reaches the MCU through a 10k / 15k divider for 5 V signals. R36, a 0 Ω resistor, bypasses the divider for 3.3 V signals. Fit one or the other.
+
+## Sensors
+
+| Sensor | Count | How it connects | Where it sits |
+|---|---|---|---|
+| ToF distance (plan: VL53L4CX) | 5 | Mux channels 3 to 7 | Off the board, around the robot edges |
+| Encoders | 3 | Mux channels 0 to 2. ENC3's jack is missing. | Off the board |
+| IMU (ICM-42688-P) | 1 | SPI | On the board |
+| Gyro (ADXRS453 module) | 1 | SPI header | Plugs into the board |
+| AUX port | 1 | I2C and a signal pin | Off the board, for anything |
+| Battery voltage | 1 | Divider to an ADC pin | On the board |
+
+That is 11 sensor connections: 8 through the mux, AUX1, the IMU and the gyro. 10 of them are external cables (the 8 mux ports, AUX1 and the gyro header). With battery sense, the board makes 12 measurements.
+
+- **Not in the plan.** The plan names no encoder part and does not list the ADXRS453. Both came from the schematic.
+- **Why the mux.** All 5 ToF sensors share one I2C address. So do I2C encoders like the AS5600.
+- **Sensor power.** All the sensor ports share F2's 350 mA. At about 20 mA per ToF and 7 mA per AS5600-type encoder, that leaves plenty of margin.
+
+## Other connections
+
+- **2 smart ports to the V5 brain.** Power works now. RS-485 still needs its transceivers.
+- **Jetson.** USB-C, with the UART header as a backup.
+
+## Still to add
+
+| Item | Status |
+|---|---|
+| STM32F446 with crystal, SWD, BOOT0 and RESET | Decided |
+| 2 x RS-485 transceivers (MAX33071E, from stellaNova) | Needed |
+| ENC3 jack | Decided |
+| Spare I2C header, and AUX1 on the second I2C bus | Decided |
+| Camera connector | Open. Which camera, and does it go to the STM32 or the Jetson? |
+| LED strip driver | Open. Is it in v1? |
+| Test pads and mounting holes | PCB stage. The holes wait on the CAD pattern. |
 
 ## Power check against powerJackal
 
