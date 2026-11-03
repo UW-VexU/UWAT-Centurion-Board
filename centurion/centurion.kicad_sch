@@ -9,7 +9,107 @@
 		(rev "A")
 		(company "UWAT VEXU")
 	)
-	(lib_symbols)
+	(lib_symbols
+		(symbol "Mechanical:MountingHole"
+		(pin_names
+			(offset 1.016)
+		)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "H"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 0 3.175 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "mounting hole"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "MountingHole*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "MountingHole_0_1"
+			(circle
+				(center 0 0)
+				(radius 1.27)
+				(stroke
+					(width 1.27)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+	)
 	(wire
 		(pts
 			(xy 35.56 130.81) (xy 16.51 130.81)
@@ -40,16 +140,7 @@
 		)
 		(uuid "383dc11b-3b29-42da-8096-fd18db815070")
 	)
-	(wire
-		(pts
-			(xy 35.56 62.23) (xy 13.97 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "73208952-6cc9-4196-aef5-bd8a19213c3d")
-	)
+	(wire (pts (xy 13.97 62.23) (xy 13.97 64.77)) (stroke (width 0) (type default)) (uuid "b52759c6-6eaa-41fc-bd8d-701e711712b3")) (wire (pts (xy 13.97 64.77) (xy 16.51 64.77)) (stroke (width 0) (type default)) (uuid "1304ce00-8860-4209-9c61-67f22e1c559d")) (junction (at 16.51 64.77) (diameter 0) (color 0 0 0 0) (uuid "c63390b2-fd0f-449c-ac60-7a35d45d11f0"))
 	(wire
 		(pts
 			(xy 13.97 193.04) (xy 36.83 193.04)
@@ -118,7 +209,7 @@
 				(justify left)
 			)
 		)
-		(instances
+		(pin "TX" input (at 96.52 88.9 0) (uuid "38ee50bd-46a4-4478-ad6d-37e7244524f2") (effects (font (size 1.27 1.27)) (justify right))) (pin "RX" output (at 96.52 91.44 0) (uuid "a7fddc2b-fc38-4a46-bfa2-af63e29d1b89") (effects (font (size 1.27 1.27)) (justify right))) (pin "DE" input (at 96.52 93.98 0) (uuid "3c69b4af-0260-4b5d-9585-d09e01b48fb6") (effects (font (size 1.27 1.27)) (justify right))) (instances
 			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062"
 					(page "3")
@@ -174,7 +265,7 @@
 				(justify left)
 			)
 		)
-		(instances
+		(pin "TX" input (at 96.52 151.13 0) (uuid "970852ca-9109-42e0-9c50-ff5194c69ca3") (effects (font (size 1.27 1.27)) (justify right))) (pin "RX" output (at 96.52 153.67 0) (uuid "a1ce3874-3bbb-485e-a8e3-80a51cec26f9") (effects (font (size 1.27 1.27)) (justify right))) (pin "DE" input (at 96.52 156.21 0) (uuid "4358bfe6-1899-48b6-9618-3a8a53f79ddc") (effects (font (size 1.27 1.27)) (justify right))) (instances
 			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062"
 					(page "4")
@@ -266,7 +357,7 @@
 				(justify left top)
 			)
 		)
-		(pin "VBAT_A" input
+		(pin "VIN_OR" input
 			(at 35.56 64.77 180)
 			(uuid "263b17cc-ed81-4bb6-9f76-44f23061e937")
 			(effects
@@ -276,16 +367,7 @@
 				(justify left)
 			)
 		)
-		(pin "VBAT_B" input
-			(at 35.56 62.23 180)
-			(uuid "2405ed51-2e45-4e98-907a-8b25f495fbf5")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
+		
 		(instances
 			(project "centurion"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062"
@@ -432,6 +514,24 @@
 			)
 		)
 	)
+	(wire (pts (xy 96.52 88.9) (xy 101.6 88.9)) (stroke (width 0) (type default)) (uuid "f378c78a-c221-4497-a9ac-97688ac2198e"))
+	(global_label "RS485A_TX" (shape input) (at 101.6 88.9 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "30efbb5b-a286-4970-a122-a0cd82df9b62") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 88.9 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 96.52 91.44) (xy 101.6 91.44)) (stroke (width 0) (type default)) (uuid "9871b9f4-0130-4621-8afb-e5f729649095"))
+	(global_label "RS485A_RX" (shape output) (at 101.6 91.44 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "88efd8b5-e1fd-4931-a05d-e62e0b7195a3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 91.44 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 96.52 93.98) (xy 101.6 93.98)) (stroke (width 0) (type default)) (uuid "073f0e9d-a169-4afe-b1f1-0bbb3d87e9b6"))
+	(global_label "RS485A_DE" (shape input) (at 101.6 93.98 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "07d9a2d0-4e6a-43a5-815b-a996bb7f5245") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 93.98 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 96.52 151.13) (xy 101.6 151.13)) (stroke (width 0) (type default)) (uuid "7ac2ae8b-b935-4c65-88c4-7da6c1c64ddd"))
+	(global_label "RS485B_TX" (shape input) (at 101.6 151.13 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "28efa631-f5a1-4156-bd12-449231c04a37") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 151.13 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 96.52 153.67) (xy 101.6 153.67)) (stroke (width 0) (type default)) (uuid "f5ef400f-ad4c-4ec3-a9e3-b557ce6a94a9"))
+	(global_label "RS485B_RX" (shape output) (at 101.6 153.67 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "45bab14f-969a-4f94-ae90-8195bfd4e284") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 153.67 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 96.52 156.21) (xy 101.6 156.21)) (stroke (width 0) (type default)) (uuid "7a5d9601-ecdf-4af5-a57c-413c5c6399d2"))
+	(global_label "RS485B_DE" (shape input) (at 101.6 156.21 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "898c7de3-bbad-4085-9ab1-75b471f83789") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 156.21 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(text "Port A and port B each have their own MAX33071E (smartport sheet).\nFirmware can split them, A to read from the brain and B to write to it, or run both half duplex." (exclude_from_sim no) (at 101.6 137.16 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "bc8380da-6573-490f-b4ca-1d37600dbbf3"))
+	(symbol (lib_id "Mechanical:MountingHole") (at 119.38 157.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "796f2813-b21b-42c4-aaa5-aad405f34f6a") (property "Reference" "H1" (at 121.92 156.21 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "#8-32" (at 121.92 158.75 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "UWAT:MountingHole_4.5mm_8-32" (at 119.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 119.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 119.38 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062" (reference "H1") (unit 1)))))
+	(symbol (lib_id "Mechanical:MountingHole") (at 132.08 157.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "ef91b4e3-f348-4eb5-9646-44986e17b281") (property "Reference" "H2" (at 134.62 156.21 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "#8-32" (at 134.62 158.75 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "UWAT:MountingHole_4.5mm_8-32" (at 132.08 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 132.08 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 132.08 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062" (reference "H2") (unit 1)))))
+	(symbol (lib_id "Mechanical:MountingHole") (at 144.78 157.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "a9a09b85-9472-46a9-af99-0630448fac6e") (property "Reference" "H3" (at 147.32 156.21 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "#8-32" (at 147.32 158.75 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "UWAT:MountingHole_4.5mm_8-32" (at 144.78 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 144.78 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 144.78 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062" (reference "H3") (unit 1)))))
+	(symbol (lib_id "Mechanical:MountingHole") (at 157.48 157.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "e2a5cd25-ecb4-4cf6-a45f-027e125e5e12") (property "Reference" "H4" (at 160.02 156.21 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "#8-32" (at 160.02 158.75 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "UWAT:MountingHole_4.5mm_8-32" (at 157.48 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 157.48 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 157.48 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062" (reference "H4") (unit 1)))))
+	(text "H1 to H4: #8-32 screws into the two brain mount brackets (brainMount-frontSlant left and right).\nHole centres 93.92 mm (3.6976 in) left to right, 50.80 mm (2.000 in) top to bottom.\n4.5 mm non-plated holes, slightly larger than the 0.175 in (4.45 mm) bracket holes. Not tied to GND." (exclude_from_sim no) (at 116.84 165.1 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "e9093712-bbe7-4636-a4c3-48bfe22540f4"))
 	(sheet_instances
 		(path "/"
 			(page "1")

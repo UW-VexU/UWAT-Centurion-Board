@@ -712,7 +712,7 @@
 							)
 						)
 					)
-					(number "S1"
+					(number "SH"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1388,195 +1388,206 @@
 			(embedded_fonts no)
 		)
 		(symbol "Device:LED"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "D"
-				(at 0 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LED"
-				(at 0 -2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Light emitting diode"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "LED diode"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "LED_0_1"
-				(polyline
-					(pts
-						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 0) (xy 1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "LED_1_1"
-				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
+		(pin_numbers
+			(hide yes)
 		)
+		(pin_names
+			(offset 1.016)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "D"
+			(at 0 2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 0 -2.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "LED diode"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "LED_0_1"
+			(polyline
+				(pts
+					(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0) (xy 1.27 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 -1.27) (xy -1.27 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "LED_1_1"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "K"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 		(symbol "Device:Polyfuse"
 			(pin_numbers
 				(hide yes)
@@ -3800,6 +3811,130 @@
 			)
 			(embedded_fonts no)
 		)
+	
+		(symbol "Connector:TestPoint"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0.762)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "TP"
+			(at 0 6.858 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 0 5.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 5.08 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 5.08 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "test point tp"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Pin* Test*"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "TestPoint_0_1"
+			(circle
+				(center 0 3.302)
+				(radius 0.762)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "TestPoint_1_1"
+			(pin passive line
+				(at 0 0 90)
+				(length 2.54)
+				(name "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 	)
 	(junction
 		(at 36.83 228.6)
@@ -3935,16 +4070,7 @@
 		)
 		(uuid "14384760-1336-4581-9d91-e9d215fa38e7")
 	)
-	(wire
-		(pts
-			(xy 264.16 81.28) (xy 264.16 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "14692c67-efb9-4d84-a741-0ac6851f53ba")
-	)
+	
 	(wire
 		(pts
 			(xy 66.04 74.93) (xy 66.04 72.39)
@@ -4625,16 +4751,7 @@
 		)
 		(uuid "d69d009e-9c1a-40f1-8a96-930d3ddeb076")
 	)
-	(wire
-		(pts
-			(xy 313.69 152.4) (xy 313.69 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d6ac9f34-8d15-44c9-bd1f-6739a99f40e4")
-	)
+	
 	(wire
 		(pts
 			(xy 347.98 54.61) (xy 350.52 54.61)
@@ -4645,16 +4762,7 @@
 		)
 		(uuid "d8223733-2bce-4711-ba54-f34585bfdeef")
 	)
-	(wire
-		(pts
-			(xy 22.86 53.34) (xy 26.67 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ddd13e59-c6f2-4f24-924a-272bd86e9834")
-	)
+	
 	(wire
 		(pts
 			(xy 26.67 228.6) (xy 26.67 234.95)
@@ -4765,16 +4873,7 @@
 		)
 		(uuid "ff1e18f5-1a17-42ab-8808-d33fbe3108c2")
 	)
-	(label "PGOOD"
-		(at 265.43 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "09a4aa48-2680-4a18-9055-7416dd62dfbf")
-	)
+	(global_label "PGOOD" (shape output) (at 265.43 88.9 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "69d582c1-2548-495a-8024-3830324a1765") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 265.43 88.9 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
 	(label "VIN_MOD"
 		(at 26.67 208.28 0)
 		(effects
@@ -4785,16 +4884,7 @@
 		)
 		(uuid "0dd1af31-3a82-4c79-b621-0d1e143573ab")
 	)
-	(label "3V3"
-		(at 330.2 156.21 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "113777c0-8f9a-48ff-85a4-555afe4c22f4")
-	)
+	(symbol (lib_id "power:+3.3V") (at 330.2 156.21 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "5e7392b1-ff08-4d5e-bd28-486675ffc9b4") (property "Reference" "#PWR458" (at 330.2 156.21 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+3.3V" (at 330.2 156.21 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 330.2 156.21 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 330.2 156.21 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+3.3V\"" (at 330.2 156.21 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "dffd265f-8f48-46ff-ad28-3365258b6d7e")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR458") (unit 1)))))
 	(label "USB_DP"
 		(at 127 160.02 90)
 		(effects
@@ -4815,16 +4905,7 @@
 		)
 		(uuid "19d1bc31-407e-493e-9aed-5e8ccebb0612")
 	)
-	(label "5V"
-		(at 243.84 152.4 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2919b126-c503-4382-bc17-187b2bb1aca0")
-	)
+	(symbol (lib_id "power:+5V") (at 243.84 152.4 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "47f932e4-8638-4d4a-adae-ff312ecdec0f") (property "Reference" "#PWR451" (at 243.84 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 243.84 152.4 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 243.84 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 243.84 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 243.84 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "ab5c68db-8e12-4f9a-9e57-8d3166be8f07")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR451") (unit 1)))))
 	(label "CC2"
 		(at 78.74 142.24 90)
 		(effects
@@ -4865,16 +4946,7 @@
 		)
 		(uuid "40006222-2e5b-4ddc-a7c4-0d7a2fb30a6c")
 	)
-	(label "5V"
-		(at 323.85 50.8 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "44670e76-e383-40a2-bb58-7e24317e350e")
-	)
+	(symbol (lib_id "power:+5V") (at 323.85 50.8 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "f67550aa-b5ee-4dd1-9805-2db6b9ae0505") (property "Reference" "#PWR452" (at 323.85 50.8 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 323.85 50.8 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 323.85 50.8 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 323.85 50.8 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 323.85 50.8 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "0991344c-6c8f-4f3c-9090-ab469316a34d")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR452") (unit 1)))))
 	(label "FB"
 		(at 337.82 67.31 90)
 		(effects
@@ -4915,26 +4987,8 @@
 		)
 		(uuid "4e1b2b73-5535-4c90-bf19-6aeeea2f3c15")
 	)
-	(label "5V"
-		(at 265.43 81.28 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4fab3ede-77bb-46ba-981a-69fc52c88120")
-	)
-	(label "5V"
-		(at 364.49 55.88 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "57af8631-568d-4034-ae74-d1f2430ecf71")
-	)
+	(symbol (lib_id "power:+5V") (at 265.43 81.28 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "d4b5ddf6-7af1-4415-a704-75fc38ddff79") (property "Reference" "#PWR453" (at 265.43 81.28 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 265.43 81.28 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 265.43 81.28 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 265.43 81.28 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 265.43 81.28 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "1cfa0e78-ce03-4870-9b18-d10e5c8a1815")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR453") (unit 1)))))
+	(symbol (lib_id "power:+5V") (at 364.49 55.88 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "ae5ee36f-bfaf-427c-852d-26b37e38387e") (property "Reference" "#PWR454" (at 364.49 55.88 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 364.49 55.88 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 364.49 55.88 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 364.49 55.88 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 364.49 55.88 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "283ce70d-36f9-4dd2-bde7-a6a7d62273bf")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR454") (unit 1)))))
 	(label "USB_DN"
 		(at 113.03 157.48 0)
 		(effects
@@ -5135,26 +5189,8 @@
 		)
 		(uuid "b035260f-ae01-40cb-8c16-4765b6299375")
 	)
-	(label "VIN_OR"
-		(at 26.67 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b721311b-7c68-42ff-a9f5-3900c4b084d3")
-	)
-	(label "5V"
-		(at 298.45 83.82 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c1c4ba5e-8140-4cbd-a97b-9277cb4bc490")
-	)
+	
+	(symbol (lib_id "power:+5V") (at 298.45 83.82 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "6b214ed0-88b9-4131-8c00-42c8859a2558") (property "Reference" "#PWR455" (at 298.45 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 298.45 83.82 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 298.45 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 298.45 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 298.45 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "7e84098c-4a57-451f-a04c-6a460b8f4e06")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR455") (unit 1)))))
 	(label "VIN_MOD"
 		(at 256.54 55.88 90)
 		(effects
@@ -5165,16 +5201,7 @@
 		)
 		(uuid "c2e1c452-b36f-4599-9e59-2d7cdf5b7fe0")
 	)
-	(label "3V3"
-		(at 314.96 152.4 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c5f28fe4-5da5-4045-8192-84dc2b5b9241")
-	)
+	(symbol (lib_id "power:+3.3V") (at 314.96 152.4 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "99d28aae-4843-4bce-ae6e-a01c0f0c78b6") (property "Reference" "#PWR459" (at 314.96 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+3.3V" (at 314.96 152.4 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 314.96 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 314.96 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+3.3V\"" (at 314.96 152.4 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "b7570548-b9c3-4f10-8e0d-7c33df35933c")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR459") (unit 1)))))
 	(label "USB_PWR"
 		(at 173.99 146.05 90)
 		(effects
@@ -5195,16 +5222,7 @@
 		)
 		(uuid "ccd955d2-e1d7-46fe-b84a-83e05f57f010")
 	)
-	(label "5V"
-		(at 163.83 153.67 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ce267fd4-d8b1-41b9-8b01-1ec073cc82cf")
-	)
+	(symbol (lib_id "power:+5V") (at 163.83 153.67 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "0b9be439-769f-41cf-9c36-74456aa7ea22") (property "Reference" "#PWR456" (at 163.83 153.67 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 163.83 153.67 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 163.83 153.67 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 163.83 153.67 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 163.83 153.67 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "79ea037a-8910-465f-823f-8192f06200e5")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR456") (unit 1)))))
 	(label "VIN_MOD"
 		(at 309.88 55.88 90)
 		(effects
@@ -5215,16 +5233,7 @@
 		)
 		(uuid "cef24e50-8462-4889-a184-936c3ae7b09d")
 	)
-	(label "5V"
-		(at 280.67 83.82 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d00ebb35-d1b5-4dad-9eae-d7d63786bb55")
-	)
+	(symbol (lib_id "power:+5V") (at 280.67 83.82 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "fd2b832d-fc89-4549-8d4e-76aaec57cf62") (property "Reference" "#PWR457" (at 280.67 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "+5V" (at 280.67 83.82 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 280.67 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 280.67 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"+5V\"" (at 280.67 83.82 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "30f8b0ce-c7ae-44b4-9e51-9efaa0d717c0")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR457") (unit 1)))))
 	(label "FB"
 		(at 265.43 86.36 0)
 		(effects
@@ -5367,7 +5376,7 @@
 			)
 		)
 	)
-	(hierarchical_label "VBAT_A"
+	(hierarchical_label "VIN_OR"
 		(shape input)
 		(at 22.86 45.72 180)
 		(effects
@@ -5378,17 +5387,7 @@
 		)
 		(uuid "6dcf3b33-ad22-44b4-89c2-ec1beda0b0fa")
 	)
-	(hierarchical_label "VBAT_B"
-		(shape input)
-		(at 22.86 53.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9617cdd9-38bd-4652-9d27-d4e731af63dc")
-	)
+	
 	(symbol
 		(lib_id "Device:LED")
 		(at 26.67 80.01 0)
@@ -5422,7 +5421,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 26.67 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -5454,7 +5453,7 @@
 				)
 			)
 		)
-		(property "MPN" "LTST-C171GKT"
+		(property "MPN" "LTST-C191KGKT"
 			(at 26.67 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -5812,7 +5811,7 @@
 				)
 			)
 		)
-		(pin "1"
+		(property "Manufacturer" "Yageo" (at 26.67 218.44 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RC0805FR-07100KL" (at 26.67 218.44 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1"
 			(uuid "85da1567-d030-49ac-9b65-2c59c6a0a626")
 		)
 		(pin "2"
@@ -6661,7 +6660,7 @@
 				)
 			)
 		)
-		(pin "2"
+		(property "Manufacturer" "Yageo" (at 36.83 238.76 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "CC0805KRX7R9BB104" (at 36.83 238.76 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2"
 			(uuid "3a609bdc-f2c9-479b-abfc-6507ec988156")
 		)
 		(pin "1"
@@ -7482,7 +7481,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 344.17 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -7514,7 +7513,7 @@
 				)
 			)
 		)
-		(property "MPN" "LTST-C171GKT"
+		(property "MPN" "LTST-C191KGKT"
 			(at 344.17 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -7980,7 +7979,7 @@
 		(pin "B9"
 			(uuid "15735307-c04a-4b88-8e51-918c14fc6b0f")
 		)
-		(pin "S1"
+		(pin "SH"
 			(uuid "8829062f-f045-4e0b-87a6-4192a54bf0b1")
 		)
 		(instances
@@ -9020,7 +9019,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "UWAT:Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm_ThermalVia"
+		(property "Footprint" "centurion:Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm_ThermalVia"
 			(at 250.19 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -9790,7 +9789,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "27k"
+		(property "Value" "22k"
 			(at 29.21 240.0299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9834,7 +9833,7 @@
 				)
 			)
 		)
-		(pin "2"
+		(property "Manufacturer" "Yageo" (at 26.67 238.76 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RC0805FR-0722KL" (at 26.67 238.76 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2"
 			(uuid "37689062-c347-41ba-9a00-fc37044bff81")
 		)
 		(pin "1"
@@ -10292,84 +10291,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 264.16 82.55 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "f1b1f999-121b-4aa4-845a-244b26c23568")
-		(property "Reference" "#FLG02"
-			(at 266.065 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 266.954 82.55 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 264.16 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 264.16 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 264.16 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "09433509-b1b3-41a0-9e0d-8b4491ae9e56")
-		)
-		(instances
-			(project "centurion"
-				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51"
-					(reference "#FLG02")
-					(unit 1)
-				)
-			)
-		)
-	)
+	
 	(symbol
 		(lib_id "Device:R")
 		(at 127 166.37 0)
@@ -10483,85 +10405,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 313.69 153.67 270)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f3c18795-2c93-4522-bee8-713164d23a00")
-		(property "Reference" "#FLG03"
-			(at 315.595 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 317.5 153.6699 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 313.69 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 313.69 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 313.69 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "8d8380df-dd9e-47f8-bdca-c78e2b72c3cf")
-		)
-		(instances
-			(project "centurion"
-				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51"
-					(reference "#FLG03")
-					(unit 1)
-				)
-			)
-		)
-	)
+	
 	(symbol
 		(lib_id "power:GND")
 		(at 255.27 104.14 0)
@@ -10638,4 +10482,53 @@
 			)
 		)
 	)
-)
+
+	(symbol (lib_id "Device:R") (at 40.64 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "d0e34d69-4720-473d-8b69-f772e214a246") (property "Reference" "R45" (at 43.18 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "10k" (at 43.18 270.51 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Resistor_SMD:R_0805_2012Metric" (at 40.64 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 40.64 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 40.64 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RC0805FR-0710KL" (at 40.64 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Manufacturer" "Yageo" (at 40.64 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "89a55b0e-55ff-4c01-a63f-d1d60261c245")) (pin "2" (uuid "efe000d4-87ec-4cfa-a0c6-85ddf2e7c532")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "R45") (unit 1)))))
+	(wire (pts (xy 40.64 265.43) (xy 40.64 262.89)) (stroke (width 0) (type default)) (uuid "90d0fb44-66f2-4850-867a-6f12dd67c153"))
+	(wire (pts (xy 40.64 273.05) (xy 40.64 275.59)) (stroke (width 0) (type default)) (uuid "db4b4a22-9131-4c99-991a-265b56a09e86"))
+	(global_label "PGOOD" (shape output) (at 40.64 275.59 270) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "224ad79a-d603-4e0c-b716-2791d9c28b4b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 40.64 275.59 0) (hide yes) (effects (font (size 1.27 1.27)) (justify right))))
+	(symbol (lib_id "power:+3.3V") (at 40.64 262.89 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "3dfe4eb1-c044-47e6-84ca-da4a4d2a7f1a") (property "Reference" "#PWR149" (at 40.64 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "+3.3V" (at 40.64 258.44 0) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 40.64 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 40.64 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 40.64 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "2d314b2d-f565-4894-b4fc-59199bdfe30f")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR149") (unit 1)))))
+	(symbol (lib_id "Device:R") (at 60.96 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "c81674bf-4e42-4bc4-8543-884aecb72764") (property "Reference" "R46" (at 63.5 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "10k" (at 63.5 270.51 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Resistor_SMD:R_0805_2012Metric" (at 60.96 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 60.96 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 60.96 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RC0805FR-0710KL" (at 60.96 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Manufacturer" "Yageo" (at 60.96 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3670e501-cd7b-44b4-93d0-2caad92ef421")) (pin "2" (uuid "4418fe70-6d6b-40ac-b802-fc0f29303762")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "R46") (unit 1)))))
+	(wire (pts (xy 60.96 265.43) (xy 60.96 262.89)) (stroke (width 0) (type default)) (uuid "b93bb7a3-b628-4e63-a6b8-fff2c41db8fe"))
+	(label "VBUS_USB" (at 60.96 262.89 90) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "7bb7c070-df41-47a6-a1f7-d21ba2a1967a"))
+	(wire (pts (xy 60.96 273.05) (xy 60.96 275.59)) (stroke (width 0) (type default)) (uuid "91b9085d-cd1e-446b-8645-1fe4294831dd"))
+	(global_label "VBUS_SENSE" (shape output) (at 60.96 275.59 270) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "7c69e405-38d4-4de4-96a0-999719d4b001") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 275.59 0) (hide yes) (effects (font (size 1.27 1.27)) (justify right))))
+	(symbol (lib_id "Device:R") (at 71.12 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "fe92225a-a48a-4147-a0b4-e87b92382d26") (property "Reference" "R47" (at 73.66 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "15k" (at 73.66 270.51 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Resistor_SMD:R_0805_2012Metric" (at 71.12 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 71.12 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 71.12 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RC0805FR-0715KL" (at 71.12 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Manufacturer" "Yageo" (at 71.12 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "0fabcde2-489d-43bd-adb1-b53adbca2ea7")) (pin "2" (uuid "5a4ddf20-78ba-48d9-9105-24903c3ee8b7")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "R47") (unit 1)))))
+	(wire (pts (xy 71.12 265.43) (xy 71.12 262.89)) (stroke (width 0) (type default)) (uuid "f1a9cd32-e20c-4be8-b5d1-fae411944906"))
+	(global_label "VBUS_SENSE" (shape output) (at 71.12 262.89 90) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "eb4fcf8f-d28d-4b15-bb07-384e60d82cfe") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 71.12 262.89 0) (hide yes) (effects (font (size 1.27 1.27)) (justify left))))
+	(wire (pts (xy 71.12 273.05) (xy 71.12 275.59)) (stroke (width 0) (type default)) (uuid "8c14151d-9634-49cc-8393-fce5030e5eac"))
+	(symbol (lib_id "power:GND") (at 71.12 275.59 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "6df0feaf-102d-489f-aa53-b247dc6f757e") (property "Reference" "#PWR150" (at 71.12 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "GND" (at 71.12 280.04 0) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 71.12 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 71.12 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 71.12 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "089ce973-684c-4e86-8796-b713639584c6")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR150") (unit 1)))))
+	(symbol (lib_id "Device:R") (at 86.36 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "f3329f17-f8e7-4420-b686-80bc82a561d4") (property "Reference" "R48" (at 88.9 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "5.1k" (at 88.9 270.51 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Resistor_SMD:R_0805_2012Metric" (at 86.36 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 86.36 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 86.36 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "RMCF0805FT5K10" (at 86.36 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Manufacturer" "Stackpole Electronics" (at 86.36 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "58d213ab-6400-4716-adfa-91f2f342e035")) (pin "2" (uuid "2331dbd5-385c-4f07-99eb-f7f807cb93a0")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "R48") (unit 1)))))
+	(wire (pts (xy 86.36 265.43) (xy 86.36 262.89)) (stroke (width 0) (type default)) (uuid "c4e4b9a7-db2a-491f-be84-bf5db1864ec4"))
+	(label "VBUS_USB" (at 86.36 262.89 90) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "dcbdd09e-a4ed-4c63-a987-745c67a7e5d0"))
+	(wire (pts (xy 86.36 273.05) (xy 86.36 275.59)) (stroke (width 0) (type default)) (uuid "21a00f9f-cab3-4f1f-9420-da30fb2ac004"))
+	(symbol (lib_id "power:GND") (at 86.36 275.59 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "9cce6053-65af-401e-ae56-5169cd802b2a") (property "Reference" "#PWR151" (at 86.36 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "GND" (at 86.36 280.04 0) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 86.36 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 86.36 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 86.36 275.59 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "ffb1901f-ae97-4426-9988-a68aec09c7f4")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR151") (unit 1)))))
+	(text "R45: PGOOD pullup (open drain), read on PC3.\nOn USB power alone the buck is off and PGOOD may\nstill read high: firmware checks VBAT_SENSE instead.\nR46/R47: VBUS sense, 5 V gives 3.0 V on PB2.\nConnect USB D+ only while VBUS_SENSE is high.\nR48: holds VBUS at 0 V with no host plugged in\n(same fix as stellaNova R22)." (exclude_from_sim no) (at 205.74 252.73 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "706a5e1b-716a-42b9-a897-6f6208038d87"))
+	(symbol (lib_id "Connector:TestPoint") (at 114.3 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "b493921d-fa63-47df-805a-cdc276109799") (property "Reference" "TP1" (at 116.84 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "VIN_MOD" (at 116.84 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 114.3 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 114.3 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 114.3 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "06219840-2dcb-4adb-a31b-2485a3cfeb5f")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP1") (unit 1)))))
+	(wire (pts (xy 114.3 266.7) (xy 114.3 269.24)) (stroke (width 0) (type default)) (uuid "e83bf38c-3dcd-4187-86cf-8a8ae15d43c2"))
+	(label "VIN_MOD" (at 114.3 269.24 270) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "d99ee763-8c07-480b-8df6-2cb4997e699c"))
+	(symbol (lib_id "Connector:TestPoint") (at 127 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "d28dd580-a498-4dc7-bd13-6cc98307e173") (property "Reference" "TP2" (at 129.54 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "5V" (at 129.54 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 127 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 127 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 127 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "94400e26-171d-4f3c-9726-e2432d559312")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP2") (unit 1)))))
+	(wire (pts (xy 127 266.7) (xy 127 269.24)) (stroke (width 0) (type default)) (uuid "2eec16b6-76e5-495f-b160-acc0c59857b1"))
+	(symbol (lib_id "power:+5V") (at 127 269.24 180) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "fb1daf5a-7d68-4fbf-b1fb-d7d139d07209") (property "Reference" "#PWR152" (at 127 269.24 180) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "+5V" (at 127 273.69 180) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 127 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 127 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 127 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "0d2905a7-15cc-4f24-bb79-da0c52cc304e")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR152") (unit 1)))))
+	(symbol (lib_id "Connector:TestPoint") (at 139.7 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "fa638df7-1529-41bd-877b-f1b25469d7d4") (property "Reference" "TP3" (at 142.24 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "3.3V" (at 142.24 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 139.7 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 139.7 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 139.7 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "5b3a2e32-77ec-4614-93a9-32bfc0683936")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP3") (unit 1)))))
+	(wire (pts (xy 139.7 266.7) (xy 139.7 269.24)) (stroke (width 0) (type default)) (uuid "8929952f-2410-4192-b0f9-b8f2427815ac"))
+	(symbol (lib_id "power:+3.3V") (at 139.7 269.24 180) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "49d61d7e-8322-43ae-87a5-049c329f5d0d") (property "Reference" "#PWR153" (at 139.7 269.24 180) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "+3.3V" (at 139.7 273.69 180) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 139.7 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 139.7 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 139.7 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c73e9051-dffe-498b-beba-661ab2e8954e")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR153") (unit 1)))))
+	(symbol (lib_id "Connector:TestPoint") (at 152.4 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "f3c8de16-19d5-4ff8-af6d-479ba7ca41a4") (property "Reference" "TP4" (at 154.94 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "GND" (at 154.94 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 152.4 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 152.4 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 152.4 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "69eaba2e-4eba-4acb-91c2-58f7e852c6a9")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP4") (unit 1)))))
+	(wire (pts (xy 152.4 266.7) (xy 152.4 269.24)) (stroke (width 0) (type default)) (uuid "296c99a4-6abf-4d3a-a56c-9d712f4505c6"))
+	(symbol (lib_id "power:GND") (at 152.4 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "fdeebc47-c662-4145-850e-4c6fd5c7b1a6") (property "Reference" "#PWR154" (at 152.4 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "GND" (at 152.4 273.69 0) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 152.4 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 152.4 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 152.4 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "4afb8ab5-a754-49dd-bf0c-01fa89981015")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR154") (unit 1)))))
+	(symbol (lib_id "Connector:TestPoint") (at 165.1 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "5fb4612b-8808-46bc-81ab-d3a4e15bb9ad") (property "Reference" "TP5" (at 167.64 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "GND" (at 167.64 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 165.1 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 165.1 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 165.1 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "d4f81fb7-6f1c-4f83-bf58-ddc6fdbe1457")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP5") (unit 1)))))
+	(wire (pts (xy 165.1 266.7) (xy 165.1 269.24)) (stroke (width 0) (type default)) (uuid "caed6229-3058-4fbe-aea9-21a4b787f443"))
+	(symbol (lib_id "power:GND") (at 165.1 269.24 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board no) (in_pos_files no) (dnp no) (uuid "614f6ff7-1196-4569-a2c5-528ff6a19ac4") (property "Reference" "#PWR155" (at 165.1 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Value" "GND" (at 165.1 273.69 0) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 165.1 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 165.1 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 165.1 269.24 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "123f1dc4-e339-435e-afb9-ea56d235a76e")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR155") (unit 1)))))
+	(symbol (lib_id "Connector:TestPoint") (at 177.8 266.7 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "678c8072-b6d7-4d76-afec-2524e09cf85b") (property "Reference" "TP6" (at 180.34 265.43 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "PGOOD" (at 180.34 267.97 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm" (at 177.8 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 177.8 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 177.8 266.7 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "ddb50a25-1ce2-4911-9b98-613ac066ca7e")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "TP6") (unit 1)))))
+	(wire (pts (xy 177.8 266.7) (xy 177.8 269.24)) (stroke (width 0) (type default)) (uuid "cfa8800c-3ad4-43e9-bc72-6bb4acdd1d46"))
+	(global_label "PGOOD" (shape output) (at 177.8 269.24 270) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "2e1741f3-f213-4766-9dfe-d124dc1bbd59") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 177.8 269.24 0) (hide yes) (effects (font (size 1.27 1.27)) (justify right))))
+	(text "Test pads from powerJackal: VIN_MOD, 5V, 3V3, 2x GND, PGOOD." (exclude_from_sim no) (at 114.3 259.08 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "49245ca2-732c-4423-b532-e172d2bf978c"))
+	(symbol (lib_id "power:PWR_FLAG") (at 190.5 262.89 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files no) (dnp no) (uuid "45b16246-5173-43cb-80c6-dc8e291a3fce") (property "Reference" "#FLG05" (at 193.04 261.62 0) (effects (font (size 1.27 1.27)) (justify left) (hide yes))) (property "Value" "PWR_FLAG" (at 193.04 264.16 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "" (at 190.5 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Datasheet" "" (at 190.5 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "Description" "" (at 190.5 262.89 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "4c98fc0e-a401-4ab2-84b2-52c61cdcd587")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#FLG05") (unit 1)))))
+	(wire (pts (xy 190.5 262.89) (xy 190.5 265.43)) (stroke (width 0) (type default)) (uuid "32107a67-a5fa-4eb8-af29-feff328158c4"))
+	(label "5V_LDO" (at 190.5 265.43 270) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "abaf2b52-e17c-4705-9863-9de99f8fbb61"))(symbol (lib_id "Device:C") (at 130.81 284.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "af7cdb0f-6917-41e7-a2d7-9b805831c797") (property "Reference" "C30" (at 133.35 283.21 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "100nF" (at 133.35 285.75 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "MPN" "CC0805KRX7R9BB104" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Manufacturer" "Yageo" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Note" "At U13 pin 5 (VBUS)" (at 130.81 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "9dae24ca-0e8c-4f20-89e9-7d286920f260")) (pin "2" (uuid "fc9de2ef-932e-40d3-9ae7-16a5072ec2c5")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "C30") (unit 1)))))
+	(label "VBUS_USB" (at 130.81 280.67 90) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "cca416a7-afdd-4035-9b02-94d463e6a407"))
+	(symbol (lib_id "power:GND") (at 130.81 288.29 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "29d06e30-db9b-40e3-87e2-58933ee02ff9") (property "Reference" "#PWR404" (at 130.81 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "GND" (at 130.81 292.1 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 130.81 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 130.81 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"GND\"" (at 130.81 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "9ff0a63d-a2ef-43ea-acc5-06bc7a9cf07f")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR404") (unit 1)))))
+	(symbol (lib_id "Device:C") (at 143.51 284.48 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no) (uuid "79e763af-7b41-4b87-9ec7-567716668d20") (property "Reference" "C32" (at 146.05 283.21 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)) (justify left))) (property "Value" "10u 50V" (at 146.05 285.75 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)) (justify left))) (property "Footprint" "Capacitor_SMD:C_1210_3225Metric" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "MPN" "CL32B106KBJNNNE" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Manufacturer" "Samsung Electro-Mechanics" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Note" "Third U1 input ceramic, place at VIN pins 1/14" (at 143.51 284.48 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "ff8cce8a-49df-4fd2-875c-a5bd5c29cb0b")) (pin "2" (uuid "43918ad8-de9e-4126-92a1-fd36695b327a")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "C32") (unit 1)))))
+	(label "VIN_MOD" (at 143.51 280.67 90) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "6f56fcac-9f05-4300-9127-c44e568c0c39"))
+	(symbol (lib_id "power:GND") (at 143.51 288.29 0) (unit 1) (body_style 1) (exclude_from_sim no) (in_bom no) (on_board yes) (in_pos_files yes) (dnp no) (uuid "c5f21680-7c08-4281-ad8d-84930aa8d107") (property "Reference" "#PWR503" (at 143.51 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Value" "GND" (at 143.51 292.1 0) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Footprint" "" (at 143.51 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Datasheet" "" (at 143.51 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (property "Description" "Power symbol creates a global label with name \"GND\"" (at 143.51 288.29 0) (hide yes) (show_name no) (do_not_autoplace no) (effects (font (size 1.27 1.27)))) (pin "1" (uuid "33025477-7c69-44ab-a375-9ca9ebba0db1")) (instances (project "centurion" (path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51" (reference "#PWR503") (unit 1)))))
+	)

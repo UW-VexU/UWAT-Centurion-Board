@@ -1,0 +1,10 @@
+#VRML V2.0 utf8
+# TPSM53602 power module (TI RDA B3QFN-14), plain body 5.0 x 5.5 x 4.0 mm. Units: 0.1 in.
+# Simple box for 3D view and height checks; TI does not publish a model in the KiCad library.
+Transform {
+  translation 0 0 0.7874
+  children Shape {
+    appearance Appearance { material Material { diffuseColor 0.15 0.15 0.15 specularColor 0.2 0.2 0.2 shininess 0.3 } }
+    geometry Box { size 1.9685 2.1654 1.5748 }
+  }
+}
