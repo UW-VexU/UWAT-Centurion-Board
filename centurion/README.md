@@ -4,7 +4,7 @@ The main custom board for the UWAT VEXU robots. It sits between the V5 brain and
 
 ## Status
 
-The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is placed and routed (2 layers, 103.2 x 62.6 mm), with KiCad 10 DRC at 0 violations, 0 unconnected pads and 0 schematic parity issues. **It still needs hand routing before ordering**: the autorouter put too much signal copper on the bottom ground plane, and the differential pairs need to be routed as pairs. Follow [HAND_ROUTING.md](HAND_ROUTING.md). See also [PCB layout](#pcb-layout).
+The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is placed and autorouted (2 layers, 103.2 x 62.6 mm), with the router steered off the bottom ground plane. KiCad 10 DRC shows 0 violations, 0 schematic parity issues and **2 connections left to hand-route** (USB_D- and a 6 mm piece of MUX7_SCL). **It needs hand routing before ordering**: those two connections, the differential pairs, ESD order, and the remaining bottom-layer signals. Follow [HAND_ROUTING.md](HAND_ROUTING.md), by hand or with Claude Desktop using [CLAUDE_DESKTOP_ROUTING.md](CLAUDE_DESKTOP_ROUTING.md). See also [PCB layout](#pcb-layout).
 
 - MCU is now the STM32G491RET6. The ESP32-S3 is gone.
 - Each smart port has its own MAX33071E RS-485 transceiver, on its own USART with hardware DE.
@@ -24,6 +24,7 @@ The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). 
 | `centurion.kicad_pcb` | The board: placed, routed, GND pours on both layers |
 | `centurion.kicad_dru` | Custom DRC rule (hole clearance, see [PCB layout](#pcb-layout)) |
 | `HAND_ROUTING.md` | Step-by-step hand-routing work left before ordering, with coordinates and targets |
+| `CLAUDE_DESKTOP_ROUTING.md` | Setup and prompts for having Claude Desktop (computer use) do the hand routing in KiCad |
 | `centurion.kicad_sch` | Top sheet. It places the sheets below and wires the RS-485 sheet pins. |
 | `power.kicad_sch` | Smart port power input, 5 V buck, 3.3 V LDO, USB-C, battery sense, PGOOD, VBUS sense, test pads |
 | `smartport.kicad_sch` | One smart port jack and its MAX33071E. Used twice, as SmartPort_A and SmartPort_B. |
@@ -143,7 +144,7 @@ The board runs left to right from inputs and power, through the MCU, to headers 
 
 **Copper.** Every net, GND included, is routed as tracks. GND is poured on both layers on top of that.
 - **Stitching vias:** about every 4 mm, a fence along the board edge, and extra vias wherever the plane had none within 3 mm.
-- **Ground-pad vias:** 46 top-side GND pads (decoupling caps, ESD clamps, IC ground pins) have their own via within 2.6 mm. The pads still missing one are listed in step 6 of the hand-routing guide.
+- **Ground-pad vias:** 54 top-side GND pads (decoupling caps, ESD clamps, IC ground pins) have their own via within 2.6 mm. The pads still missing one are listed in step 7 of the hand-routing guide.
 - **Power-net vias:** every power-net layer change has three vias.
 - **Buck module:** short copper fills widen the VIN and 5 V paths right at its pins.
 - **Keep-outs:**
@@ -151,7 +152,7 @@ The board runs left to right from inputs and power, through the MCU, to headers 
   - No bottom vias under U1, so its thermal vias land in solid GND (TI).
   - No tracks or vias within 4.5 mm of a mounting-hole centre, where the #8 screw heads sit.
 
-**How it was made.** The board was placed and routed by a script using KiCad 10's Python and Freerouting 2.5. That's why every footprint is linked to its schematic symbol and Update PCB from Schematic finds nothing to change. From here on the `.kicad_pcb` file is the master: the hand routing is done in KiCad directly.
+**How it was made.** The board was placed and routed by a script using KiCad 10's Python and Freerouting 2.5. Freerouting was given per-layer costs (`router.layers` in its settings file) that make bottom-layer track 4–6 times as expensive as top-layer track. That cut signal copper on the bottom from 2.6 m to 1.6 m, and the bottom GND pour went from 11 pieces to one sheet. That's why every footprint is linked to its schematic symbol and Update PCB from Schematic finds nothing to change. From here on the `.kicad_pcb` file is the master: the hand routing is done in KiCad directly.
 
 Before ordering:
 
