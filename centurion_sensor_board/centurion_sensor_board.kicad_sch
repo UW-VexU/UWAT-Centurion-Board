@@ -118,6 +118,36 @@
 				(justify left)
 			)
 		)
+		(pin "PORT_DE" input
+			(at 35.56 82.55 180)
+			(uuid "f3d7c2ae-721e-4727-8d6f-ae30f45be15e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PORT_RX" output
+			(at 35.56 85.09 180)
+			(uuid "adeabc84-c9e9-46e0-be41-eae4e00d420f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PORT_TX" input
+			(at 35.56 87.63 180)
+			(uuid "8885e273-a788-4c5d-98a3-f07d0d706f81")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(instances
 			(project "centurion_sensor_board"
 				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062"
@@ -167,6 +197,36 @@
 		(pin "VBAT_OR" output
 			(at 36.83 193.04 180)
 			(uuid "6e5f3137-56ab-4967-b144-8eb799efa9d6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PORT_DE" input
+			(at 36.83 144.78 180)
+			(uuid "1581eff2-70ab-419e-abdf-bf7dccbb8a1e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PORT_RX" output
+			(at 36.83 147.32 180)
+			(uuid "a739879b-fe93-4c63-ba5f-ed1fc1dc968c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "PORT_TX" input
+			(at 36.83 149.86 180)
+			(uuid "8001f143-2f6b-43a1-ae07-84b16a6cec26")
 			(effects
 				(font
 					(size 1.27 1.27)
