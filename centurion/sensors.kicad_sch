@@ -6132,7 +6132,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Texas Instruments" (at 304.8 203.2 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06DQAR" (at 304.8 203.2 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
+		(property "Manufacturer" "Texas Instruments" (at 304.8 203.2 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06QDQARQ1" (at 304.8 203.2 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
 			(uuid "b9328c06-924b-4ed1-994c-fafaf23b0bc7")
 		)
 		(pin "10"
@@ -6570,7 +6570,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Texas Instruments" (at 304.8 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06DQAR" (at 304.8 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
+		(property "Manufacturer" "Texas Instruments" (at 304.8 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06QDQARQ1" (at 304.8 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
 			(uuid "d1e9f87c-986a-4174-afe3-e47c5db3e94f")
 		)
 		(pin "10"
@@ -7324,7 +7324,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Texas Instruments" (at 368.3 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06DQAR" (at 368.3 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
+		(property "Manufacturer" "Texas Instruments" (at 368.3 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06QDQARQ1" (at 368.3 130.81 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
 			(uuid "61d9e4af-f0b2-4eaa-9488-1eb9639f872e")
 		)
 		(pin "10"
@@ -8645,7 +8645,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Texas Instruments" (at 368.3 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06DQAR" (at 368.3 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
+		(property "Manufacturer" "Texas Instruments" (at 368.3 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06QDQARQ1" (at 368.3 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
 			(uuid "156177b3-2515-45cb-b4d0-f9dd905e8a91")
 		)
 		(pin "10"
@@ -8915,7 +8915,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Texas Instruments" (at 304.8 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06DQAR" (at 304.8 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
+		(property "Manufacturer" "Texas Instruments" (at 304.8 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "TPD4E05U06QDQARQ1" (at 304.8 167.64 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "7"
 			(uuid "ab6b35b8-cae3-43fa-8fd9-e9c0104a5f59")
 		)
 		(pin "10"
