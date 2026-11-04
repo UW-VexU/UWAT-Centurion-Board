@@ -12,7 +12,7 @@ The schematic was updated on 2026-11-02 to the decisions below, plus the review 
 - Four #8-32 mounting holes (H1 to H4) are in, on the bracket pattern measured from the robot CAD.
 - KiCad 10 ERC: 0 errors, 0 warnings (see [How this was checked](#how-this-was-checked)).
 - J16's USB-C shield pin is renamed `S1` to `SH` to match KiCad 10's USB4105 footprint. Before this the shield pads had no net, so the USB shell would have floated instead of going to GND.
-- The BOM is in [bom/](bom/). On 2026-11-02 four values were changed to parts already on centurion, powerJackal or stellaNova, which removed 4 unique part numbers: R8, R9 and R41 33 Ω to 22 Ω; R40 27k to 22k; R46/R47 22k/33k to 10k/15k (same ratio); LED1/LED2 0805 to the 0603 green LED used for D6.
+- The BOM is in [bom/](bom/). On 2026-11-02 four values were changed to parts already on centurion, powerJackal or stellaNova, which removed 4 unique part numbers: R8, R9 and R41 33 Ω to 22 Ω; R40 27k to 22k; R46/R47 22k/33k to 10k/15k (same ratio); LED1/LED2 0805 to the 0603 green LED used for D6. On 2026-11-04, after the design review: R38/R39 (USB D+/D-) 22 Ω to 0 Ω, because the STM32G4's USB pins need no external series resistor; F2 0.35 A to 0.5 A hold, the same part as F3, because 8 or more jacks on 3.3 V would trip 0.35 A. C33 added: a 47 uF 10 V polymer tantalum (KEMET T520B476M010ATE070) on 5V_LDO next to Q1, so plugging in USB can't ring U7's input past its 6.5 V rating (see [sim/](sim/README.md)).
 
 The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). Where this file and the plan disagree, this file has the later decision.
 
@@ -33,8 +33,8 @@ The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). 
 | `sensors.kicad_sch` | I2C mux and its 8 ports, the pot port, AUX1, the spare I2C header, ESD |
 | `usb_jetson.kicad_sch` | Backup 3.3 V UART connector to the Jetson, and the ramBar link (UART, CAN FD transceiver, fused 5 V) |
 | `lib/` | Project symbols (now includes MAX33071E), footprints and 3D models. The smart port jack uses the stellaNova footprint with the Molex step model. The TPSM53602 footprint is from powerJackal; KiCad has no model for it, so it gets a plain 5 x 5.5 x 4 mm body. |
-| `bom/centurion_revA_BOM.xlsx` | BOM with DigiKey Canada stock and qty 1 prices, a yellow "boards to build" cell, and a DNP list. Every part on the board is listed. "In an earlier order" says whether powerJackal or stellaNova already used the part; "Buy from" marks team-stock lines (header strip, shunts). |
-| `bom/centurion_revA_DigiKey_upload.csv` | Upload to DigiKey BOM Manager. Quantities are for 5 boards plus spares. Team-stock lines are left out. |
+| `bom/centurion_revA_BOM.xlsx` | BOM with DigiKey Canada stock and qty 1 prices, a yellow "boards to build" cell, and a DNP list. Every part on the board is listed. "In an earlier order" says whether powerJackal or stellaNova already used the part; "Buy from" marks team-stock lines (header strip, shunts). The "Stock check" sheet compares those reused parts with what the powerJackal and stellaNova orders left over (their BOMs' order quantities minus the boards built, set in its yellow cells). |
+| `bom/centurion_revA_DigiKey_upload.csv` | Upload to DigiKey BOM Manager. Quantities are what to order: 6 boards plus spares, minus what the powerJackal (2 built) and stellaNova (3 built) orders left over; parts fully covered by that stock and team-stock lines are left out. To round a line up to a price break, type it in the BOM sheet's yellow "Your order qty" column, then save the "DigiKey upload" sheet as CSV (delete its 0-quantity lines first). |
 | `docs/Board_Components.xlsx` | Original component plan and open questions |
 | `docs/centurion_revA_schematic.pdf` | The schematic as a PDF. Regenerate with `kicad-cli sch export pdf -o docs/centurion_revA_schematic.pdf centurion.kicad_sch` |
 
@@ -201,7 +201,7 @@ STM32G491RET6, LQFP-64. Every assignment was checked against ST's pin data (STM3
 | I2C to the mux: SCL, SDA | PA15, PB7 | I2C1 |
 | Second I2C bus (AUX1, J18): SCL, SDA | PC8, PC9 | I2C3 |
 | IMU: SCK, MISO, MOSI, CS | PA5, PA6, PA7, PA4 | SPI1, CS as GPIO |
-| IMU INT1, INT2 | PA8, PB1 | EXTI 8 and 1 |
+| IMU INT1, INT2 | PA8, PA10 | EXTI 8 and 10 |
 | Spare SPI (J15): SCK, MISO, MOSI, CS, INT | PC10, PC11, PB5, PA0, PB9 | SPI3, CS as GPIO, INT on EXTI 9 |
 | ramBar UART: TX, RX | PC12, PD2 | UART5 |
 | ramBar CAN FD: TX, RX | PB13, PB12 | FDCAN2 |
@@ -215,11 +215,11 @@ STM32G491RET6, LQFP-64. Every assignment was checked against ST's pin data (STM3
 | SWD: SWDIO, SWCLK, SWO | PA13, PA14, PB3 | |
 | NRST, BOOT0 | PG10, PB8 | |
 | 8 MHz crystal | PF0, PF1 | HSE |
-| Unused, no-connect flags | PA9, PA10, PB4, PB6, PC13, PC14, PC15 | |
+| Unused, no-connect flags | PA9, PB1, PB4, PB6, PC13, PC14, PC15 | |
 
 PB8 is also BOOT0, so nothing else uses it. PB4 and PB6 are the USB-C PD (UCPD) pins and stay unused.
 
-Some pins moved on 2026-11-02 for the ramBar link. UART5's only TX/RX pins are PC12/PD2 and FDCAN2's free pair is PB12/PB13, so the spare SPI's MOSI, CS and INT and the two IMU interrupts moved to free pins. PA10 (the bootloader's USART1 RX) was left free on purpose, so an IMU interrupt can't trigger the bootloader's UART detection.
+Some pins moved on 2026-11-02 for the ramBar link. UART5's only TX/RX pins are PC12/PD2 and FDCAN2's free pair is PB12/PB13, so the spare SPI's MOSI, CS and INT and the two IMU interrupts moved to free pins. PA10 (the bootloader's USART1 RX) was meant to stay free, so an IMU interrupt couldn't trigger the bootloader's UART detection. On the 4-layer board (2026-11-03) IMU_INT2 moved from PB1 to PA10 anyway: PB1 (U3 pin 25) is boxed in by the routing of its neighbours on U3's bottom edge. See "Flashing over USB" below for the workaround.
 
 ## Firmware notes
 
@@ -228,7 +228,7 @@ Some pins moved on 2026-11-02 for the ramBar link. UART5's only TX/RX pins are P
 - **Two-port split.** To read on port A and write on port B, keep port A's DE low and only transmit on port B. If the brain ever sends on port B, the port B receiver still hears it.
 - **Baud rate.** The brain side: `vexGenericSerialEnable(port, 0)` then `vexGenericSerialBaudrate(port, 921600)` or lower. The MAX33071E handles up to 2 Mbps.
 - **USB.** Connect the USB D+ pullup (`HAL_PCD_Start`) only while VBUS_SENSE (PB2) reads high. USB runs from HSI48 with the clock recovery system, so no crystal is needed.
-- **Flashing over USB (no programmer needed).** The G491 has a bootloader built into ROM. Plug in the USB-C, hold BOOT, tap RESET, let go of BOOT, and it shows up as a DFU device. Flash it with STM32CubeProgrammer (USB, DFU) or `dfu-util`. Firmware can also jump to the bootloader on a command from the Jetson. Flash with the smart ports unplugged: the bootloader also listens on USART2, which is smart port A's RX, and brain traffic there could make it pick that UART instead of USB. It also listens on USART3 at PC10/PC11 (J15's SCK and MISO, held by R57) and I2C2 on PC4/PA8.
+- **Flashing over USB (no programmer needed).** The G491 has a bootloader built into ROM. Plug in the USB-C, hold BOOT, tap RESET, let go of BOOT, and it shows up as a DFU device. Flash it with STM32CubeProgrammer (USB, DFU) or `dfu-util`. Firmware can also jump to the bootloader on a command from the Jetson. Flash with the smart ports unplugged: the bootloader also listens on USART2, which is smart port A's RX, and brain traffic there could make it pick that UART instead of USB. It also listens on USART3 at PC10/PC11 (J15's SCK and MISO, held by R57) and I2C2 on PC4/PA8. And on USART1 RX at PA10, which carries the IMU's INT2: flash with the IMU unplugged, or have firmware turn off the IMU's interrupt outputs before it jumps to the bootloader.
 - **SWD (J3).** Only for step-through debugging with an ST-LINK (a Nucleo board's ST-LINK works with 6 dupont wires). Not needed to flash.
 - **Clock.** Y1 (8 MHz) is fitted. Run SYSCLK from the PLL on HSE. FDCAN needs the crystal's accuracy, and it keeps the USB bootloader independent of the internal oscillator.
 - **PGOOD on USB power.** The buck is off, and TI doesn't specify PGOOD below 2 V in, so it may still read high. Use VBAT_SENSE (PC0) to know whether port power is there.
@@ -237,7 +237,7 @@ Some pins moved on 2026-11-02 for the ramBar link. UART5's only TX/RX pins are P
 - **ramBar link.** UART5 at 3.3 V logic, at whatever baud rate both ends agree on. FDCAN2 goes through U16: SHDN and STB are tied low, so the transceiver is always on. R53 terminates this end of the CAN bus; ramBar must put 120 Ω across CANH-CANL at its end too.
 - **I2C speed.** 400 kHz works on every mux channel and on bus 2 with the 2.7k / 2.2k pullups. Select one mux channel at a time: several at once put their pullups in parallel.
 - **CAN FD.** Run the FDCAN kernel clock at 80 or 160 MHz from the HSE PLL. Above about 1 Mbit/s data rate, enable transmitter delay compensation (DBTP.TDC) and put the data-phase sample point at about 70 to 75 %.
-- **Inputs with nothing plugged in.** Turn on internal pulls for IMU_INT1/INT2 (PA8, PB1), SPARE_INT (PB9) and IMU_MISO (PA6), matching the device's polarity.
+- **Inputs with nothing plugged in.** Turn on internal pulls for IMU_INT1/INT2 (PA8, PA10), SPARE_INT (PB9) and IMU_MISO (PA6), matching the device's polarity.
 - **ramBar on USB-only power.** Keep UART5's pins (PC12, PD2) in analog mode until VBAT_SENSE or PGOOD shows smart port power, so the board doesn't back-power an unpowered ramBar.
 - **Flashing over USB:** unplug ramBar as well as the smart ports. The ROM bootloader's SPI2 uses PB12 (CAN_RX) as chip select and PB14 (port B DE) as MISO.
 - **I2C timeouts.** Give every I2C call a timeout, and scan the mux channels at boot so empty ports are skipped. A stuck sensor only blocks its own mux channel. Pulse MUX_RST low to clear it.
@@ -379,7 +379,7 @@ The JST-GH ports use pin 1 VCC, then SCL, SDA and GND (Pixhawk order). Encoders 
 ## Open questions
 
 - **Lift laser part number.** Mux channel 2 assumes an I2C sensor such as a VL53.
-- **LED strip.** Is it in v1? Plan Q14. The spare pins PA9 (TIM1_CH2) and PA10 (TIM1_CH3) can drive one.
+- **LED strip.** Is it in v1? Plan Q14. The spare pin PA9 (TIM1_CH2) can drive one (PA10 now carries IMU_INT2).
 - **ramBar.** Its board needs a matching JST-GH 6-pin, a 3.3 V UART, a CAN FD transceiver and a 120 Ω terminator, and must draw under 0.5 A from the 5 V pin.
 - **Still open in the plan.** Q3 (lock the footprints), Q9 (smart port current limit), Q11 (soldering), Q12 (V5 packet format).
 
@@ -434,3 +434,4 @@ The three ERC warnings from powerJackal's power sheet were also cleared (see bel
 - [MAX33071E, Analog Devices](https://analog.com/en/products/max33071e.html)
 - [ArduPilot PR on RS-485 DE, not supported on F4](https://github.com/ArduPilot/ardupilot/pull/26930)
 - [powerJackal hot-plug simulation](../powerJackal/sim/README.md)
+- [centurion USB hot-plug simulation](sim/README.md): without C33, U7's input could pass its 6.5 V rating on a long, stiff USB cable; with C33 it stays at 5.5 V or less

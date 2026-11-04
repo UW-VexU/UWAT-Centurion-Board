@@ -5593,6 +5593,225 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C_Polarized")
+		(at 284.48 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "205209ea-ea0b-4db6-b552-0169c8e8e3ed")
+		(property "Reference" "C33"
+			(at 287.782 161.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47u 10V"
+			(at 287.782 163.83 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B"
+			(at 284.48 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 284.48 162.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "T520B476M010ATE070"
+			(at 284.48 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "KEMET"
+			(at 284.48 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Note" "Polymer tantalum, 70 mOhm ESR. Damps the USB hot-plug ring on 5V_LDO so U7 stays under its 6.5 V rating (sim/README.md)"
+			(at 284.48 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "faaade00-f11f-40aa-a72b-aa0b6b6d25b4")
+		)
+		(pin "2"
+			(uuid "0830a3f4-a6e1-437b-b5dc-d490b5546a36")
+		)
+		(instances
+			(project "centurion"
+				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51"
+					(reference "C33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 284.48 158.75) (xy 284.48 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "038153d0-b38a-4892-98cf-82dbaefad757")
+	)
+	(label "5V_LDO"
+		(at 284.48 156.21 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d24f99c0-daa2-479f-9c21-e7519b869e12")
+	)
+	(wire
+		(pts
+			(xy 284.48 166.37) (xy 284.48 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebfede97-15f5-4894-930a-719eabf9c434")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 284.48 168.91 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "705a6e61-0bbc-4b0f-8c08-dd4cb2b94f40")
+		(property "Reference" "#PWR504"
+			(at 271.78 175.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 271.78 172.72 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 284.48 168.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 284.48 168.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 284.48 168.91 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4e773a06-f181-4964-a59c-4c2c9c46898e")
+		)
+		(instances
+			(project "centurion"
+				(path "/3032cbe1-6c0a-4e14-b8a3-fd74e7e48062/483f8da1-6abe-4dd3-8249-b5c044ad4b51"
+					(reference "#PWR504")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 245.11 104.14 0)
 		(unit 1)
@@ -7572,7 +7791,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22"
+		(property "Value" "0"
 			(at 141.986 167.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7615,7 +7834,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0805FR-0722RL"
+		(property "MPN" "RC0805JR-070RL"
 			(at 139.7 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -7637,7 +7856,7 @@
 				)
 			)
 		)
-		(property "Note" "USB D- series resistor"
+		(property "Note" "USB D-: 0 ohm. The STM32G4 USB pins need no external series resistor (DS13122); the pad stays for tuning"
 			(at 139.7 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -10314,7 +10533,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22"
+		(property "Value" "0"
 			(at 129.286 167.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10357,7 +10576,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0805FR-0722RL"
+		(property "MPN" "RC0805JR-070RL"
 			(at 127 166.37 0)
 			(hide yes)
 			(show_name no)
@@ -10379,7 +10598,7 @@
 				)
 			)
 		)
-		(property "Note" "USB D+ series resistor, per Espressif's checklist"
+		(property "Note" "USB D+: 0 ohm. The STM32G4 USB pins need no external series resistor (DS13122); the pad stays for tuning"
 			(at 127 166.37 0)
 			(hide yes)
 			(show_name no)

@@ -6709,7 +6709,7 @@
 				)
 			)
 		)
-		(property "Value" "0.35A hold"
+		(property "Value" "0.5A hold"
 			(at 73.66 25.4 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6753,7 +6753,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Bourns" (at 73.66 29.21 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "MF-NSMF035X-2" (at 73.66 29.21 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1"
+		(property "Manufacturer" "Bourns" (at 73.66 29.21 0) (effects (font (size 1.27 1.27)) (hide yes))) (property "MPN" "MF-NSMF050-2" (at 73.66 29.21 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1"
 			(uuid "a8dcc481-63bf-478c-8473-9eb9203bef7d")
 		)
 		(pin "2"

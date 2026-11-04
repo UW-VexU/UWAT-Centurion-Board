@@ -1,0 +1,143 @@
+* centurion hot-plug: a live USB host port plugged into J16 (USB-C) with the smart ports unpowered
+*
+* Plain SPICE. Opens in LTspice (File > Open, then Run). Also runs in ngspice (see README.md).
+* Probe V(ldoin) for /Power/5V_LDO: C16 and U7 (MCP1826S) VIN, abs max 6.5 V.
+* Path: J16 VBUS (/Power/VBUS_USB) > D10 > USB_PWR > Q1 (P-FET, gate on +5V) > 5V_LDO > U7 > +3.3V.
+* With the smart ports unpowered, +5V sits at 0 V, so Q1 is on once 5V_LDO passes its threshold.
+* Board GND is node 0. The cable loop (VBUS wire plus GND wire) is lumped into the VBUS leg.
+*
+* ---------------------------------------------------------------------------
+* Parameters. Defaults are the worst case: top of the USB-C supply range, stiff host, low cable R,
+* U13's VBUS clamp not conducting, U7 not loading its input.
+* ---------------------------------------------------------------------------
+* Host VBUS. USB 2.0 allows 4.75 to 5.25 V at the host; USB-C vSafe5V allows up to 5.5 V.
+.param VHOST=5.5
+* Host output impedance: its VBUS bulk cap (120 uF or more by the USB spec) and ESR. Assumed 20m to 50m.
+.param RHOST=20m
+* Cable loop inductance, VBUS plus GND. About 0.5 to 1 uH per metre; plug and host wiring add a little.
+* Swept 0.3u to 2u (up to about 2 m of cable).
+.param LCAB=1u
+* Cable plus contact resistance, VBUS plus GND. A 1 m USB-C cable is 0.1 to 0.3 ohm loop; 0.07 is the low end.
+.param RCAB=0.07
+* 1 = U13's VBUS clamp conducts at its 6 V minimum breakdown (ST gives only a minimum), 0 = left out.
+.param CLAMP=0
+* 1 = U7 starts and charges the +3.3V caps (current limit ILIM), 0 = U7 draws nothing (bound).
+.param LDO=0
+* U7 MCP1826S current limit while it charges its output caps. Assumed 1.4 A (between its 1 A rating and
+* the short-circuit current).
+.param ILIM=1.4
+* Fix under test, at 5V_LDO next to C16.
+* FIX=0 none. FIX=1 bulk cap CB with ESR RB (electrolytic or polymer). FIX=2 RC snubber RB in series with CB.
+.param FIX=0
+.param CB=47u
+.param RB=0.3
+* Where the fix sits. 0 = at C16 and U7. 1 = at Q1's source, about 60 mm of 5V_LDO trace before C16 and U7.
+.param FIXAT=0
+* The 5V_LDO trace from Q1 to C16/U7: 0.5 to 0.6 mm wide over the inner planes, up to about 60 mm.
+* About 0.25 to 0.8 nH/mm and 0.06 ohm. LTR=1p leaves the trace out.
+.param LTR=50n
+.param RTR=0.05
+*
+* Derived values. Do not edit.
+.param RCLAMP={1m+(1-CLAMP)*1G}
+.param RFIX={1m+(FIX==0 || FIXAT==1)*1G}
+.param RFIX2={1m+(FIX==0 || FIXAT==0)*1G}
+*
+* ---------------------------------------------------------------------------
+* Host and cable
+* ---------------------------------------------------------------------------
+* Ideal step at 1 us with a 10 ns edge. No contact bounce. The host's bulk cap makes it a stiff source.
+V_HOST host 0 PWL(0 0 1u 0 1.01u {VHOST})
+R_HOST host s1 {RHOST}
+L_CAB s1 s2 {LCAB}
+R_CAB s2 vbus {RCAB}
+* J16 and the plug. Assumed 20 pF.
+C_J16 vbus 0 20p
+*
+* ---------------------------------------------------------------------------
+* VBUS side (/Power/VBUS_USB)
+* ---------------------------------------------------------------------------
+* C30 Yageo CC0805KRX7R9BB104, 100 nF 50 V X7R. About 95 nF at 5 V. ESR 20 mOhm, ESL 0.6 nH assumed.
+R_C30 vbus c30a 20m
+L_C30 c30a c30b 0.6n
+C_C30 c30b 0 95n
+* R46 10k / R47 15k to PB2 (VBUS_SENSE), R48 5.1k bleeder.
+R_R46 vbus vsense 10k
+R_R47 vsense 0 15k
+R_R48 vbus 0 5.1k
+* U13 ST USBLC6-2SC6, VBUS pin 5 to GND. ST: VBR 6 V min at 1 mA, VCL 12 V max at 1 A and 17 V max at 5 A
+* (I/O to GND, which adds a steering diode). Model: soft Zener, 6.0 V at 1 mA, about 11 V at 1 A, 1.25 ohm.
+V_IU13 vbus u13a 0
+R_U13SW u13a u13k {RCLAMP}
+V_U13OFF u13k u13b {6.0 - 18*25.865m*ln(1m/1n)}
+D_U13BR u13b 0 D_U13Z
+D_U13FW 0 u13k D_SIL
+*
+* ---------------------------------------------------------------------------
+* D10, Q1, 5V_LDO
+* ---------------------------------------------------------------------------
+* D10 Vishay SS14-E3/61T, 40 V 1 A Schottky. VF 0.50 V max at 1 A, IFSM 40 A, CJ about 110 pF.
+* Model: about 0.40 V at 1 A, 0.75 V at 10 A.
+V_ID10 vbus d10a 0
+D_D10 d10a usbpwr D_SS14
+* Q1 AO3401A P-FET: drain USB_PWR, gate +5V, source 5V_LDO. AOS: Vth -0.5 to -1.3 V, RDS(on) 50 mOhm at
+* VGS -4.5 V, 75 mOhm at -2.5 V. Body diode from drain to source. VDMOS model with those figures.
+M_Q1 usbpwr p5v q1s AO3401A
+* 5V_LDO trace from Q1's source to C16 and U7.
+R_TR q1s tra {RTR}
+L_TR tra ldoin {LTR}
+* D9 SS14 from +5V to 5V_LDO (reverse biased here).
+D_D9 p5v ldoin D_SS14
+* +5V with the smart ports unpowered: C4, C5 (47 uF 10 V) and the buck output, nothing driving it.
+* R18 and R30 are its only loads. It holds Q1's gate near 0 V.
+C_P5V p5v 0 80u
+R_P5V p5v 0 2.2k
+*
+* C16 Samsung CL32B106KBJNNNE, 10 uF 50 V X7R 1210. About 9.6 uF at 5 V (Samsung DC-bias curve, as in
+* powerJackal/sim). ESR 5 mOhm, ESL 0.5 nH.
+R_C16 ldoin c16a 5m
+L_C16 c16a c16b 0.5n
+C_C16 c16b 0 9.6u
+*
+* Fix under test. FIX=1 and FIX=2 are the same circuit (a capacitor with a series resistance); they only
+* differ in the values the README tries. ESL 2 nH.
+R_FIXSW ldoin fixa {RFIX}
+R_FIXSW2 q1s fixa {RFIX2}
+R_FIX fixa fixb {RB}
+L_FIX fixb fixc 2n
+C_FIX fixc 0 {CB}
+*
+* ---------------------------------------------------------------------------
+* U7 and +3.3V
+* ---------------------------------------------------------------------------
+* U7 Microchip MCP1826S-3302E: VIN abs max 6.5 V (DS22057B). Behavioural LDO: follows
+* min(VIN - 0.3 V, 3.3 V) through 50 mOhm, current limited to ILIM. LDO=0 turns it off (the bound).
+V_IU7 ldoin u7in 0
+B_U7 u7in v33 I={LDO}*min({ILIM}, max(0, (min(V(u7in)-0.3, 3.3) - V(v33))/0.05))
+* +3.3V caps: C17 47 uF 10 V 1206 (about 30 uF at 3.3 V), C10 and C28 10 uF 25 V 0805 (about 8 uF each),
+* C18 1 uF, eleven 100 nF. About 48 uF. C28 sits behind F2 (0.7 ohm), lumped in.
+R_C33 v33 c33a 10m
+C_C33 c33a 0 48u
+* Board load on +3.3V while it starts: MCU, mux, transceivers. About 60 mA.
+R_L33 v33 0 55
+*
+* ---------------------------------------------------------------------------
+* Models
+* ---------------------------------------------------------------------------
+.model D_SS14 D(IS=10u N=1.1 RS=0.045 CJO=110p VJ=0.4 M=0.5)
+.model D_SIL D(IS=1e-12 N=1.5 RS=0.05)
+.model D_U13Z D(IS=1n N=18 RS=1.25)
+.model AO3401A VDMOS(pchan Vto=-0.9 Kp=9 Rd=10m Rs=10m Rb=30m Is=1e-11 N=1.3 Cgs=600p Cgdmax=250p Cgdmin=60p Cjo=150p)
+*
+* ---------------------------------------------------------------------------
+* Analysis. The .step and .meas lines are for LTspice; ngspice runs one case (see README.md).
+* ---------------------------------------------------------------------------
+.tran 5n 200u 0 5n
+.options plotwinsize=0
+.step param LCAB list 0.3u 0.5u 1u 1.5u 2u
+.meas tran VLDO_PK MAX V(ldoin)
+.meas tran VBUS_PK MAX V(vbus)
+.meas tran IIN_PK MAX I(V_ID10)
+.meas tran IU13_PK MAX I(V_IU13)
+.meas tran VLDO_END FIND V(ldoin) AT 190u
+.end
