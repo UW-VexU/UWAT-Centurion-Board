@@ -1,0 +1,71 @@
+* centurion SPI to the IMU breakout on J5 (SPI1), or to the spare SPI port J15 (SPI3) with RSER=0
+* SCK, MOSI: MCU pin (push-pull, ROUT, edge TRM) - R8/R9 (RSER, 100 ohm since 2026-11-04, was 22) - trace - U5 ESD - J5 - JST GH cable - IMU input
+* MISO: the IMU drives it TCO after every SCK edge it sees (toggling every half clock, the hardest case),
+*       back up the cable - J5 - U5 - trace - MCU input. MISOSTATIC=1 holds MISO low instead (crosstalk check).
+* The cable is 10 coupled sections: wires SCK, MOSI, MISO side by side (J5 pins 3, 4, 5).
+.include connectors.lib
+.param LEN=0.3
+.param FSCK=10MEG
+.param TRM=2n
+.param ROUT=30
+.param RSER=100
+.param TCO=20n
+.param ROIMU=40
+.param CIMU=5p
+.param MISOSTATIC=0
+.param LSCK=58
+.param LMOSI=54
+.param LMISO=50
+.param T0=20n
+
+V33 v33 0 3.3
+* ---- MCU outputs: SCK runs at FSCK, MOSI changes on every SCK falling edge
+VSCK sck_src 0 PULSE(0 3.3 {T0} {TRM} {TRM} {0.5/FSCK-TRM} {1/FSCK})
+VMOSI mosi_src 0 PULSE(0 3.3 {T0+0.5/FSCK} {TRM} {TRM} {1/FSCK-TRM} {2/FSCK})
+XO1 sck_src sck_mcu PP_OUT ROUT={ROUT}
+XO2 mosi_src mosi_mcu PP_OUT ROUT={ROUT}
+RS1 sck_mcu sck_r {RSER+1m}
+RS2 mosi_mcu mosi_r {RSER+1m}
+* traces: 0.3 nH and 0.15 pF per mm, lengths in mm
+L1 sck_r sck_j {0.3n*LSCK}
+C1 sck_r 0 {0.15p*LSCK}
+L2 mosi_r mosi_j {0.3n*LMOSI}
+C2 mosi_r 0 {0.15p*LMOSI}
+L3 miso_j miso_mcu {0.3n*LMISO}
+C3 miso_mcu 0 {0.15p*LMISO}
+XE1 sck_j TPD_CH
+XE2 mosi_j TPD_CH
+XE3 miso_j TPD_CH
+XIN miso_mcu IN_PIN
+* ---- the cable
+X1 sck_j mosi_j miso_j a1 b1 c1 GH3_SEC DL={LEN/10}
+X2 a1 b1 c1 a2 b2 c2 GH3_SEC DL={LEN/10}
+X3 a2 b2 c2 a3 b3 c3 GH3_SEC DL={LEN/10}
+X4 a3 b3 c3 a4 b4 c4 GH3_SEC DL={LEN/10}
+X5 a4 b4 c4 a5 b5 c5 GH3_SEC DL={LEN/10}
+X6 a5 b5 c5 a6 b6 c6 GH3_SEC DL={LEN/10}
+X7 a6 b6 c6 a7 b7 c7 GH3_SEC DL={LEN/10}
+X8 a7 b7 c7 a8 b8 c8 GH3_SEC DL={LEN/10}
+X9 a8 b8 c8 a9 b9 c9 GH3_SEC DL={LEN/10}
+X10 a9 b9 c9 sck_imu mosi_imu miso_imu GH3_SEC DL={LEN/10}
+* ---- the IMU
+* its SCK and MOSI pins: CIMU and ESD clamps to VDDIO (SENS_3V3) and GND; VHx/VLx measure the clamp currents
+CI1 sck_imu 0 {CIMU}
+DH1 sck_imu h1 DCLAMP
+VH1 h1 v33 0
+DL1 l1 sck_imu DCLAMP
+VL1 l1 0 0
+CI2 mosi_imu 0 {CIMU}
+DH2 mosi_imu h2 DCLAMP
+VH2 h2 v33 0
+DL2 l2 mosi_imu DCLAMP
+VL2 l2 0 0
+* MISO: the inverse of the SCK the IMU sees, delayed by TCO through a matched ideal line
+Bm m1 0 V=3.3*(0.5-0.5*tanh((V(sck_imu)-1.65)*8))
+Rm1 m1 m2 50
+Td m2 0 m3 0 Z0=50 TD={TCO}
+Rm3 m3 0 50
+Bo o 0 V={MISOSTATIC} > 0.5 ? 0 : 2*V(m3)
+XO3 o miso_imu PP_OUT ROUT={ROIMU}
+.tran 0.1n {T0+6/FSCK}
+.end

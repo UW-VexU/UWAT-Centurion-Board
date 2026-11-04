@@ -1,0 +1,32 @@
+* centurion I2C bus 2 (I2C_AUX), no mux: MCU pin - R33 2.2k to SENS_3V3 - about 95 mm of trace - U12 ESD -
+* J14 (AUX1) and J18 (I2C_SPARE) in parallel, each with its own JST GH cable and sensor
+* DRV=0: the MCU pulls low; DRV=1: the sensor on J14 pulls low
+.include connectors.lib
+.param LEN1=1
+.param LEN2=1
+.param RBO=1G
+.param DRV=0
+.param FSCL=400k
+.param RONM=20
+.param RONS=130
+.param TF=20n
+
+V33 v33 0 3.3
+R33 mcu v33 2.2k
+XMCU mcu IN_PIN
+XODM mcu ctlm OD_PULL RON={RONM}
+* 95 mm of trace (I2C_AUX_SCL): 0.3 nH and 0.15 pF per mm
+L1 mcu jacks 28n
+C1 mcu 0 14p
+XU12 jacks TPD_CH
+XC1 jacks s1 GH_WIRE LEN={LEN1}
+XC2 jacks s2 GH_WIRE LEN={LEN2}
+RB1 s1 v33 {RBO}
+RB2 s2 v33 {RBO}
+XS1 s1 IN_PIN CIN=10p
+XS2 s2 IN_PIN CIN=10p
+XODS s1 ctls OD_PULL RON={RONS}
+VCM ctlm 0 PULSE(0 {1-DRV} 1u {TF} {TF} {0.5/FSCL-TF} {1/FSCL})
+VCS ctls 0 PULSE(0 {DRV} 1u {TF} {TF} {0.5/FSCL-TF} {1/FSCL})
+.tran 0.5n {1u+2.5/FSCL}
+.end

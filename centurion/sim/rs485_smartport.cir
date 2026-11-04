@@ -1,0 +1,33 @@
+* centurion smart port RS-485 (J1 or J2) to the V5 brain over a VEX smart cable (flat 4-wire modular cable)
+* U14 MAX33071E driving (DE=1) - 25 mm traces - R51 (RTC, not fitted = 1G) - J1 - cable - brain receiver (RTB across A-B)
+* DI pattern: the same mixed runs and single bits as the CAN deck, at BAUD
+.include connectors.lib
+.param BAUD=921.6k
+.param TB={1/BAUD}
+.param TRT=12n
+.param T0=500n
+.param VH=3.3
+.param LEN=1
+.param Z0D=100
+.param TDM=5n
+.param RTC=1G
+.param RTB=1G
+.param RODRV=28
+
+V33 v33 0 3.3
+VDE de 0 1
+VDI di 0 PWL(0 {VH} {T0+0*TB} {VH} {T0+0*TB+TRT} 0 {T0+5*TB} 0 {T0+5*TB+TRT} {VH} {T0+6*TB} {VH} {T0+6*TB+TRT} 0 {T0+11*TB} 0 {T0+11*TB+TRT} {VH} {T0+16*TB} {VH} {T0+16*TB+TRT} 0 {T0+17*TB} 0 {T0+17*TB+TRT} {VH} {T0+18*TB} {VH} {T0+18*TB+TRT} 0 {T0+19*TB} 0 {T0+19*TB+TRT} {VH} {T0+20*TB} {VH} {T0+20*TB+TRT} 0 {T0+21*TB} 0 {T0+21*TB+TRT} {VH} {T0+23*TB} {VH} {T0+23*TB+TRT} 0 {T0+25*TB} 0 {T0+25*TB+TRT} {VH})
+XU14 di de a1 b1 RS485_DRV RO={RODRV}
+L1 a1 aj 7.5n
+C1 a1 0 3.8p
+L2 b1 bj 8.4n
+C2 b1 0 4.2p
+RTC aj bj {RTC}
+* the smart cable: flat 4-wire, Z0D and TDM per metre, 25 pF/m common mode
+XT1 aj bj ab bb DIFF_LINE LEN={LEN} ZD={Z0D} TDM={TDM} CCM=25p
+* the brain: an RS-485 receiver (its driver off) and RTB across A-B
+VDE0 de0 0 0
+XBR v33 de0 ab bb RS485_DRV
+RTB ab bb {RTB}
+.tran 2n {T0+28*TB}
+.end

@@ -1,0 +1,77 @@
+* centurion power at the connectors: plugging something into a powered jack, or shorting its supply pin
+* +5V from U1 (TPSM53602 as a 5.0 V source with a current limit ILIM5) feeds:
+*   F3 - SENS_5V (C29) - the 5 V sensor jacks (ISENS5 already drawn)
+*   F4 - J19 pin 1 (ramBar 5 V)
+*   D9 - 5V_LDO (C16, C33) - U7 MCP1826S (dropout VDO, current limit ILIM3) - +3.3V (MCU and friends, I33)
+*        then F2 - SENS_3V3 (C28) - the 3.3 V sensor jacks, J5, J15 (ISENS3 already drawn)
+* At TPLUG a cable of LEN metres connects a device (CDEV with ESR RDEV, drawing IDEV) to rail PLUG
+* (1 = SENS_3V3 jack, 2 = SENS_5V jack, 3 = J19 ramBar 5 V). SHORT=1 makes the device a dead short (RSHORT).
+* The polyfuses are their cold resistance only (MF-NSMF050 0.15..0.70 ohm, MF-NSMF075 0.10..0.40 ohm); they take
+* milliseconds or more to trip (see README). U1's hiccup (below 2.0 V out, 94 ms off) is not modelled: the run flags it.
+.include connectors.lib
+.param PLUG=1
+.param SHORT=0
+.param RSHORT=0.05
+.param LEN=0.5
+.param CDEV=10u
+.param RDEV=0.01
+.param IDEV=0.02
+.param TPLUG=20u
+.param ILIM5=3.5
+.param ILIM3=2.2
+.param VDO=0.25
+.param RF2=0.4
+.param RF3=0.4
+.param RF4=0.25
+.param ISENS3=0.15
+.param ISENS5=0.2
+.param I33=0.08
+.param C28V=9u
+.param C29V=4.5u
+
+* ---- U1: 5.0 V, 15 mohm loop, current limit; output caps C4, C5, C17 (3 x 47 uF 10 V 1206, about 20 uF each at 5 V)
+B5 0 p5 I=min(max((5.0-V(p5))/0.015,0),{ILIM5})
+C5V p5 p5e 60u
+R5E p5e 0 3m
+* ---- SENS_5V
+RF3 p5 s5 {RF3}
+C29 s5 s5e {C29V}
+R29E s5e 0 5m
+IS5 s5 0 {ISENS5}
+* ---- ramBar 5 V
+RF4 p5 rb {RF4}
+* ---- 3.3 V chain: D9, 5V_LDO caps (C16 10 uF ceramic, C33 47 uF polymer), U7, +3.3V caps (about 48 uF)
+D9 p5 ldoin DSCH
+C16 ldoin c16e 9.6u
+R16E c16e 0 5m
+C33 ldoin c33e 47u
+R33E c33e 0 70m
+B3 ldoin p33 I=min(max((min(3.3,V(ldoin)-{VDO})-V(p33))/0.05,0),{ILIM3})
+C33V p33 p33e 48u
+R33V p33e 0 5m
+I33 p33 0 {I33}
+RF2 p33 s3 {RF2}
+C28 s3 s3e {C28V}
+R28E s3e 0 5m
+IS3 s3 0 {ISENS3}
+* ---- the plug: contact closes over 1 us at TPLUG, then cable (0.7 uH and 0.2 ohm per metre, loop) and the device
+VPC pc 0 PWL(0 0 {TPLUG} 0 {TPLUG+1u} 1)
+Bsel1 k1 0 V=V(pc)*max(0,1-abs({PLUG}-1))
+Bsel2 k2 0 V=V(pc)*max(0,1-abs({PLUG}-2))
+Bsel3 k3 0 V=V(pc)*max(0,1-abs({PLUG}-3))
+Bk1 s3 jp I=V(k1)*V(s3,jp)/0.02
+Bk2 s5 jp I=V(k2)*V(s5,jp)/0.02
+Bk3 rb jp I=V(k3)*V(rb,jp)/0.02
+Rjp jp 0 1MEG
+Lc jp jc {0.7u*LEN+1n}
+Rc jc dev {0.2*LEN+1m}
+Cdev dev deve {CDEV}
+Rdeve deve 0 {RDEV}
+Bdev dev 0 I={SHORT > 0.5 ? 0 : IDEV}*min(max(V(dev)-0.5,0),1)
+Rsh dev 0 {SHORT > 0.5 ? RSHORT : 1G}
+* start every node at its DC value (each capacitor's ESR node at 0 V), plug open; TPLUG leaves 20 us to settle
+.ic V(p5)=5 V(p5e)=0 V(s5)=4.92 V(s5e)=0 V(rb)=5 V(ldoin)=4.65 V(c16e)=0 V(c33e)=0
++ V(p33)=3.3 V(p33e)=0 V(s3)=3.24 V(s3e)=0 V(jp)=0 V(jc)=0 V(dev)=0 V(deve)=0
+.param TSTOP=200u
+.tran 20n {TSTOP} uic
+.end

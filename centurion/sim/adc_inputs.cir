@@ -1,0 +1,45 @@
+* centurion analog inputs, sampled by the STM32G4 ADC
+* AUX1 (J14 pin 5): a 5 V sensor output (VSIG behind RSRC) - U12 ESD - R34 10k - AUX1_SIG (R35 15k to GND, C31 10 nF) - PC2
+* POT (J17): +3.3V - R55 100 - pot (RPOT, wiper at POS) - R60 1M - R44 1k - POT_SIG (C24 100 nF) - PC1
+* Each ADC sample: the sampling capacitor CADC starts empty (another channel at 0 V was converted before),
+* then connects through RADC for TSMP. Samples repeat every 1/FS on both channels.
+.include connectors.lib
+.param VSIG=4.0
+.param RSRC=1k
+.param RPOT=10k
+.param POS=0.75
+.param FS=100k
+.param TSMP=247n
+.param RADC=1k
+.param CADC=5p
+
+V33 v33 0 3.3
+* ---- AUX1
+VS sig 0 {VSIG}
+RSRC sig j14 {RSRC}
+XE1 j14 TPD_CH
+R34 j14 aux 10k
+R35 aux 0 15k
+C31 aux 0 10n
+* ---- POT
+R55 v33 potv 100
+RPA potv wip {RPOT*(1-POS)+1m}
+RPB wip 0 {RPOT*POS+1m}
+XE2 wip TPD_CH
+R60 wip 0 1MEG
+R44 wip pot 1k
+C24 pot 0 100n
+* ---- sampling: reset pulse (10 ns) then the sampling switch for TSMP, every 1/FS
+VRST rst 0 PULSE(0 1 {0.5/FS} 1n 1n 10n {1/FS})
+VSMP smp 0 PULSE(0 1 {0.5/FS+12n} 1n 1n {TSMP} {1/FS})
+Ba aux ca I=V(smp)*V(aux,ca)/{RADC}
+Bar ca 0 I=V(rst)*V(ca)/10
+Ca ca 0 {CADC}
+Bp pot cp I=V(smp)*V(pot,cp)/{RADC}
+Bpr cp 0 I=V(rst)*V(cp)/10
+Cp cp 0 {CADC}
+* start both nodes at their DC values (R60 loads the wiper), then run long enough for C24 to settle
+.param RB={RPOT*POS*1MEG/(RPOT*POS+1MEG)}
+.ic V(aux)={VSIG*15k/(25k+RSRC)} V(pot)={3.3*RB/(RB+RPOT*(1-POS)+100)}
+.tran 5n {max(20.5/FS, 1.6m)} uic
+.end

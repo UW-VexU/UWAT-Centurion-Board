@@ -1,0 +1,169 @@
+(footprint "AXES"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "BMI270 axes on centurion's IMU board (U1 rotated 180 degrees): +X toward J1, +Y toward H2, +Z up")
+	(property "Reference" "AX1"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d0774ab9-c8ef-461f-b5ed-05f5da4f505d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Value" "AXES"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a0aad10-438b-44f4-b3df-fac517e44abc")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e8659e2f-f69d-4213-bbe2-a044bdc5795a")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "38876b97-0fed-4cdf-85d5-2c1948fa4add")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr board_only exclude_from_pos_files exclude_from_bom)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start 0 0.45)
+		(end 0 3)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "0ab59811-dc40-446c-93e7-af03bbe24b4f")
+	)
+	(fp_line
+		(start 0 3)
+		(end -0.5 2.3)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "fe061b9b-2139-4295-b27e-c107c0fd29b2")
+	)
+	(fp_line
+		(start 0 3)
+		(end 0.5 2.3)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "9d961667-8c3d-4eeb-b15c-063212879504")
+	)
+	(fp_line
+		(start 0.45 0)
+		(end 3 0)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "4e47af7d-1998-44e8-ab55-025247ca72cb")
+	)
+	(fp_line
+		(start 3 0)
+		(end 2.3 -0.5)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "4d361518-b627-4d6b-97d1-94500198b698")
+	)
+	(fp_line
+		(start 3 0)
+		(end 2.3 0.5)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "4078e88a-d414-4893-84e4-70e0e8bbb637")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 0.08 0)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "e6735401-9fdf-410a-a7ae-ffeae23b482b")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 0.45 0)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "50ef20a4-2616-4a6c-96d3-16ec868ff214")
+	)
+	(fp_text user "Z"
+		(at -1.1 -0.9 0)
+		(layer "F.SilkS")
+		(uuid "6beca291-de9b-4f99-9f69-edd302b61ba2")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "X"
+		(at 1 2.6 0)
+		(layer "F.SilkS")
+		(uuid "dfb44938-21fd-4929-bde3-7db41ece0caa")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "Y"
+		(at 2.6 -1 0)
+		(layer "F.SilkS")
+		(uuid "ebf00b3a-2ac2-463c-b83b-69281ecb8be8")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

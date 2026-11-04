@@ -12,7 +12,13 @@ The schematic was updated on 2026-11-02 to the decisions below, plus the review 
 - Four #8-32 mounting holes (H1 to H4) are in, on the bracket pattern measured from the robot CAD.
 - KiCad 10 ERC: 0 errors, 0 warnings (see [How this was checked](#how-this-was-checked)).
 - J16's USB-C shield pin is renamed `S1` to `SH` to match KiCad 10's USB4105 footprint. Before this the shield pads had no net, so the USB shell would have floated instead of going to GND.
-- The BOM is in [bom/](bom/). On 2026-11-02 four values were changed to parts already on centurion, powerJackal or stellaNova, which removed 4 unique part numbers: R8, R9 and R41 33 Ω to 22 Ω; R40 27k to 22k; R46/R47 22k/33k to 10k/15k (same ratio); LED1/LED2 0805 to the 0603 green LED used for D6. On 2026-11-04, after the design review: R38/R39 (USB D+/D-) 22 Ω to 0 Ω, because the STM32G4's USB pins need no external series resistor; F2 0.35 A to 0.5 A hold, the same part as F3, because 8 or more jacks on 3.3 V would trip 0.35 A. C33 added: a 47 uF 10 V polymer tantalum (KEMET T520B476M010ATE070) on 5V_LDO next to Q1, so plugging in USB can't ring U7's input past its 6.5 V rating (see [sim/](sim/README.md)). Also on 2026-11-04: the ESD clamps U5, U8 to U12 and U17 changed from TPD4E05U06DQAR, which is out of stock at DigiKey CA until February 2027, to TPD4E05U06QDQARQ1, TI's automotive (AEC-Q101) version with the same package, pinout and ratings. The BOM was rebuilt in the powerJackal/stellaNova format, with DigiKey price breaks for every part.
+- The BOM is in [bom/](bom/). On 2026-11-02 four values were changed to parts already on centurion, powerJackal or stellaNova, which removed 4 unique part numbers: R8, R9 and R41 33 Ω to 22 Ω; R40 27k to 22k; R46/R47 22k/33k to 10k/15k (same ratio); LED1/LED2 0805 to the 0603 green LED used for D6. On 2026-11-04, after the design review: R38/R39 (USB D+/D-) 22 Ω to 0 Ω, because the STM32G4's USB pins need no external series resistor; F2 0.35 A to 0.5 A hold, the same part as F3, because 8 or more jacks on 3.3 V would trip 0.35 A. C33 added: a 47 uF 10 V polymer tantalum (KEMET T520B476M010ATE070) on 5V_LDO next to Q1, so plugging in USB can't ring U7's input past its 6.5 V rating (see [sim/](sim/README.md)). Also on 2026-11-04: the ESD clamps U5, U8 to U12 and U17 changed from TPD4E05U06DQAR, which is out of stock at DigiKey CA until February 2027, to TPD4E05U06QDQARQ1, TI's automotive (AEC-Q101) version with the same package, pinout and ratings. The BOM was rebuilt in the powerJackal/stellaNova format, with DigiKey price breaks for every part. Later on 2026-11-04, after the connector simulations: R8, R9 and R41 (IMU SPI) 22 Ω to 100 Ω, the same part as R55, so a 0.3 m IMU cable works at any GPIO speed and 0.5 m at medium or low (see [sim/](sim/README.md#connector-simulations)). That dropped the 22 Ω line from the BOM and adds one 100 Ω resistor to the order (26 instead of 25). The BOM's Cables and tools tab lists what it takes to make the JST GH cables, with its own upload file, [bom/centurion_cables_tools_DigiKey_upload.csv](bom/centurion_cables_tools_DigiKey_upload.csv):
+  - GH housings and crimp contacts;
+  - JST pre-crimped leads for the ramBar and IMU cables;
+  - 28 AWG wire in five colours;
+  - an Engineer PA-09 crimper and a 30 AWG stripper.
+
+  It comes to about $500 for three cable sets, with $300 of that being wire. It also has the pin order and wire colour for every jack.
 
 The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). Where this file and the plan disagree, this file has the later decision.
 
@@ -53,11 +59,11 @@ The project also uses the UWAT library in `../powerJackal/lib`. Keep the repo fo
 | Camera | On the Jetson | The STM32 camera option was looked at and dropped: its RAM limits it to about 160 x 120 color or 320 x 240 gray. |
 | USB host | Not on this board | The Jetson is the USB host. J15, a spare SPI connector, lets a MAX3421E breakout plug in later. |
 | ramBar link | J19, JST-GH 6-pin: 5 V, 3.3 V UART and CAN FD on one cable | ramBar talks to centurion, which passes its data on to the brain. Firmware can use the UART, CAN FD or both. See [ramBar link](#rambar-link-usb_jetson-sheet). |
-| IMU | Off-board breakout on SPI, through J5 | BMI270 is a candidate. The ADXRS453 is dropped. Any SPI IMU breakout works with a GH cable. |
+| IMU | Off-board, on SPI through J5 | The team's own IMU board: a BMI270 with a matching JST GH 8-pin jack, plugged in with a straight cable. See [../imuBoard/README.md](../imuBoard/README.md). The ADXRS453 is dropped. |
 | I2C mux | One TCA9548A | 2 encoders, 4 ToF, the lift laser and 1 spare. See [Sensor ports](#sensor-ports). |
 | Second I2C bus | AUX1 and the spare I2C header J18 | I2C3 on PC8 and PC9 |
 | Turret | Laser on mux channel 2, pot on an ADC pin | The turret turns at most 210°, so no slip ring. A slightly longer cable is fine because the laser has its own mux channel. |
-| Sensor connector | JST-GH | Chosen on 2026-11-02 for its latch. Every cable connector is JST-GH: right-angle jacks on the edges, vertical (top entry) inside the board. Qwiic breakouts need a GH-to-Qwiic adapter cable. |
+| Sensor connector | JST-GH | Chosen on 2026-11-02 for its latch. Every cable connector is JST-GH: right-angle jacks on the edges, vertical (top entry) inside the board. Qwiic breakouts need a GH-to-Qwiic adapter cable: Qwiic is JST SH (1.0 mm) with pins GND, VCC, SDA, SCL, while these jacks are VCC, SCL, SDA, GND. Cable parts and crimping tools are on the BOM's Cables and tools tab. |
 | Reverse polarity | None in v1 | Plan Q7 |
 | eFuse | None in v1 | Hot-plug inrush is accepted. Plan Q8. |
 | Power budget | Measure it on powerJackal | Plan Q2 |
@@ -240,6 +246,7 @@ Some pins moved on 2026-11-02 for the ramBar link. UART5's only TX/RX pins are P
 - **Inputs with nothing plugged in.** Turn on internal pulls for IMU_INT1/INT2 (PA8, PA10), SPARE_INT (PB9) and IMU_MISO (PA6), matching the device's polarity.
 - **ramBar on USB-only power.** Keep UART5's pins (PC12, PD2) in analog mode until VBAT_SENSE or PGOOD shows smart port power, so the board doesn't back-power an unpowered ramBar.
 - **Flashing over USB:** unplug ramBar as well as the smart ports. The ROM bootloader's SPI2 uses PB12 (CAN_RX) as chip select and PB14 (port B DE) as MISO.
+- **GPIO speed on the cable pins.** Set SPI1 (J5), SPI3 (J15) and USART1 TX (J4) to GPIO speed low (OSPEEDR 00). The 1.7 ns edges of the fastest setting ring on the JST GH cables (sim/README.md). On J15 and J4 they push 10 to 19 mA into the far chip's clamp diodes. J5's 100 Ω resistors handle a 0.3 m cable at any speed, but even there speed low cuts the MISO crosstalk from 0.88 V to 0.13 V (VIL is 0.99 V), and a 0.5 m cable gets extra SCK edges at the two fastest settings. 17 ns edges are still fine for 10 MHz SPI and 1 Mbaud. Turn USART1 TX on only once the Jetson is up: an idle-high TX into an unpowered Jetson lifts its 3.3 V rail to about 2.5 V.
 - **I2C timeouts.** Give every I2C call a timeout, and scan the mux channels at boot so empty ports are skipped. A stuck sensor only blocks its own mux channel. Pulse MUX_RST low to clear it.
 
 ## The board as drawn now
@@ -303,20 +310,20 @@ Each decoupling cap's Note field says which pin it belongs at.
 
 | Ref | Part | Job |
 |---|---|---|
-| J5 | JST-GH 8-pin, vertical | IMU breakout: 1 3V3, 2 GND, 3 SCK, 4 MOSI, 5 MISO, 6 CS, 7 INT1, 8 INT2 |
-| R8, R9, R41 | 22 Ω | Series resistors on SCK, MOSI and CS, for the cable |
+| J5 | JST-GH 8-pin, vertical | IMU board ([../imuBoard](../imuBoard/README.md)): 1 3V3, 2 GND, 3 SCK, 4 MOSI, 5 MISO, 6 CS, 7 INT1, 8 INT2 |
+| R8, R9, R41 | 100 Ω | Series resistors on SCK, MOSI and CS. With the pin's own ~30 Ω they roughly match the JST GH cable (about 130 Ω), so a 0.3 m cable works at any GPIO speed and 0.5 m at medium or low (sim/README.md). 22 Ω until 2026-11-04. |
 | R58 | 10k | IMU CS pullup to SENS_3V3: keeps the IMU deselected while PA4 is hi-Z (reset, flashing, bootloader) |
 | U5 | TPD4E05U06 | ESD on SCK, MOSI, MISO and CS |
 | J15, R57 | JST-GH 7-pin, vertical, 10k | R57 pulls SPARE_MISO up so it doesn't float with J15 empty. Spare SPI: 1 3V3, 2 GND, 3 SCK, 4 MOSI, 5 MISO, 6 CS, 7 INT |
 
-Both connectors take 3.3 V from SENS_3V3 (through F2), so a shorted cable can't pull down the main 3.3 V rail. Keep the IMU cable under about 30 cm. A USB host breakout on J15 would also need its own switched, current-limited 5 V.
+Both connectors take 3.3 V from SENS_3V3 (through F2). F2 keeps a shorted cable from burning, but it can't stop the short from pulling +3.3V down (and resetting the MCU) until it trips; see [sim/README.md](sim/README.md#connector-simulations). Keep the IMU cable at 30 cm or less (50 cm at most, with GPIO speed medium or low) and set the SPI pins to GPIO speed low. With R8, R9 and R41 at 100 Ω the simulations show 0.3 m working at any GPIO speed and 0.5 m at medium or low; 1 m fails at every speed. J15 has no series resistors: keep its cable short and its pins at speed low. A USB host breakout on J15 would also need its own switched, current-limited 5 V.
 
 ### ramBar link (usb_jetson sheet)
 
 | Ref | Part | Job |
 |---|---|---|
 | J19 | JST-GH 6-pin, vertical | 1 5V, 2 TX (centurion out), 3 RX (centurion in), 4 GND, 5 CANH, 6 CANL |
-| F4 | Polyfuse, 0.75 A hold, 1206 (MF-NSMF075-2) | 5 V to ramBar, so a cable short can't drag down the board's 5 V. Holds about 0.52 A at 60 °C, so ramBar can draw up to about 0.5 A. |
+| F4 | Polyfuse, 0.75 A hold, 1206 (MF-NSMF075-2) | 5 V to ramBar, so a cable short can't overheat the cable. A short still pulls +5V down until F4 trips: U1 current-limits at about 3.5 A and hiccups (sim/README.md). Holds about 0.52 A at 60 °C, so ramBar can draw up to about 0.5 A. Rated 6 V max, fine on 5 V. |
 | R59 | 470 Ω | Series resistor in TX (RAMBAR_TX to the connector side RAMBAR_TX_C): limits current into an unpowered ramBar and damps the cable |
 | U16, C27 | TCAN334G, 100 nF | 3.3 V CAN FD transceiver (5 Mbps), always on |
 | R53 | 120 Ω | CAN termination at centurion's end |
@@ -341,8 +348,8 @@ Both links share one cable, so ramBar can start on the plain UART and move to CA
 |---|---|---|
 | U6 | TCA9548A | 8-channel I2C mux, address 0x70 |
 | U8 to U12 | 5 x TPD4E05U06 | ESD on every port |
-| F2 | Polyfuse, 0.35 A hold | Feeds SENS_3V3: the 3.3 V side of every sensor jack, both SPI connectors and the bus 2 pullups |
-| C28, C29 | 10 µF | New. Bulk on SENS_3V3 and SENS_5V after the fuses, so a sensor hot-plug doesn't dip the rail |
+| F2 | Polyfuse, 0.5 A hold (MF-NSMF050-2, same as F3 since 2026-11-04) | Feeds SENS_3V3: the 3.3 V side of every sensor jack, both SPI connectors and the bus 2 pullups |
+| C28, C29 | 10 µF | New. Bulk on SENS_3V3 and SENS_5V after the fuses. They soften a sensor hot-plug but don't prevent it: plugging a 10 µF breakout into a live 3.3 V jack still dips SENS_3V3 to about 1.3 to 2.1 V for a few µs (sim/README.md). Plug sensors in with the board off. |
 | F3 | Polyfuse, 0.5 A hold (MF-NSMF050-2) | New. Feeds SENS_5V: the 5 V side of every sensor jack and AUX1 |
 | JP2 to JP10 | 1 x 3 headers, 2.54 mm, with a shunt | New. Supply select for J6 to J13 and J18, one per jack. See below. |
 | J17, R55 | JST-GH 3-pin, 100 Ω | Turret pot: 1 POT_VCC, 2 wiper, 3 GND. POT_VCC comes from +3.3V through R55, the same rail as the ADC's VREF+, so the reading is ratiometric and doesn't drift with sensor load on F2. R55 limits a cable short. |
@@ -371,7 +378,7 @@ JP2 to JP9 sit right under their jacks, with pin 1 on the left. JP1 (AUX1) and J
 - **Mux jacks (J6 to J13).** The two I2C pullups follow the jack's VCC. The TCA9548A's pass gates translate between the 3.3 V MCU side and a 5 V channel, which is how TI's datasheet shows mixed-voltage channels, and its channel pins take 5 V. The TPD4E05U06 ESD parts are rated 5.5 V.
 - **J18 (bus 2, wired straight to the MCU).** Only VCC changes. The bus pullups R32/R33 stay on SENS_3V3 (the fused 3.3 V) because the MCU pins and J14 share that bus. Most 5 V I2C breakouts read 3.3 V logic. A strict 5 V CMOS part might not.
 - **Pullups.** Each jack has 2.7k pullups (R13 to R16, R19 to R28, R42, R43) to its own VCC: that meets the 400 kHz rise time on a 1 m cable and stays under the 3 mA sink limit on a 5 V jack. Bus 2 (R32, R33) uses 2.2k, so two cables on J14 and J18 still meet 400 kHz. Cut the pullup jumpers on breakouts that have their own (SparkFun/Qwiic boards usually do), or the sink current goes over 3 mA.
-- **Budget: put ToF sensors and the laser on 5 V.** All 3.3 V jacks share F2 (0.35 A hold, about 0.30 A at 40 °C), and F2 also feeds the IMU and SPI connectors. Eight VL53-class sensors on 3.3 V can trip it, and they load the 3.3 V LDO. VL53 breakouts usually have their own regulator, so run them from 5 V (F3, 0.5 A hold). Keep the encoders, the IMU and anything 3.3 V-only on 3.3 V.
+- **Budget: put ToF sensors and the laser on 5 V.** All 3.3 V jacks share F2 (0.5 A hold), and F2 also feeds the IMU and SPI connectors. Eight VL53-class sensors on 3.3 V add up quickly and load the 3.3 V LDO. VL53 breakouts usually have their own regulator, so run them from 5 V (F3, 0.5 A hold). Keep the encoders, the IMU and anything 3.3 V-only on 3.3 V.
 - **USB-only power.** On USB alone only the 3.3 V side runs and the 5 V jacks are off. All jacks on 3.3 V at once can draw about 0.55 A, more than a USB 2.0 port gives. Run sensors from the smart ports, or keep few on 3.3 V when testing on USB.
 
 The JST-GH ports use pin 1 VCC, then SCL, SDA and GND (Pixhawk order). Encoders like the AS5600 and the VL53 ToF sensors each have one fixed address, which is why every one gets its own mux channel. A channel can still hold several devices with different addresses.

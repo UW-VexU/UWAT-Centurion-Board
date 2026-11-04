@@ -46,6 +46,9 @@ def netlist(path, **params):
         m = re.match(r"\s*\.param\s+(\w+)\s*=", line, re.I)
         if m and m.group(1) in params:
             line = ".param %s=%s" % (m.group(1), params[m.group(1)])
+        m = re.match(r"\s*\.(include|inc|lib)\s+\"?([^\"\s]+)\"?\s*$", line, re.I)
+        if m and not os.path.isabs(m.group(2)):   # the netlist runs from a temp file, so make includes absolute
+            line = '.%s "%s"' % (m.group(1), os.path.join(os.path.dirname(os.path.abspath(path)), m.group(2)).replace("\\", "/"))
         out.append(line)
     return "\n".join(out) + "\n"
 

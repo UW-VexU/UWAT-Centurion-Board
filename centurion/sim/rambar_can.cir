@@ -1,0 +1,40 @@
+* centurion to ramBar CAN FD on J19 pins 5 (CANH) and 6 (CANL)
+* U16 TCAN334G - CANH/CANL traces (23 and 34 mm) - R53 120 ohm - D12 NUP2105L - J19 - twisted pair - ramBar:
+* its own transceiver (same model, listening), RTRB termination (120 ohm, or 1G if ramBar forgets it) and CTRB on each line
+* TXD pattern (1 = recessive): 5 dominant + 1 recessive (the ISO 11898-2 bit-symmetry case), single bits, runs
+.include connectors.lib
+.param TB=200n
+.param TRT=15n
+.param T0=200n
+.param VH=3.3
+.param LEN=1
+.param Z0D=120
+.param TDM=5n
+.param RTRB=120
+.param CTRB=10p
+.param CNUP=26p
+
+V33 v33 0 3.3
+VTXD txd 0 PWL(0 {VH} {T0+0*TB} {VH} {T0+0*TB+TRT} 0 {T0+5*TB} 0 {T0+5*TB+TRT} {VH} {T0+6*TB} {VH} {T0+6*TB+TRT} 0 {T0+11*TB} 0 {T0+11*TB+TRT} {VH} {T0+16*TB} {VH} {T0+16*TB+TRT} 0 {T0+17*TB} 0 {T0+17*TB+TRT} {VH} {T0+18*TB} {VH} {T0+18*TB+TRT} 0 {T0+19*TB} 0 {T0+19*TB+TRT} {VH} {T0+20*TB} {VH} {T0+20*TB+TRT} 0 {T0+21*TB} 0 {T0+21*TB+TRT} {VH} {T0+23*TB} {VH} {T0+23*TB+TRT} 0 {T0+25*TB} 0 {T0+25*TB+TRT} {VH})
+* ---- centurion: U16, traces, R53, D12
+XU16 txd h1 l1 TCAN334
+L1 h1 hj 7n
+C1 h1 0 3.5p
+L2 l1 lj 10n
+C2 l1 0 5p
+R53 h1 l1 120
+DH1 hj xh DNUP
+DH2 0 xh DNUP
+CH hj 0 {CNUP}
+DL1 lj xl DNUP
+DL2 0 xl DNUP
+CL lj 0 {CNUP}
+* ---- the cable: a twisted pair, Z0D and TDM per metre, 20 pF/m common mode
+XT1 hj lj hr lr DIFF_LINE LEN={LEN} ZD={Z0D} TDM={TDM} CCM=20p
+* ---- ramBar end
+XRB v33 hr lr TCAN334
+RTRB hr lr {RTRB}
+CTH hr 0 {CTRB}
+CTL lr 0 {CTRB}
+.tran 0.2n {T0+28*TB}
+.end

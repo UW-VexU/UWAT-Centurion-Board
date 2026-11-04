@@ -1,0 +1,16 @@
+Quantity,Manufacturer Part Number,Manufacturer,DigiKey Part Number,Customer Reference
+8,GHR-03V-S,JST,455-1593-ND,"Cables: J4 Jetson UART, J17 pot"
+31,GHR-04V-S,JST,455-1594-ND,"Cables: J6 to J13 sensors, J18"
+5,GHR-05V-S,JST,455-1595-ND,Cables: J14 AUX1
+8,GHR-06V-S,JST,455-1596-ND,"Cables: J19 ramBar, both ends"
+4,GHR-07V-S,JST,455-1597-ND,Cables: J15 spare SPI
+8,GHR-08V-S,JST,455-1598-ND,"Cables: J5 IMU, both ends"
+300,SSHL-002T-P0.2,JST,455-1606-100-ND,Cables: Every crimped GH end
+46,AGHGH28K305,JST,455-3074-ND,Cables: J19 ramBar and J5 IMU cables
+1,422807 RD005,Alpha Wire,A422807R-100-ND,Cables: VCC
+1,422807 BK005,Alpha Wire,A422807B-100-ND,Cables: GND
+1,422807 YL005,Alpha Wire,A422807Y-100-ND,"Cables: SCL, Jetson TX"
+1,422807 BL005,Alpha Wire,A422807L-100-ND,"Cables: SDA, Jetson RX"
+1,422807 WH005,Alpha Wire,A422807W-100-ND,Cables: Other signals
+1,350,Adafruit,1528-350-ND,"Cables: JST GH (and SH, Dupont, PH) contacts"
+1,CSP-30-1,American Hakko,1691-1281-ND,Cables: 28 AWG wire

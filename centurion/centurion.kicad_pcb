@@ -6794,7 +6794,7 @@
 				)
 			)
 		)
-		(property "Value" "22"
+		(property "Value" "100"
 			(at 0 1.65 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6840,7 +6840,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0805FR-0722RL"
+		(property "MPN" "RC0805FR-07100RL"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -34881,7 +34881,7 @@
 				)
 			)
 		)
-		(property "Value" "22"
+		(property "Value" "100"
 			(at 0 1.65 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -34927,7 +34927,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0805FR-0722RL"
+		(property "MPN" "RC0805FR-07100RL"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -38255,7 +38255,7 @@
 				)
 			)
 		)
-		(property "Value" "22"
+		(property "Value" "100"
 			(at 0 1.65 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -38301,7 +38301,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0805FR-0722RL"
+		(property "MPN" "RC0805FR-07100RL"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)

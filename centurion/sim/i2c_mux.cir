@@ -1,0 +1,44 @@
+* centurion I2C sensor jack through the mux (J6 to J13), one line (SCL or SDA)
+* MCU pin (I2C1, open drain) - R11 4.7k to +3.3V - 25 mm trace - U6 TCA9548A pass gate - 35 mm trace -
+* 2.7k pull-up to the jack's VCC (JP2..JP9 picks 3.3 or 5 V) - U8 ESD - J6 - JST GH cable - sensor
+* DRV=0: the MCU pulls low (SCL clock); DRV=1: the sensor pulls low (SDA ack/data)
+.include connectors.lib
+.param VCCJ=3.3
+.param LEN=1
+.param RBO=1G
+.param DRV=0
+.param FSCL=400k
+.param RONM=20
+.param RONS=130
+.param CSEN=10p
+.param TF=20n
+
+V33 v33 0 3.3
+VJ vj 0 {VCCJ}
+VG g 0 3.3
+* MCU side
+R11 mcu v33 4.7k
+XMCU mcu IN_PIN
+XODM mcu ctlm OD_PULL RON={RONM}
+* 25 mm of trace (I2C_MUX_SCL): 0.3 nH and 0.15 pF per mm
+L_up mcu mux_up 7.4n
+C_upt mcu 0 3.7p
+C_up mux_up 0 20p
+* TCA9548A channel switch
+M1 mux_up g ch 0 NPASS W=1 L=1
+C_ch ch 0 5.5p
+* channel side: trace, pull-up, ESD, jack, cable, sensor
+* 35 mm of trace (ENC1_SCL)
+L_ch ch jack 10.4n
+C_cht ch 0 5.2p
+R13 jack vj 2.7k
+XU8 jack TPD_CH
+XCAB jack sen GH_WIRE LEN={LEN}
+RBO sen vj {RBO}
+XSEN sen IN_PIN CIN={CSEN}
+XODS sen ctls OD_PULL RON={RONS}
+* who pulls low: a 400 kHz square wave on the chosen driver
+VCM ctlm 0 PULSE(0 {1-DRV} 1u {TF} {TF} {0.5/FSCL-TF} {1/FSCL})
+VCS ctls 0 PULSE(0 {DRV} 1u {TF} {TF} {0.5/FSCL-TF} {1/FSCL})
+.tran 0.5n {1u+2.5/FSCL}
+.end

@@ -1,0 +1,55 @@
+* centurion 3.3 V UART over a JST GH cable, one direction at a time
+* SIDE=0, Jetson backup UART J4 (USART1):
+*   TX: PC4 push-pull (ROUT, edge TRM) - 75 mm trace - J4 - cable - Jetson RX (CRX)
+*   RX: the Jetson's TX (ROFAR, edge TRF) - cable - J4 - 52 mm trace - R56 10k pull-up - PC5
+* SIDE=1, ramBar UART on J19 (UART5):
+*   TX: PC12 - 57 mm trace - R59 470 - U17 ESD - J19 - cable - ramBar RX
+*   RX: ramBar TX - cable - J19 - U17 - 87 mm trace - R54 10k pull-up - PD2
+* J4 has no ESD part; the U17 channel drawn here only adds 0.5 pF and a GND clamp, like the pins themselves.
+* The far end's RX pin has a clamp diode to its own VDD, which is VFAR: 3.3 when ramBar is on, 0 (plus RFARLOAD) when off.
+* Pattern: alternating bits at BAUD (the hardest case for settling)
+.include connectors.lib
+.param SIDE=0
+.param LEN=0.5
+.param BAUD=1MEG
+.param TRM=2n
+.param ROUT=30
+.param TRF=3n
+.param ROFAR=40
+.param CRX=5p
+.param FARON=1
+.param RFARLOAD=1k
+.param T0=50n
+.param LPM=0.66u
+.param CPM=46p
+
+V33 v33 0 3.3
+* ---- centurion TX
+VTX tx_src 0 PULSE(3.3 0 {T0} {TRM} {TRM} {1/BAUD-TRM} {2/BAUD})
+XO1 tx_src tx_mcu PP_OUT ROUT={ROUT}
+L1 tx_mcu tx_r {SIDE > 0.5 ? 17n : 22.5n}
+C1 tx_mcu 0 {SIDE > 0.5 ? 8.6p : 11.3p}
+R59 tx_r tx_j {SIDE > 0.5 ? 470 : 1m}
+XE1 tx_j TPD_CH
+XC1 tx_j tx_far GH_WIRE LEN={LEN} LPM={LPM} CPM={CPM}
+* the far end's RX pin: CRX and ESD clamps to its own VDD (VFAR) and GND; VCH/VCL measure the clamp currents
+CRX tx_far 0 {CRX}
+D1 tx_far vch DCLAMP
+VCH vch vfar 0
+D2 vcl tx_far DCLAMP
+VCL vcl 0 0
+VFAR vfar_src 0 {FARON*3.3}
+RFAR vfar_src vfar {FARON > 0.5 ? 0.01 : 1G}
+RFL vfar 0 {RFARLOAD}
+CFAR vfar 0 10u
+* ---- centurion RX
+VRX rx_src 0 PULSE(3.3 0 {T0} {TRF} {TRF} {1/BAUD-TRF} {2/BAUD})
+XO2 rx_src rx_far PP_OUT ROUT={ROFAR}
+XC2 rx_far rx_j GH_WIRE LEN={LEN} LPM={LPM} CPM={CPM}
+XE2 rx_j TPD_CH
+L2 rx_j rx_mcu {SIDE > 0.5 ? 26n : 15.7n}
+C2 rx_mcu 0 {SIDE > 0.5 ? 13p : 7.8p}
+R56 rx_mcu v33 10k
+XIN rx_mcu IN_PIN
+.tran 0.2n {T0+6/BAUD}
+.end

@@ -1,0 +1,129 @@
+* Shared models for the centurion connector simulations (ngspice from KiCad 10, or LTspice).
+* [ds] = datasheet value, [est] = estimate. Sources are listed in README.md, "Connector simulations".
+
+* ---- diodes
+.model DCLAMP D(IS=1e-14 N=1.05 RS=5 CJO=0.5p)               ; CMOS pin clamp to GND [est]
+.model DTPD   D(IS=1e-14 N=1.1 RS=0.5 CJO=0.5p BV=7.0 IBV=1m) ; TPD4E05U06 channel: 0.5 pF, breaks down above 6.5 V [ds]
+.model DNUP   D(IS=1e-14 N=1.1 RS=1 BV=26.2 IBV=1m)           ; NUP2105L line, 24 V working, 26.2 V min breakdown [ds]; its 26 pF is drawn separately
+.model DSCH   D(IS=2u N=1.05 RS=0.04 CJO=110p)                 ; SS14 / B340A Schottky, about 0.35 V at 0.3 A [est]
+
+* ---- TCA9548A pass gate: NMOS, gate at VCC = 3.3 V, fitted to Ron 12 ohm (at 0.4 V) and Vpass 1.9 V, both typical [ds]
+.model NPASS NMOS(LEVEL=1 VTO=0.8 KP=43m GAMMA=0.744 PHI=0.6)
+
+* ---- STM32G491 push-pull output: an ideal logic edge (node in) behind ROUT, pin capacitance and GND clamp
+.subckt PP_OUT in out ROUT=30 COUT=5p
+R1 in out {ROUT}
+C1 out 0 {COUT}
+D1 0 out DCLAMP
+.ends
+
+* ---- logic input: CIN and the GND clamp. FT pins have no clamp to VDD, so none is drawn.
+.subckt IN_PIN pin CIN=5p
+C1 pin 0 {CIN}
+D1 0 pin DCLAMP
+.ends
+
+* ---- open-drain pull-down: on-resistance RON, switched by ctl (0 = off, 1 = on); ctl's edge sets the fall time
+.subckt OD_PULL pin ctl RON=60
+B1 pin 0 I=V(ctl)*V(pin)/{RON}
+.ends
+
+* ---- TPD4E05U06 channel (one line to GND)
+.subckt TPD_CH ch
+D1 0 ch DTPD
+.ends
+
+* ---- one JST GH wire over its return wire, 10 LC sections, plus the copper of both wires (28 AWG, 0.21 ohm/m each) [est]
+* default 0.66 uH and 46 pF per metre (120 ohm, 5.5 ns/m: a heavy cable, worst for I2C rise time);
+* CPM=30p LPM=0.675u is a light one (150 ohm, 4.5 ns/m: more overshoot from a strong driver)
+.subckt GH_SEC a b DL=0.03 LPM=0.66u CPM=46p
+L1 a m {LPM*DL}
+R1 m b {0.42*DL+1u}
+C1 b 0 {CPM*DL}
+.ends
+.subckt GH_WIRE a b LEN=0.3 LPM=0.66u CPM=46p
+X1 a n1 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X2 n1 n2 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X3 n2 n3 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X4 n3 n4 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X5 n4 n5 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X6 n5 n6 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X7 n6 n7 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X8 n7 n8 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X9 n8 n9 GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+X10 n9 b GH_SEC DL={LEN/10} LPM={LPM} CPM={CPM}
+.ends
+
+* ---- 3-wire section of a JST GH cable (wires 1, 2, 3 side by side, return wire further away) [est]
+* per metre: self L 0.9 uH, 25 pF to the return, 15 pF between neighbours, k = 0.5 between neighbours, 0.3 one apart
+.subckt GH3_SEC a1 a2 a3 b1 b2 b3 DL=0.05
+L1 a1 m1 {0.9u*DL}
+L2 a2 m2 {0.9u*DL}
+L3 a3 m3 {0.9u*DL}
+K12 L1 L2 0.5
+K23 L2 L3 0.5
+K13 L1 L3 0.3
+R1 m1 b1 {0.42*DL+1u}
+R2 m2 b2 {0.42*DL+1u}
+R3 m3 b3 {0.42*DL+1u}
+C1 b1 0 {25p*DL}
+C2 b2 0 {25p*DL}
+C3 b3 0 {25p*DL}
+C12 b1 b2 {15p*DL}
+C23 b2 b3 {15p*DL}
+.ends
+
+* ---- a two-wire differential cable, 10 LC sections: differential impedance ZD and delay TDM per metre, plus CCM per
+* metre from each wire to GND (common mode) [est]. ngspice's lossless T line stalls on these runs, so it isn't used.
+.subckt DIFF_SEC a1 a2 b1 b2 DL=0.1 ZD=120 TDM=5n CCM=20p
+L1 a1 m1 {ZD*TDM*DL/2}
+L2 a2 m2 {ZD*TDM*DL/2}
+R1 m1 b1 {0.13*DL+1u}
+R2 m2 b2 {0.13*DL+1u}
+C12 b1 b2 {TDM/ZD*DL}
+C1 b1 0 {CCM*DL}
+C2 b2 0 {CCM*DL}
+.ends
+.subckt DIFF_LINE a1 a2 b1 b2 LEN=1 ZD=120 TDM=5n CCM=20p
+X1 a1 a2 n1 p1 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X2 n1 p1 n2 p2 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X3 n2 p2 n3 p3 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X4 n3 p3 n4 p4 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X5 n4 p4 n5 p5 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X6 n5 p5 n6 p6 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X7 n6 p6 n7 p7 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X8 n7 p7 n8 p8 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X9 n8 p8 n9 p9 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+X10 n9 p9 b1 b2 DIFF_SEC DL={LEN/10} ZD={ZD} TDM={TDM} CCM={CCM}
+.ends
+
+* ---- TCAN334G CAN FD transceiver, driver and bus pins [ds, see README]
+* txd: logic input (0 = dominant). Dominant: CANH sourced from VHD through RHD, CANL sunk to VLD through RLD.
+* Recessive: both pins float to VREC through RIN. CIN per pin to GND.
+* Defaults give VOD 2.05 V into 60 ohm, CANH 2.93 V and CANL 0.87 V (datasheet: VOD 1.6..3.0 V, CANH >= 2.45 V, CANL 0.5..1.25 V)
+.subckt TCAN334 txd canh canl VHD=3.2 VLD=0.6 RHD=8 RLD=8 VREC=1.85 RIN=25k CIN=20p
+Bd d 0 V=0.5-0.5*tanh((V(txd)-1.65)*6)
+Rd d 0 1MEG
+BH 0 canh I=V(d)*max(VHD-V(canh),0)/RHD
+BL canl 0 I=V(d)*max(V(canl)-VLD,0)/RLD
+RH canh rec {RIN}
+RL canl rec {RIN}
+VR rec 0 {VREC}
+CH canh 0 {CIN}
+CL canl 0 {CIN}
+.ends
+
+* ---- MAX33071E RS-485 driver and receiver load (half duplex, DE on when de = 1) [ds, see README]
+* di: logic input (0..VCC). While de = 1, A is pulled toward di and B toward VCC - di, each through RO;
+* while de = 0 the driver is off. The receiver input is RIN from each pin to about VCC/2, always.
+* Defaults: VOD 1.62 V into 54 ohm, 2.1 V into 100 ohm (datasheet min 1.5 and 2.0 V); RIN 96k (1/8 unit load), 50 pF across A-B
+.subckt RS485_DRV di de a b VCC=3.3 RO=28 RIN=96k CIN=5p CDIFF=50p
+Ba 0 a I=V(de)*(V(di)-V(a))/{RO}
+Bb 0 b I=V(de)*({VCC}-V(di)-V(b))/{RO}
+Rai a mid {RIN}
+Rbi b mid {RIN}
+Vm mid 0 {VCC/2}
+Ca a 0 {CIN}
+Cb b 0 {CIN}
+Cab a b {CDIFF}
+.ends
