@@ -4,7 +4,7 @@ The main custom board for the UWAT VEXU robots. It sits between the V5 brain and
 
 ## Status
 
-The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is placed and autorouted (2 layers, 103.2 x 62.6 mm), with the router steered off the bottom ground plane. KiCad 10 DRC shows 0 violations, 0 schematic parity issues and **2 connections left to hand-route** (USB_D- and a 6 mm piece of MUX7_SCL). **It needs hand routing before ordering**: those two connections, the differential pairs, ESD order, and the remaining bottom-layer signals. Follow [HAND_ROUTING.md](HAND_ROUTING.md), by hand or with Claude Desktop using [CLAUDE_DESKTOP_ROUTING.md](CLAUDE_DESKTOP_ROUTING.md). See also [PCB layout](#pcb-layout).
+The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is a fully routed **4-layer** board, 103.2 x 62.6 mm: signals on top and bottom, a solid GND plane on In1 and a +3.3V plane on In2. On 2026-11-04 KiCad 10 shows 0 DRC violations, 0 unconnected items and 0 schematic parity issues, and ERC is clean. The signal, connector, USB hot-plug and crosstalk simulations are in [sim/](sim/README.md). The board still has to go through the [Before ordering](#before-ordering) list (fab DFM check, a 1:1 test-fit, and two part checks with a meter). The old hand-routing guides, [HAND_ROUTING.md](HAND_ROUTING.md) and [CLAUDE_DESKTOP_ROUTING.md](CLAUDE_DESKTOP_ROUTING.md), describe the earlier 2-layer board and are kept only as a record.
 
 - MCU is now the STM32G491RET6. The ESP32-S3 is gone.
 - Each smart port has its own MAX33071E RS-485 transceiver, on its own USART with hardware DE.
@@ -27,10 +27,11 @@ The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). 
 | Path | What it is |
 |---|---|
 | `centurion.kicad_pro` | The KiCad project. Open this. It holds the net classes and board rules. |
-| `centurion.kicad_pcb` | The board: placed, routed, GND pours on both layers |
+| `centurion.kicad_pcb` | The board: 4 layers, placed and fully routed. In1 is a solid GND plane, In2 a +3.3V plane, GND poured on top and bottom. |
 | `centurion.kicad_dru` | Custom DRC rule (hole clearance, see [PCB layout](#pcb-layout)) |
-| `HAND_ROUTING.md` | Step-by-step hand-routing work left before ordering, with coordinates and targets |
-| `CLAUDE_DESKTOP_ROUTING.md` | Setup and prompts for having Claude Desktop (computer use) do the hand routing in KiCad |
+| `HAND_ROUTING.md` | Record only: the hand-routing to-do list for the earlier 2-layer board. That work was replaced by the 4-layer re-layout. |
+| `CLAUDE_DESKTOP_ROUTING.md` | Record only: prompts for having Claude Desktop do that hand routing |
+| `sim/` | Signal, connector, USB hot-plug and crosstalk simulations ([sim/README.md](sim/README.md)) |
 | `centurion.kicad_sch` | Top sheet. It places the sheets below and wires the RS-485 sheet pins. |
 | `power.kicad_sch` | Smart port power input, 5 V buck, 3.3 V LDO, USB-C, battery sense, PGOOD, VBUS sense, test pads |
 | `smartport.kicad_sch` | One smart port jack and its MAX33071E. Used twice, as SmartPort_A and SmartPort_B. |
@@ -119,7 +120,16 @@ The outline is 103.2 x 62.6 mm, close to the smallest the hole pattern allows. T
 
 ## PCB layout
 
-Two layers, all parts on the top side.
+Four layers, all parts on the top side.
+
+| Layer | Use | Dielectric below it |
+|---|---|---|
+| F.Cu | Parts and most signals (3.6 m of track), GND pour | 0.1 mm prepreg |
+| In1.Cu | Solid GND plane, no tracks | 1.24 mm core |
+| In2.Cu | +3.3V plane. 22 slow signals and the USB pair also run here (0.3 m), cutting slots in it. | 0.1 mm prepreg |
+| B.Cu | Signals (1.35 m), GND pour, small power fills | |
+
+Every top-layer signal sits 0.1 mm over the solid GND plane, so its return current has an unbroken path. Bottom-layer signals reference the +3.3V plane, which is tied to GND through the decoupling caps. The USB pair is on In2 because J16 is on the left edge while the MCU's USB pins (PA11/PA12) are on its right side, about 60 mm away, and moving it to the top layer didn't fit. That's accepted for rev A at full speed; for rev B, move J16, U13, R38 and R39 next to the MCU (see [sim/README.md](sim/README.md)). Ask the fab for this stackup (1.6 mm, 1 oz outer copper), or their closest standard 4-layer stackup.
 
 | Edge | What's there |
 |---|---|
@@ -133,7 +143,7 @@ The board runs left to right from inputs and power, through the MCU, to headers 
 
 **Power stage and crystal.** The buck's input caps (C2, C32, C3) sit in a row right above U1's VIN pins. Its output caps (C4, C5) sit under the VOUT pins, and the feedback divider (R29, R30) sits at the FB pin, which keeps the FB node 3.9 mm long. The crystal Y1 sits next to the MCU's OSC pins, with C22 and C23 right at its pads (OSC traces 7.6 and 5.7 mm).
 
-**Silkscreen.** Connectors and buttons print their name in one label with the reference, right beside the part (`J5 IMU`, `SW1 RESET`, `J19 RAMBAR`...), never under a part body or a screw head. J14 (AUX1) and J18 (spare I2C) had no room; see step 8 of the hand-routing guide. Every supply shunt header has 3V3 and 5V printed at its two end pins. All text is 0.8 mm tall with a 0.15 mm stroke, and may cross vias because the vias are tented. The test pads are 1.5 mm round pads.
+**Silkscreen.** Connectors and buttons print their name in one label with the reference, right beside the part (`J5 IMU`, `SW1 RESET`, `J19 RAMBAR`...), never under a part body or a screw head. J14 (AUX1) and J18 (spare I2C) had no room on top, so their labels are on the bottom silkscreen, behind the jacks. Every supply shunt header has 3V3 and 5V printed at its two end pins. All text is 0.8 mm tall with a 0.15 mm stroke, and may cross vias because the vias are tented. The test pads are 1.5 mm round pads.
 
 **Net classes and rules** (Board Setup, from `centurion.kicad_pro`):
 
@@ -148,9 +158,10 @@ The board runs left to right from inputs and power, through the MCU, to headers 
 - Minimum track 0.127 mm (5 mil), only for short neck-downs into fine-pitch pads. After routing, every narrowed power segment is widened back to its class width wherever clearance allows. The narrowest power sections left are short necks at pads: VIN_MOD 0.45 mm and VBUS_USB 0.375 mm.
 - Hole clearance is 0.25 mm through `centurion.kicad_dru`. The board-level floor is 0.15 mm only because KiCad's stock GCT USB4105 footprint (J16) puts its outer GND pads 0.19 mm from its own plastic locating holes.
 
-**Copper.** Every net, GND included, is routed as tracks. GND is poured on both layers on top of that.
+**Copper.** Every net, GND included, is routed as tracks. On top of that, In1 is solid GND, In2 is +3.3V, and GND is poured on the top and bottom layers. The board has 663 vias.
 - **Stitching vias:** about every 4 mm, a fence along the board edge, and extra vias wherever the plane had none within 3 mm.
-- **Ground-pad vias:** 54 top-side GND pads (decoupling caps, ESD clamps, IC ground pins) have their own via within 2.6 mm. The pads still missing one are listed in step 7 of the hand-routing guide.
+- **Ground-pad vias:** top-side GND pads (decoupling caps, ESD clamps, IC ground pins) have their own via down to the In1 plane.
+- **Corners:** every track corner of 90° or sharper was chamfered into two 45° bends on 2026-11-04. The only two left, on U3 pin 32 and D4 pin 2, are inside their own pads.
 - **Power-net vias:** every power-net layer change has three vias.
 - **Buck module:** short copper fills widen the VIN and 5 V paths right at its pins.
 - **Keep-outs:**
@@ -158,25 +169,39 @@ The board runs left to right from inputs and power, through the MCU, to headers 
   - No bottom vias under U1, so its thermal vias land in solid GND (TI).
   - No tracks or vias within 4.5 mm of a mounting-hole centre, where the #8 screw heads sit.
 
-**How it was made.** The board was placed and routed by a script using KiCad 10's Python and Freerouting 2.5. Freerouting was given per-layer costs (`router.layers` in its settings file) that make bottom-layer track 4–6 times as expensive as top-layer track. That cut signal copper on the bottom from 2.6 m to 1.6 m, and the bottom GND pour went from 11 pieces to one sheet. That's why every footprint is linked to its schematic symbol and Update PCB from Schematic finds nothing to change. From here on the `.kicad_pcb` file is the master: the hand routing is done in KiCad directly.
+**How it was made.** The board was placed and routed by a script using KiCad 10's Python and Freerouting 2.5. Freerouting was given per-layer costs (`router.layers` in its settings file) that make bottom-layer track 4–6 times as expensive as top-layer track. That cut signal copper on the bottom from 2.6 m to 1.6 m, and the bottom GND pour went from 11 pieces to one sheet. That's why every footprint is linked to its schematic symbol and Update PCB from Schematic finds nothing to change. From here on the `.kicad_pcb` file is the master. The board was then moved to 4 layers and re-routed, which replaced the hand-routing list in [HAND_ROUTING.md](HAND_ROUTING.md). After that, a script chamfered the right-angle corners and removed spurs, tiny jogs and zero-length segments, with a clearance check on every new piece of copper, and the zones were refilled.
 
-Before ordering:
+### Layout audit, 4-layer board (2026-11-04)
 
-1. Do the hand routing in [HAND_ROUTING.md](HAND_ROUTING.md):
-   - sensor-jack ESD order;
-   - the USB, RS-485 and CAN pairs;
-   - clearing the bottom layer;
-   - the remaining GND vias;
-   - the crystal escapes;
-   - two silkscreen names.
+The layout auditor (`../.claude/agents/pcb-layout-auditor.md`) was rerun on the final 4-layer board. It found **no errors**: nothing that risks a respin. It passed the power paths, the buck and LDO, the crystal, ESD order (all 31 protected nets go through their clamp before the IC), pours, DFM and silkscreen labels. These warnings are left, all optional for rev A:
 
-   Then rerun the layout auditor.
-2. Check the smart port footprint against the Molex 0955012441 drawing. It now matches the Molex 95501 footprint download (same as stellaNova), but test-fit a real jack on a 1:1 print.
-3. 38 reference designators didn't fit on the silkscreen and are on F.Fab only, mostly small resistors in the crowded middle: D4, D7, D8, J14, J18, R1, R4, R8, R9, R11, R12, R15, R18, R23, R24, R25, R27, R28, R29, R30, R34, R36, R37, R38, R41, R43, R46, R48, R51, R53, R54, R56, R58, U1, U5, U15, U17, Y1. Hand routing will free some room; move them by hand if you want them printed. Mounting holes and the JP1/JP10 references aren't printed. JP1 and JP10 still have their 3V3/5V labels.
-4. The USB pair is step 2 of the hand-routing guide. It runs from J16 at the top left to the MCU's USB pins (PA11/PA12) on the MCU's right side.
-5. Check a real Molex 0955012441 jack with the team's cable: looking into the opening with the latch tab down, the black wire (A) should be on the leftmost contact (pin 1). The footprint matches Molex's 3D model, but the numbering wasn't checked against Molex's drawing.
-6. Check one TL3342 button with a meter: the footprint pairs its pads left/right. If the internal pairing is the other way, NRST is shorted to GND.
-7. Ask the fab to plug or fill the vias in U1's thermal pad (TI's recommendation), so solder doesn't wick down them.
+| # | Warning | Measured | Fix (optional) |
+|---|---|---|---|
+| 1 | RS-485 pairs not routed side by side | Port A: A 24.7 mm, B 28.0 mm (6.1 mm on B.Cu). Port B: 28.2 / 31.1 mm. Median spacing 1.8 and 2.9 mm. | Re-route each pair together on F.Cu. At these bit rates and lengths, with In1 GND 0.1 mm under F.Cu, the board works as is. |
+| 2 | CAN pair not routed side by side | CAN_H 23.4 mm, CAN_L 33.7 mm (10.3 mm longer, 18.8 mm on B.Cu). 40% coupled. Order J19, D12, U16 is right. | Re-route CAN_L next to CAN_H on F.Cu. |
+| 3 | Holes in the In2 +3.3V plane | The non-USB signals on In2 (about 189 mm) cut off four areas that island removal deletes: 137, 47, 36 and 22 mm², around (157–176, 115–138) and (175–193, 128–140). About 120 mm of B.Cu track runs under them. | Move the non-USB In2 tracks to F.Cu or B.Cu. All 32 +3.3V vias still reach the plane. |
+| 4 | USB pair on In2 | 92% coupled at 0.35 mm, 2.3 mm mismatch: fine for full speed. Crossed 19 times by B.Cu tracks. The connector-side part (USB_DP/DN) is 11% coupled. | Rev B: move J16, U13, R38, R39 next to the MCU. |
+| 5 | 38 GND pads without a via within 1.5 mm | Worst: U3.15 4.2 mm, U3.27 2.9 mm, U3.47 2.3 mm; ESD clamps U8 to U11 pin 3 at 2.3–2.8 mm; U6.21, U6.12; C29, C31, C11 to C14. | Add a GND via at each pin. |
+| 6 | Decoupling a bit far | C15 is 5.5 mm from U6.24 (VCC). C30 is 9.9 mm from U13.5. U3's VDD caps are 2.3–2.7 mm from their pins (guideline 2 mm). | Move C15 and C30 closer. |
+| 7 | Silkscreen line width | 635 footprint silk lines are 0.12 mm. PCBWay and JLCPCB list 0.15 mm as their minimum, so the thinnest lines may print faint or broken. Text is 0.8 mm / 0.15 mm: fine for PCBWay, under JLCPCB's 1.0 mm. | Cosmetic only. |
+| 8 | Jack-to-clamp distance | 8 of the 16 jack lines are 17.3–17.4 mm from jack to clamp (target under 15 mm). J5 lines are 13.5–19.4 mm, J14 19.7–22.1 mm. | None needed: the order is right. |
+
+Notes from the same audit:
+- **Cleanup:** 5 exact duplicate track segments, plus a few more that fully overlap (I2C_AUX_SDA at about (167, 122), GND, +5V, +3.3V). They're harmless: the same copper twice. 21 of the 204 small filler zones fill nothing.
+- **Edge stitching:** the bottom edge has two gaps, 18 mm (x 137.7–155.7) and 27 mm (x 157.7–184.7). The other edges are at most 9.7 mm.
+- **Vias** are 0.6 / 0.3 mm, a 0.15 mm ring: the minimum at both fabs (JLCPCB recommends 0.20 mm).
+- **Board text** says "UWAT VEXU - F26 - REV 1.1", while the files call this rev A.
+
+### Before ordering
+
+1. Generate the fab files (see [Ordering](#ordering)) and upload them to the fab's DFM viewer. Check that the 4 copper layers are in order (Top, In1 GND, In2 +3.3V, Bottom), that the outline is 103.2 x 62.6 mm, and the solder mask between the LQFP-64 and B3QFN pins.
+2. Print the board 1:1 and test-fit a real Molex 0955012441 smart port jack and the JST GH connectors. With the team's cable, looking into the jack opening with the latch tab down, the black wire (A) should be on the leftmost contact (pin 1). The footprint matches Molex's 3D model and the 95501 footprint download, but the numbering wasn't checked against Molex's drawing.
+3. Check one TL3342 button with a meter: the footprint pairs its pads left/right. If the internal pairing is the other way, NRST is shorted to GND.
+4. Ask the fab to plug or fill the vias in U1's thermal pad (TI's recommendation), so solder doesn't wick down them.
+5. Recheck stock for the four BOM lines that were out at DigiKey CA on 2026-11-04 (listed under [Fix list](#fix-list)).
+6. Decide whether to fix the "REV 1.1" board text and any of the optional audit warnings above.
+
+79 reference designators are on F.Fab only, not printed: all the passives in the crowded middle, the jacks (which print their own `J5 IMU`-style labels), U1, U5, U15, U17 and Y1. The assembly drawing (F.Fab) has them all.
 
 ## Ordering
 
@@ -193,6 +218,20 @@ The team will most likely use PCBWay, unless JLCPCB is cheaper or faster to Cana
 - DHL bills duties and HST to the receiver unless the order is DDP. Canadian reports put the DHL clearance fee at about $20 on top of shipping. Check whether DDP is offered at checkout.
 - For assembly, both fabs add rails and fiducials if they're missing. The board has none of its own.
 - Before ordering, upload the Gerbers to the fab's DFM viewer, and print the board 1:1 to test-fit the smart port jacks and the GH connectors.
+
+**Making the fab files** (KiCad 10, with `centurion.kicad_pcb` open):
+
+1. **File → Fabrication Outputs → Gerbers (.gbr)**. Output folder `fab/gerbers/`. Layers: F.Cu, In1.Cu, In2.Cu, B.Cu, F.Silkscreen, B.Silkscreen, F.Mask, B.Mask, F.Paste, B.Paste, Edge.Cuts. Tick "Check zone fills before plotting" and "Use Protel filename extensions"; leave the rest at the defaults. Click **Plot**.
+2. In the same dialog, **Generate Drill Files**: Excellon, millimetres, decimal zeros, absolute origin, PTH and NPTH in separate files, Gerber map file. Click **Generate Drill File**.
+3. Zip `fab/gerbers/` and upload it. On the order form: 4 layers, 1.6 mm, 1 oz outer copper, tented vias, the stackup from [PCB layout](#pcb-layout), and a note asking for plugged or filled vias in U1's thermal pad.
+4. For assembly only: **File → Fabrication Outputs → Component Placement (.pos)** as CSV in millimetres, plus the BOM in `bom/`.
+
+The same from a terminal in this folder:
+
+```bash
+kicad-cli pcb export gerbers --layers "F.Cu,In1.Cu,In2.Cu,B.Cu,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,F.Paste,B.Paste,Edge.Cuts" --check-zones -o fab/gerbers/ centurion.kicad_pcb
+kicad-cli pcb export drill --format excellon --drill-origin absolute --excellon-units mm --generate-map --map-format gerberx2 -o fab/gerbers/ centurion.kicad_pcb
+```
 
 ## MCU pin map
 
@@ -406,7 +445,7 @@ Done in this update:
 Still to do:
 
 1. Add the LED strip circuit if it is in v1.
-2. Work through the "Before ordering" list under [PCB layout](#pcb-layout).
+2. Work through the [Before ordering](#before-ordering) list.
 3. Before ordering, recheck the four lines that were out of stock at DigiKey CA on 2026-11-04 (red stock cells in the BOM): TCA9548APWR (restock expected Nov 10), SM04B-GHS-TB and SM03B-GHS-TB (Nov 16), RC0805FR-07470RL (Nov 9).
 
 ## Design reviews (2026-11-03)
@@ -420,6 +459,7 @@ Five independent reviews ran on rev A. They only read the files, and their findi
 | Power and thermal | 2 errors fixed | F3 0.35 A to 0.5 A; F4 0.5 A to 0.75 A; ToF sensors on 5 V; 2 extra vias at every power-net layer change; 8 GND vias at the LDO tab; C32 on the buck input. |
 | Signal interfaces | 0 errors | Jack pullups 4.7k to 2.7k, bus 2 to 2.2k; IMU CS pullup R58; RAMBAR_TX series R59; POT_IN pulldown R60; AUX1 ADC cap C31; firmware notes. |
 | Layout checklist | 6 errors, 10 warnings; the placement ones fixed by script, the rest in [HAND_ROUTING.md](HAND_ROUTING.md) | Buck caps and FB divider placed at U1's pins; no bottom tracks under the buck stage or crystal; crystal caps at Y1. Also: GND vias at ground pads, an edge via fence, screw-head keep-outs, a 0.15 mm silk stroke, and names beside every connector. Hand routing remains: bottom-layer signals, pairs, ESD order. |
+| Layout checklist, rerun on the 4-layer board (2026-11-04) | 0 errors, 8 warnings | All optional for rev A; listed under [Layout audit](#layout-audit-4-layer-board-2026-11-04). |
 
 The three ERC warnings from powerJackal's power sheet were also cleared (see below).
 
