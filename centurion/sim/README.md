@@ -194,3 +194,53 @@ Shared models are in `connectors.lib`. Each value is a datasheet number unless m
 - **Transceivers are behavioural.** They have the datasheet's levels, edges and input loads, but no loop delay. Receivers are capacitors plus generic clamp diodes.
 - **Cables are 10-section ladders.** They're good to a few hundred MHz, which covers edges down to about 1.5 ns. ngspice's lossless T line stalls on these runs, so it isn't used.
 - **The ADC case is the worst case.** Each sample starts from 0 V, as if a 0 V channel was converted just before it.
+
+## Crosstalk and return paths
+
+Checked 2026-11-04 on the autorouted board, before hand routing. Rerun these after the board changes.
+
+### Run it
+
+| Step | Command | What it does |
+|---|---|---|
+| 1 | `xtalk_scan.py ../centurion.kicad_pcb` | Finds every pair of nets that run side by side within 0.75 mm on F.Cu or B.Cu. Also lists signal vias far from a ground via, signal length on B.Cu, signals over a gap in their reference plane, and what passes near Y1. Writes `xtalk_scan.json` |
+| 2 | `xtalk_inner.py ../centurion.kicad_pcb` | The same for traces routed on In2.Cu, both side by side and stacked over B.Cu. Writes `xtalk_inner.json` |
+| 3 | `xtalk_sim.py` | Simulates the worst pairs with `xtalk_pair.cir`, using the real driver and load on each victim |
+| 4 | `xtalk_plot.py` | Plots the four worst cases to `xtalk_worst.png`: victim noise in mV at both ends, with the aggressor's edge for timing |
+
+Run all three with KiCad's Python, from this folder.
+
+### Stackup
+
+Top-layer traces sit 0.1 mm over In1, which is a solid GND plane. Bottom-layer traces sit 0.1 mm under In2, the +3.3V plane. A trace that close to a plane keeps its field tight, so side-by-side crosstalk is small.
+
+### Results
+
+- **Side-by-side crosstalk is small.**
+  - 172 net pairs run within 0.75 mm of each other. The Johnson and Graham estimate gives at most about 5 mV of noise on any of them.
+  - The simulation of the worst cases gives:
+
+    | Victim | Aggressor | Noise |
+    |---|---|---|
+    | MUX_RST idling on R10 | RS485A_DE, 16.8 mm alongside | −30 mV |
+    | AUX1_SIG at the ADC | RS485B_TX, 9.3 mm alongside | ±10 mV spikes a few ns long, which C31 filters |
+    | RS485A_RX | RS485A_TX | 12 mV |
+    | AUX1_SIG_IN | I2C_AUX_SCL | −10 mV |
+
+- **The worst single spot is stacked coupling on In2.** TOF4_SCL runs on In2 for 3.9 mm directly under MUX_RST on B.Cu, 0.1 mm apart. A falling SCL edge pulls the idle MUX_RST down by about 140 mV. The mux only resets below about 1.0 V, so there is still 2 V of margin.
+- **The crystal is clean.** OSC_IN is 7.4 mm and OSC_OUT 5.7 mm. Within 4 mm of Y1 there are only slow or static nets (VBAT_SENSE, PGOOD, NRST, POT_SIG), and no clocks or data lines.
+- **The top layer has a solid reference everywhere.** Every place a top-layer trace seems to leave the In1 plane is just the clearance hole around a via.
+- **In2 is not a solid plane.** The autorouter put 306 mm of signal traces on In2. The longest are USB D+ and D−, about 58 mm each, running across the middle of the board. Each In2 trace cuts a slot in the +3.3V plane.
+  - Ten B.Cu signals cross the USB slot. Most have no GND pour beside them, so at the crossing their return current has to go around the slot or jump planes through decoupling caps. They are MUX_RST, I2C_MUX_SCL, VBUS_SENSE, POT_SIG, NRST, SWO, RS485A_DE, IMU_INT2, IMU_CS and +5V.
+  - All of them are slow (I2C, control lines, an interrupt, chip select, sense lines), so in practice this means a little more noise and EMI rather than errors.
+  - **Moving the pair off In2 was tried on 2026-11-04 and doesn't fit.** Three attempts, all in a scratch copy:
+    - **Grid router:** USB D- found no path on F.Cu or B.Cu.
+    - **Freerouting, full middle reroute** with In1 and In2 closed: about 160 of 192 connections stayed unrouted after 20 passes.
+    - **Freerouting, a 2.5 mm band** around the USB path: about 190 of 310 stayed unrouted.
+  - **The cause is placement.** J16 (USB-C) is on the left edge, and the MCU's USB pins (U3 45 and 46) are on its right side. That leaves about 60 mm across the MCU fan-out, where F.Cu and B.Cu are full.
+  - **Rev A keeps the pair on In2.** The simulations above show the slot is harmless for these slow nets.
+  - **For rev B,** put J16, U13 and R38/R39 near U3's right side. The pair is then about 10 to 15 mm long on F.Cu, and In2 stays solid.
+
+### What these checks leave out
+
+The coupling coefficients are textbook estimates, not a field solve. The simulations model each pair alone, with no third net nearby. Simultaneous switching through the planes is not modelled.

@@ -1,0 +1,53 @@
+* centurion crosstalk: one aggressor coupled to one victim over LEN mm, 10 coupled sections
+* Per mm, 0.2 mm trace 0.1 mm over its plane, er 4.5 (Hammerstad): L 0.298 nH, C 0.127 pF, about 48 ohm, 6.2 ps/mm
+* KL / KC: inductive and capacitive coupling coefficients (side by side microstrip: KC < KL)
+* Aggressor: step of SWING volts with 10-90 % edge TR, from RDRV, into CLOAD at the far end; DIR=-1 makes it a falling edge
+* Victim: near end RV1 to VV (driver or pull-up) with CV1; far end RV2 to VV with CV2
+.param LEN=10
+.param KL=0.05
+.param KC=0.035
+.param TR=1.7n
+.param SWING=3.3
+.param DIR=1
+.param RDRV=30
+.param CLOAD=5p
+.param VV=3.3
+.param RV1=30
+.param CV1=5p
+.param RV2=1G
+.param CV2=5p
+.param AI={DIR > 0 ? 0 : SWING}
+.param DL={LEN/10}
+.param LS={0.298n*DL}
+.param CS={0.127p*DL}
+.param CM={KC/(1-KC)*0.127p*DL}
+VA src 0 PWL(0 {DIR > 0 ? 0 : SWING} 2n {DIR > 0 ? 0 : SWING} {2n+TR/0.8} {DIR > 0 ? SWING : 0} 400n {DIR > 0 ? SWING : 0})
+RA src a0 {RDRV}
+VB vb 0 {VV}
+R1 vb v0 {RV1}
+C1 v0 0 {CV1}
+.subckt CSEC a1 v1 a2 v2 LS=1n CS=1p CM=0.1p KL=0.05
+La a1 a2 {LS}
+Lv v1 v2 {LS}
+K1 La Lv {KL}
+Ca a2 0 {CS}
+Cv v2 0 {CS}
+Cm a2 v2 {CM}
+.ends
+X1 a0 v0 a1 v1 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X2 a1 v1 a2 v2 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X3 a2 v2 a3 v3 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X4 a3 v3 a4 v4 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X5 a4 v4 a5 v5 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X6 a5 v5 a6 v6 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X7 a6 v6 a7 v7 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X8 a7 v7 a8 v8 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X9 a8 v8 a9 v9 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+X10 a9 v9 a10 v10 CSEC LS={LS} CS={CS} CM={CM} KL={KL}
+CA a10 0 {CLOAD}
+R2 vb v10 {RV2}
+C2 v10 0 {CV2}
+.ic V(v0)={VV} V(v1)={VV} V(v2)={VV} V(v3)={VV} V(v4)={VV} V(v5)={VV} V(v6)={VV} V(v7)={VV} V(v8)={VV} V(v9)={VV} V(v10)={VV}
+.ic V(a0)={AI} V(a1)={AI} V(a2)={AI} V(a3)={AI} V(a4)={AI} V(a5)={AI} V(a6)={AI} V(a7)={AI} V(a8)={AI} V(a9)={AI} V(a10)={AI} V(src)={AI}
+.tran 10p 200n uic
+.end

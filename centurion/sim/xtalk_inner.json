@@ -1,0 +1,410 @@
+[
+ {
+  "kind": "In2|In2",
+  "a": "USB_D+",
+  "b": "USB_D-",
+  "len": 54.31,
+  "lateral": 0.35,
+  "K": 0.13,
+  "at": [
+   114.8,
+   125.1
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF4_SCL",
+  "b": "MUX_RST",
+  "len": 3.85,
+  "lateral": 0.006,
+  "K": 0.645,
+  "at": [
+   150.3,
+   124.7
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/LED_MCU",
+  "b": "IMU_MOSI",
+  "len": 2.75,
+  "lateral": 0.3,
+  "K": 0.154,
+  "at": [
+   165.6,
+   137.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF4_SDA",
+  "b": "SPARE_MOSI",
+  "len": 3.75,
+  "lateral": 0.385,
+  "K": 0.103,
+  "at": [
+   176.5,
+   116.6
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/BOOT0",
+  "b": "SPARE_MISO",
+  "len": 3.25,
+  "lateral": 0.403,
+  "K": 0.095,
+  "at": [
+   163.0,
+   124.0
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF3_SCL",
+  "b": "I2C_MUX_SCL",
+  "len": 0.21,
+  "lateral": 0.0,
+  "K": 0.646,
+  "at": [
+   153.4,
+   117.5
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "IMU_MISO",
+  "b": "SPARE_INT",
+  "len": 2.54,
+  "lateral": 0.593,
+  "K": 0.048,
+  "at": [
+   187.8,
+   122.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Power/CC2",
+  "b": "USB_D+",
+  "len": 0.52,
+  "lateral": 0.256,
+  "K": 0.195,
+  "at": [
+   111.7,
+   121.5
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/BOOT0",
+  "b": "SPARE_MOSI",
+  "len": 3.75,
+  "lateral": 0.915,
+  "K": 0.021,
+  "at": [
+   163.0,
+   124.0
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF4_SDA",
+  "b": "SPARE_INT",
+  "len": 1.31,
+  "lateral": 0.599,
+  "K": 0.047,
+  "at": [
+   177.6,
+   115.5
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF3_SCL",
+  "b": "/Sensors/TOF3_SDA",
+  "len": 0.5,
+  "lateral": 0.35,
+  "K": 0.121,
+  "at": [
+   147.4,
+   123.4
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "RS485A_RX",
+  "b": "USB_D+",
+  "len": 3.02,
+  "lateral": 0.942,
+  "K": 0.02,
+  "at": [
+   129.0,
+   124.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "IMU_MISO",
+  "b": "POT_SIG",
+  "len": 1.7,
+  "lateral": 0.707,
+  "K": 0.035,
+  "at": [
+   178.8,
+   140.6
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/LED_MCU",
+  "b": "SPARE_CS",
+  "len": 2.7,
+  "lateral": 0.9,
+  "K": 0.022,
+  "at": [
+   165.6,
+   137.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF2_SDA",
+  "b": "/Sensors/TOF3_SCL",
+  "len": 2.58,
+  "lateral": 0.884,
+  "K": 0.023,
+  "at": [
+   153.4,
+   117.5
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/IMU/IMU_SCK_H",
+  "b": "SPARE_SCK",
+  "len": 1.39,
+  "lateral": 0.677,
+  "K": 0.037,
+  "at": [
+   185.1,
+   130.2
+  ]
+ },
+ {
+  "kind": "In2|In2",
+  "a": "/Sensors/TOF3_SCL",
+  "b": "/Sensors/TOF3_SDA",
+  "len": 0.92,
+  "lateral": 0.566,
+  "K": 0.054,
+  "at": [
+   164.1,
+   115.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "I2C_AUX_SCL",
+  "b": "RAMBAR_TX",
+  "len": 1.34,
+  "lateral": 0.707,
+  "K": 0.035,
+  "at": [
+   171.1,
+   126.7
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "IMU_MISO",
+  "b": "IMU_SCK",
+  "len": 1.8,
+  "lateral": 0.813,
+  "K": 0.026,
+  "at": [
+   178.8,
+   140.6
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/SWO",
+  "b": "I2C_AUX_SDA",
+  "len": 1.06,
+  "lateral": 0.636,
+  "K": 0.042,
+  "at": [
+   169.1,
+   129.3
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/TOF4_SCL",
+  "b": "RS485A_DE",
+  "len": 0.82,
+  "lateral": 0.638,
+  "K": 0.042,
+  "at": [
+   148.6,
+   124.6
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/Sensors/POT_IN",
+  "b": "SPARE_CS",
+  "len": 1.06,
+  "lateral": 0.739,
+  "K": 0.032,
+  "at": [
+   182.8,
+   142.2
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "JETSON_RX",
+  "b": "POT_SIG",
+  "len": 0.85,
+  "lateral": 0.7,
+  "K": 0.035,
+  "at": [
+   163.6,
+   141.1
+  ]
+ },
+ {
+  "kind": "In2|In2",
+  "a": "I2C_AUX_SDA",
+  "b": "RAMBAR_TX",
+  "len": 0.35,
+  "lateral": 0.45,
+  "K": 0.083,
+  "at": [
+   169.6,
+   127.2
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "SPARE_MISO",
+  "b": "USB_D+",
+  "len": 1.78,
+  "lateral": 1.08,
+  "K": 0.015,
+  "at": [
+   135.8,
+   131.6
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "I2C_AUX_SCL",
+  "b": "IMU_INT1",
+  "len": 0.6,
+  "lateral": 0.778,
+  "K": 0.029,
+  "at": [
+   169.8,
+   127.9
+  ]
+ },
+ {
+  "kind": "In2|In2",
+  "a": "/Sensors/TOF3_SCL",
+  "b": "/Sensors/TOF4_SDA",
+  "len": 0.35,
+  "lateral": 0.65,
+  "K": 0.041,
+  "at": [
+   164.5,
+   115.0
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "I2C_AUX_SCL",
+  "b": "I2C_AUX_SDA",
+  "len": 0.3,
+  "lateral": 0.6,
+  "K": 0.047,
+  "at": [
+   169.2,
+   135.3
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "I2C_AUX_SDA",
+  "b": "IMU_CS",
+  "len": 0.35,
+  "lateral": 0.665,
+  "K": 0.039,
+  "at": [
+   180.2,
+   135.8
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/NRST",
+  "b": "I2C_MUX_SDA",
+  "len": 0.85,
+  "lateral": 1.061,
+  "K": 0.016,
+  "at": [
+   157.7,
+   126.8
+  ]
+ },
+ {
+  "kind": "In2|In2",
+  "a": "/IMU/IMU_CS_H",
+  "b": "/IMU/IMU_SCK_H",
+  "len": 0.42,
+  "lateral": 0.778,
+  "K": 0.029,
+  "at": [
+   182.4,
+   137.0
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/SWO",
+  "b": "RAMBAR_TX",
+  "len": 0.42,
+  "lateral": 0.778,
+  "K": 0.029,
+  "at": [
+   167.1,
+   127.2
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/NRST",
+  "b": "/Sensors/TOF2_SCL",
+  "len": 0.32,
+  "lateral": 0.742,
+  "K": 0.031,
+  "at": [
+   158.2,
+   124.3
+  ]
+ },
+ {
+  "kind": "In2|B.Cu",
+  "a": "/MCU/BOOT0",
+  "b": "/MCU/SWO",
+  "len": 0.22,
+  "lateral": 1.139,
+  "K": 0.014,
+  "at": [
+   160.3,
+   126.7
+  ]
+ }
+]
