@@ -4,7 +4,7 @@ The main custom board for the UWAT VEXU robots. It sits between the V5 brain and
 
 ## Status
 
-The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is a fully routed **4-layer** board, 103.2 x 62.6 mm: signals on top and bottom, a solid GND plane on In1 and a +3.3V plane on In2. On 2026-11-04 KiCad 10 shows 0 DRC violations, 0 unconnected items and 0 schematic parity issues, and ERC is clean. The signal, connector, USB hot-plug and crosstalk simulations are in [sim/](sim/README.md). The board still has to go through the [Before ordering](#before-ordering) list (fab DFM check, a 1:1 test-fit, and two part checks with a meter). The old hand-routing guides, [HAND_ROUTING.md](HAND_ROUTING.md) and [CLAUDE_DESKTOP_ROUTING.md](CLAUDE_DESKTOP_ROUTING.md), describe the earlier 2-layer board and are kept only as a record.
+The schematic was updated on 2026-11-02 to the decisions below, plus the review fixes of 2026-11-03. The PCB is a fully routed **4-layer** board, 103.2 x 62.6 mm: signals on top and bottom, a solid GND plane on In1 and a +3.3V plane on In2. On 2026-11-04 KiCad 10 shows 0 DRC violations, 0 unconnected items and 0 schematic parity issues, and ERC is clean. The signal, connector, USB hot-plug and crosstalk simulations are in [sim/](sim/README.md). The board still has to go through the [Before ordering](#before-ordering) list (fab DFM check, a 1:1 test-fit, and two part checks with a meter). The old hand-routing guides, [HAND_ROUTING.md](HAND_ROUTING.md) and [CLAUDE_DESKTOP_ROUTING.md](CLAUDE_DESKTOP_ROUTING.md), describe the earlier 2-layer board and are kept only as a record. Non-urgent layout and circuit improvements are deferred to rev B in [REV_B_IMPROVEMENTS.md](REV_B_IMPROVEMENTS.md).
 
 - MCU is now the STM32G491RET6. The ESP32-S3 is gone.
 - Each smart port has its own MAX33071E RS-485 transceiver, on its own USART with hardware DE.
@@ -29,6 +29,7 @@ The component plan is [docs/Board_Components.xlsx](docs/Board_Components.xlsx). 
 | `centurion.kicad_pro` | The KiCad project. Open this. It holds the net classes and board rules. |
 | `centurion.kicad_pcb` | The board: 4 layers, placed and fully routed. In1 is a solid GND plane, In2 a +3.3V plane, GND poured on top and bottom. |
 | `centurion.kicad_dru` | Custom DRC rule (hole clearance, see [PCB layout](#pcb-layout)) |
+| `REV_B_IMPROVEMENTS.md` | Non-urgent improvements left out of rev A, from the final layout audit and the simulations |
 | `HAND_ROUTING.md` | Record only: the hand-routing to-do list for the earlier 2-layer board. That work was replaced by the 4-layer re-layout. |
 | `CLAUDE_DESKTOP_ROUTING.md` | Record only: prompts for having Claude Desktop do that hand routing |
 | `sim/` | Signal, connector, USB hot-plug and crosstalk simulations ([sim/README.md](sim/README.md)) |
@@ -173,7 +174,7 @@ The board runs left to right from inputs and power, through the MCU, to headers 
 
 ### Layout audit, 4-layer board (2026-11-04)
 
-The layout auditor (`../.claude/agents/pcb-layout-auditor.md`) was rerun on the final 4-layer board. It found **no errors**: nothing that risks a respin. It passed the power paths, the buck and LDO, the crystal, ESD order (all 31 protected nets go through their clamp before the IC), pours, DFM and silkscreen labels. These warnings are left, all optional for rev A:
+The layout auditor (`../.claude/agents/pcb-layout-auditor.md`) was rerun on the final 4-layer board. It found **no errors**: nothing that risks a respin. It passed the power paths, the buck and LDO, the crystal, ESD order (all 31 protected nets go through their clamp before the IC), pours, DFM and silkscreen labels. These warnings are left, all optional for rev A. Rev A ships without them; they, the notes below and the simulation follow-ups are collected in [REV_B_IMPROVEMENTS.md](REV_B_IMPROVEMENTS.md).
 
 | # | Warning | Measured | Fix (optional) |
 |---|---|---|---|
@@ -199,7 +200,7 @@ Notes from the same audit:
 3. Check one TL3342 button with a meter: the footprint pairs its pads left/right. If the internal pairing is the other way, NRST is shorted to GND.
 4. Ask the fab to plug or fill the vias in U1's thermal pad (TI's recommendation), so solder doesn't wick down them.
 5. Recheck stock for the four BOM lines that were out at DigiKey CA on 2026-11-04 (listed under [Fix list](#fix-list)).
-6. Decide whether to fix the "REV 1.1" board text and any of the optional audit warnings above.
+6. Optional: fix the "REV 1.1" board text (the files call this rev A). Everything else from the audit waits for rev B ([REV_B_IMPROVEMENTS.md](REV_B_IMPROVEMENTS.md)).
 
 79 reference designators are on F.Fab only, not printed: all the passives in the crowded middle, the jacks (which print their own `J5 IMU`-style labels), U1, U5, U15, U17 and Y1. The assembly drawing (F.Fab) has them all.
 
