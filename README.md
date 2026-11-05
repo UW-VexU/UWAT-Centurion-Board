@@ -72,6 +72,25 @@ The other files:
 
 Fabs read the layer order from these extensions.
 
+### Checking the files
+
+`tools/gerbcheck.py` reads the Gerber and drill files with its own reader, not KiCad's exporter, and checks them against the board file:
+- **Drills:** hole and slot counts per size.
+- **Layers:** copper, mask and paste, to 0.08 mm.
+- **Netlist:** connectivity rebuilt from the Gerber copper and the plated holes alone, then checked against every pad's net. It reports shorts and opens.
+
+It also draws preview PNGs from the Gerbers. It works for 2- and 4-layer boards. Run it from the repo root, with KiCad's Python:
+
+```bash
+"C:\Program Files\KiCad.0in\python.exe" tools/gerbcheck.py centurion/centurion.kicad_pcb centurion/fab/gerbers
+```
+
+It ends with `RESULT: PASS` (exit code 0) or `RESULT: FAIL` and the reasons. The previews go to `fab/gerbcheck/`.
+
+On 2026-11-05 it passed centurion rev A (125 nets, 0 shorts, 0 opens) and imuBoard (13 nets). To make sure it catches faults, it was also run on a deliberately broken copy of centurion's files, with one MUX_RST track cut and one via drill deleted. It reported both opens and the missing drill.
+
+It doesn't check the silkscreen beyond drawing it, or how the fab processes the files. Still look at the fab's Gerber viewer and approve their production files.
+
 ### Ordering at JLCPCB
 
 On 2026-11-04, five centurion boards cost C$40.39 plus C$37.41 UPS shipping at JLCPCB. At PCBWay they cost US$98.76 with DHL, about C$135–140. So JLCPCB is the first choice. Duties and HST are extra at both.
@@ -103,5 +122,6 @@ Centurion's silkscreen text is 0.8 mm tall, under JLCPCB's 1.0 mm minimum, so th
 
 Other folders:
 
+- `tools`: `gerbcheck.py`, the Gerber checker (see [Checking the files](#checking-the-files)).
 - `tinaOnboarding`: electrical onboarding materials.
 - `ul_*`, `0955012401` and similar folders: downloaded part libraries.
