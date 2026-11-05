@@ -206,7 +206,7 @@ Notes from the same audit:
 
 ## Ordering
 
-The team will most likely use PCBWay, unless JLCPCB is cheaper or faster to Canada. Get both online quotes: the board is 103.2 mm wide, just over both fabs' 100 x 100 mm promo size, so neither $2/$5 offer applies. The width is set by the bracket holes (93.92 mm apart), so it can't shrink to 100 mm.
+JLCPCB is the first choice. On 2026-11-04, five boards were C$40.39 plus C$37.41 UPS at JLCPCB, against US$98.76 with DHL at PCBWay (about C$135–140); JLCPCB was also a day faster to build. Their settings are in the [main README](../README.md#ordering-at-jlcpcb). The board is 103.2 mm wide, just over both fabs' 100 x 100 mm promo size, so neither $2/$5 offer applies. The width is set by the bracket holes (93.92 mm apart), so it can't shrink to 100 mm.
 
 | Rule | PCBWay | JLCPCB | This board |
 |---|---|---|---|
@@ -220,19 +220,7 @@ The team will most likely use PCBWay, unless JLCPCB is cheaper or faster to Cana
 - For assembly, both fabs add rails and fiducials if they're missing. The board has none of its own.
 - Before ordering, upload the Gerbers to the fab's DFM viewer, and print the board 1:1 to test-fit the smart port jacks and the GH connectors.
 
-**Making the fab files** (KiCad 10, with `centurion.kicad_pcb` open):
-
-1. **File → Fabrication Outputs → Gerbers (.gbr)**. Output folder `fab/gerbers/`. Layers: F.Cu, In1.Cu, In2.Cu, B.Cu, F.Silkscreen, B.Silkscreen, F.Mask, B.Mask, F.Paste, B.Paste, Edge.Cuts. Tick "Check zone fills before plotting" and "Use Protel filename extensions"; leave the rest at the defaults. Click **Plot**.
-2. In the same dialog, **Generate Drill Files**: Excellon, millimetres, decimal zeros, absolute origin, PTH and NPTH in separate files, Gerber map file. Click **Generate Drill File**.
-3. Zip `fab/gerbers/` and upload it. On the order form: 4 layers, 1.6 mm, 1 oz outer copper, tented vias, the stackup from [PCB layout](#pcb-layout), and a note asking for plugged or filled vias in U1's thermal pad.
-4. For assembly only: **File → Fabrication Outputs → Component Placement (.pos)** as CSV in millimetres, plus the BOM in `bom/`.
-
-The same from a terminal in this folder:
-
-```bash
-kicad-cli pcb export gerbers --layers "F.Cu,In1.Cu,In2.Cu,B.Cu,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,F.Paste,B.Paste,Edge.Cuts" --check-zones -o fab/gerbers/ centurion.kicad_pcb
-kicad-cli pcb export drill --format excellon --drill-origin absolute --excellon-units mm --generate-map --map-format gerberx2 -o fab/gerbers/ centurion.kicad_pcb
-```
+**Making the fab files:** follow [Making Gerber files](../README.md#making-gerber-files) in the main README. It has the KiCad steps, the tested `kicad-cli` commands, and the JLCPCB order settings.
 
 ## MCU pin map
 
