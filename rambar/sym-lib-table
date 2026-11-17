@@ -1,5 +1,6 @@
 (sym_lib_table
 	(version 7)
-	(lib (name "uwat") (type "KiCad") (uri "${KIPRJMOD}/../powerJackal/lib/UWAT.kicad_sym") (options "") (descr ""))
+	(lib (name "UWAT") (type "KiCad") (uri "${KIPRJMOD}/../powerJackal/lib/UWAT.kicad_sym") (options "") (descr ""))
 	(lib (name "rambar") (type "KiCad") (uri "${KIPRJMOD}/rambar.kicad_sym") (options "") (descr ""))
+	(lib (name "centurion") (type "KiCad") (uri "/home/evan/Documents/uwat/UWAT-Centurion-Board/centurion/lib/centurion.kicad_sym") (options "") (descr ""))
 )
