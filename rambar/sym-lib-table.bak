@@ -1,5 +1,0 @@
-(sym_lib_table
-	(version 7)
-	(lib (name "UWAT") (type "KiCad") (uri "${KIPRJMOD}/../powerJackal/lib/UWAT.kicad_sym") (options "") (descr ""))
-	(lib (name "rambar") (type "KiCad") (uri "${KIPRJMOD}/rambar.kicad_sym") (options "") (descr ""))
-)

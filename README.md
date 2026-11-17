@@ -8,7 +8,7 @@ KiCad hardware projects for UWAT VEXU.
 | imuBoard | Centurion IMU board, rev 1.0: a Bosch BMI270 on SPI, which plugs into centurion's J5 with a straight JST GH 8-pin cable. 38 x 24 mm, 2 layers, two #8-32 holes 1 in apart. Routed; ERC, DRC and parity clean. See [imuBoard/README.md](imuBoard/README.md) |
 | powerJackal | Smart port power test board, rev A. See [powerJackal/README.md](powerJackal/README.md) |
 | stellaNova | VEX V5 wireless debugger. An ESP32-S3 bridges one smart port (RS-485) to WiFi and Bluetooth LE. See [stellaNova/README.md](stellaNova/README.md) |
-| rambar | Not in the repo yet |
+| rambar | Arc ToF sensor strip for the lift carriage, rev A schematic. A flex board with up to seven VL53L4CD sensors read by an STM32G491CET6, which sends the stack error to the brain (RS-485) and to Centurion (UART and CAN FD through J19). The power block is copied from Centurion. PCB not started. See [rambar/README.md](rambar/README.md) |
 
 [PCB_DESIGN_GUIDELINES.md](PCB_DESIGN_GUIDELINES.md) has the layout rules, fab limits (PCBWay and JLCPCB) and a pre-order checklist for all of these boards.
 

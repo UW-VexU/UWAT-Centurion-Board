@@ -10,3 +10,7 @@ fp-info-cache
 .easyeda_cache/
 .history/
 _restore_backup*/
+
+# Editor backups and LibreOffice lock files
+*.bak
+.~lock.*#
